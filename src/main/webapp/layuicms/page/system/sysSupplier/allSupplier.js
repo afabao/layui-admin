@@ -49,7 +49,7 @@ layui.config({
             , cols: [[ //表头
                 {type:'numbers',title:'序号',fixed: 'left'},
                 {field: 'supplierName', title: '供应商名称'/*, width: '10%'*/}
-                , {field: 'supplierDescript', title: '供应商描述'/*, width: '10%'*/}
+                , {field: 'supplierDescribe', title: '供应商描述'/*, width: '10%'*/}
                 , {field: 'phone', title: '供应商联系电话'/*, width: '10%'*/}
                 /*, {field: 'requestUrl', title: '后台请求路径', width: '10%'}
                 , {field: 'sort', title: '排序号', width: '10%'}

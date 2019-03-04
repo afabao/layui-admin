@@ -10,31 +10,66 @@
         <result column="PHONE" property="phone" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <select id="getAll" resultMap="SupplierMap" parameterType="com.gameloft9.demo.dataaccess.pagevo.SysSupplierPageVO">
+    <!--分页   List<SysSupplierTest> getAll(SysSupplierPageVO supplierPageVO);-->
+    <select id="getAll" resultMap="SupplierMap" >
 
        select *
        from sys_supplier_test
        <where>
            <if test="supplierName != null and supplierName != ''">
-               and supplierName like "%"#{supplierName}"%"
+               and supplierName like "%"#{supplierName,jdbcType=VARCHAR}"%"
            </if>
            <if test="phone != null and phone != ''">
-               and phone=#{phone}
+               and phone=#{phone,jdbcType=VARCHAR}
            </if>
        </where>
-       limit #{start},#{end}
+       limit #{start,jdbcType=DECIMAL},#{end,jdbcType=DECIMAL}
     </select>
 
-    <select id="getCount" resultType="java.lang.Long" parameterType="com.gameloft9.demo.dataaccess.pagevo.SysSupplierPageVO">
+    <!--总条数  Long getCount(SysSupplierPageVO supplierPageVO);-->
+    <select id="getCount" resultType="java.lang.Integer" parameterType="map">
         select count(1)
         from sys_supplier_test
         <where>
             <if test="supplierName != null and supplierName != ''">
-                and supplierName like "%"#{supplierName}"%"
+                and supplierName like "%"#{supplierName,jdbcType=VARCHAR}"%"
             </if>
             <if test="phone != null and phone != ''">
-                and phone=#{phone}
+                and phone=#{phone,jdbcType=VARCHAR}
             </if>
         </where>
     </select>
+
+    <!--添加  void addSupplier(SysSupplierTest supplier);-->
+    <insert id="addSupplier" parameterType="com.gameloft9.demo.dataaccess.model.system.SysSupplierTest">
+        insert into sys_supplier_test
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">
+                ID,
+            </if>
+            <if test="supplierName != null and supplierName != ''">
+                SUPPLIER_NAME,
+            </if>
+            <if test="supplierDescribe != null and supplierDescribe != ''">
+                SUPPLIER_DESCRIBE,
+            </if>
+            <if test="phone != null and phone != ''">
+                PHONE,
+            </if>
+        </trim>
+        <trim prefix=" values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="supplierName != null and supplierName != ''">
+                #{supplierName,jdbcType=VARCHAR},
+            </if>
+            <if test="supplierDescribe != null and supplierDescribe != ''">
+                #{supplierDescribe,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null and phone != ''">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
 </mapper>

@@ -7,7 +7,7 @@ var runEnv = 'dev';
 
 // $config不建议直接引用，除了用于指定模块基目录。可以通过$tool模块中的方法获取
 var $config = {
-    apiContext: runEnv === 'product' ? 'http://localhost:8080/stone/' : 'http://localhost:8080/stone/', // api请求地址
-    resUrl: runEnv === 'product' ? 'http://xxx.xxx.xxx.xxx:10086/': 'http://localhost:8080/stone/' // 前端资源访问根目录,生产环境请设置为托管前端资源的位置
+    apiContext: runEnv === 'product' ? 'http://localhost:8888/stone/' : 'http://localhost:8888/stone/', // api请求地址
+    resUrl: runEnv === 'product' ? 'http://xxx.xxx.xxx.xxx:10086/': 'http://localhost:8888/stone/' // 前端资源访问根目录,生产环境请设置为托管前端资源的位置
 };
 

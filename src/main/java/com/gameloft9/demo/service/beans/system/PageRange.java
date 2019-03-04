@@ -26,7 +26,7 @@ public class PageRange {
 
     public PageRange(String page,String limit){
         this.page = Integer.parseInt(page);
-        this.limit = Integer.parseInt(limit);;
+        this.limit = Integer.parseInt(limit);
     }
 
     /**

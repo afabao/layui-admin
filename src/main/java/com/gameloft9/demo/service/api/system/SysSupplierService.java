@@ -11,15 +11,20 @@ public interface SysSupplierService {
 
     /**
      * 分页查询supplier信息
-     * @param supplierPageVO 封装supplier分页查询需要的数据
      * @return list
      */
-    List<SysSupplierTest> getAll(SysSupplierPageVO supplierPageVO);
+    List<SysSupplierTest> getAll(String page ,String limit ,String supplierName ,String phone);
 
     /**
      *
      * @return 返回总条数
      */
-    Long getCount(SysSupplierPageVO supplierPageVO);
+    Integer getCount(String supplierName ,String phone);
+
+    /**
+     * 添加供应商
+     * @param supplier 供应商信息
+     */
+    String addSupplier(SysSupplierTest supplier);
 
 }
