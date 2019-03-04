@@ -143,6 +143,10 @@ layui.define(['$tool','jquery'], function (exports) {
         },
         UpdateUserInfo:function(req,config,successCallback,errorCallback){
             doComplexPost($tool.getContext() + 'personCenter/update.do',req,config,successCallback,errorCallback);
+        },
+        //添加供应商
+        AddSupplier:function(req,config,successCallback,errorCallback){
+            doComplexPost($tool.getContext() + 'supplier/add.do',req,config,successCallback,errorCallback);
         }
     };
 

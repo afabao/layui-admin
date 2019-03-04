@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gameloft9.demo.dataaccess.dao.system.SysSupplierTestMapper">
+
+    <resultMap id="SupplierMap" type="com.gameloft9.demo.dataaccess.model.system.SysSupplierTest">
+
+        <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="SUPPLIER_NAME" property="supplierName" jdbcType="VARCHAR"/>
+        <result column="SUPPLIER_DESCRIBE" property="supplierDescribe" jdbcType="VARCHAR"/>
+        <result column="PHONE" property="phone" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getAll" resultMap="SupplierMap" parameterType="com.gameloft9.demo.dataaccess.pagevo.SysSupplierPageVO">
+
+       select *
+       from sys_supplier_test
+       <where>
+           <if test="supplierName != null and supplierName != ''">
+               and supplierName like "%"#{supplierName}"%"
+           </if>
+           <if test="phone != null and phone != ''">
+               and phone=#{phone}
+           </if>
+       </where>
+       limit #{start},#{end}
+    </select>
+
+    <select id="getCount" resultType="java.lang.Long" parameterType="com.gameloft9.demo.dataaccess.pagevo.SysSupplierPageVO">
+        select count(1)
+        from sys_supplier_test
+        <where>
+            <if test="supplierName != null and supplierName != ''">
+                and supplierName like "%"#{supplierName}"%"
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone=#{phone}
+            </if>
+        </where>
+    </select>
+</mapper>
