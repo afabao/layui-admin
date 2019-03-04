@@ -72,4 +72,46 @@
             </if>
         </trim>
     </insert>
+
+    <!--修改供应商  void updateSupplier(SysSupplierTest supplier);-->
+    <update id="updateSupplier" parameterType="com.gameloft9.demo.dataaccess.model.system.SysSupplierTest">
+        update sys_supplier_test
+        <set>
+            <if test="supplierName != null and supplierName != ''">
+                SUPPLIER_NAME = #{supplierName,jdbcType=VARCHAR},
+            </if>
+            <if test="supplierDescribe != null and supplierDescribe != ''">
+                SUPPLIER_DESCRIBE = #{supplierDescribe,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null and phone != ''">
+                PHONE = #{phone,jdbcType=VARCHAR}
+            </if>
+        </set>
+        <where>
+            ID = #{id,jdbcType=VARCHAR}
+        </where>
+    </update>
+
+    <!--根据名称查找供应商  SysSupplierTest getBySupplierName(String supplierName);-->
+    <select id="getBySupplierName" parameterType="java.lang.String" resultMap="SupplierMap">
+        select * from sys_supplier_test where SUPPLIER_NAME = #{supplierName,jdbcType=VARCHAR}
+
+    </select>
+
+    <!--根据id查找供应商  SysSupplierTest getById(String id);-->
+    <select id="getById" parameterType="java.lang.String" resultMap="SupplierMap">
+        select ID,SUPPLIER_NAME,SUPPLIER_DESCRIBE,PHONE from sys_supplier_test where ID = #{id,jdbcType=VARCHAR}
+
+    </select>
+
+    <!--根据id删除供应商void deleteSupllierById(String id);-->
+    <delete id="deleteSupllierById" parameterType="java.lang.String">
+        delete from sys_supplier_test
+        <where>
+            <if test="id != null and id != ''">
+
+            </if>
+        </where>
+    </delete>
+
 </mapper>

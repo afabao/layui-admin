@@ -147,6 +147,14 @@ layui.define(['$tool','jquery'], function (exports) {
         //添加供应商
         AddSupplier:function(req,successCallback,errorCallback){
             doPost($tool.getContext() + 'supplier/add.do',req,successCallback,errorCallback);
+        },
+        //修改供应商
+        UpdateSupplier:function(req,successCallback,errorCallback){
+            doPost($tool.getContext()+'supplier/update.do',req,successCallback,errorCallback);
+        },
+        //根据id查找供应商
+        GetSupplier:function(req,successCallback,errorCallback){
+            doPost($tool.getContext()+'supplier/get.do',req,successCallback,errorCallback);
         }
     };
 

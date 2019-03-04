@@ -36,4 +36,31 @@ public interface SysSupplierTestMapper {
      */
     void addSupplier(SysSupplierTest supplier);
 
+    /**
+     * 修改供应商
+     * @param supplier 供应商信息
+     * @return
+     */
+    void updateSupplier(SysSupplierTest supplier);
+
+    /**
+     * 根据名称查找供应商
+     * @param supplierName 供应商名称
+     * @return
+     */
+    SysSupplierTest getBySupplierName(String supplierName);
+
+    /**
+     * 根据名称查找供应商
+     * @param id 供应商名称
+     * @return
+     */
+    SysSupplierTest getById(String id);
+
+    /**
+     * 根据id删除供应商
+     * @param id 供应商id
+     */
+    void deleteSupllierById(String id);
+
 }

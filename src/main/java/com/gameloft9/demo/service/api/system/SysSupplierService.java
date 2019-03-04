@@ -27,4 +27,24 @@ public interface SysSupplierService {
      */
     String addSupplier(SysSupplierTest supplier);
 
+    /**
+     * 修改供应商
+     * @param supplier 供应商信息
+     * @return
+     */
+    Boolean updateSupplier(SysSupplierTest supplier);
+
+    /**
+     * 根据名称查找供应商
+     * @param id 供应商名称
+     * @return
+     */
+    SysSupplierTest getById(String id);
+
+    /**
+     * 根据id删除供应商
+     * @param id 供应商id
+     */
+    Boolean deleteSupllierById(String id);
+
 }

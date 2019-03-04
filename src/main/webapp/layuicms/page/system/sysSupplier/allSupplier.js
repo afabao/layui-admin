@@ -73,10 +73,10 @@ layui.config({
 
             //区分事件
             if (layEvent === 'del') { //删除
-                delMenu(row.id);
+                delSupplier(row.id);
             } else if (layEvent === 'edit') { //编辑
                 //do something
-                editMenu(row.id);
+                editSupplier(row.id);
             }
         });
     }
@@ -101,7 +101,7 @@ layui.config({
         return false;
     });
 
-    //添加角色
+    //添加供应商
     $(".usersAdd_btn").click(function () {
         var index = layui.layer.open({
             title: "添加供应商",
@@ -124,7 +124,7 @@ layui.config({
     });
 
     //删除
-    function delMenu(id){
+    function delSupplier(id){
         layer.confirm('确认删除吗？', function (confirmIndex) {
             layer.close(confirmIndex);//关闭confirm
             //向服务端发送删除指令
@@ -143,11 +143,11 @@ layui.config({
     }
 
     //编辑
-    function editMenu(id){
+    function editSupplier(id){
         var index = layui.layer.open({
-            title: "编辑菜单",
+            title: "编辑供应商",
             type: 2,
-            content: "editMenu.html?id="+id,
+            content: "editSupplier.html?id="+id,
             success: function (layero, index) {
                 setTimeout(function () {
                     layui.layer.tips('点击此处返回菜单列表', '.layui-layer-setwin .layui-layer-close', {
