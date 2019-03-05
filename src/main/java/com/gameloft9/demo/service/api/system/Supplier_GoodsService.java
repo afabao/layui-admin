@@ -1,32 +1,23 @@
-package com.gameloft9.demo.dataaccess.dao.system;
+package com.gameloft9.demo.service.api.system;
 
-
+import com.gameloft9.demo.dataaccess.dao.system.SysSupplier_GoodsTestMapper;
 import com.gameloft9.demo.dataaccess.model.system.MeterialTest;
 import com.gameloft9.demo.dataaccess.model.system.Supplier_GoodsTest;
 import com.gameloft9.demo.dataaccess.model.system.SysSupplierTest;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-public interface SysSupplier_GoodsTestMapper {
+public interface Supplier_GoodsService {
 
     /**
      *获取原料商品信息
      */
-    List<Supplier_GoodsTest> getAll(
-            @Param("start") int start,
-            @Param("end") int end,
-            @Param("goodsType") String goodsType,
-            @Param("supplierName") String supplierName
-    );
+    List<Supplier_GoodsTest> getAll(String page, String limit, String goodsType, String supplierName);
 
     /**
      * 获取原料商品总条数
      */
-    Integer getCount(
-            @Param("goodsType") String goodsType,
-            @Param("supplierName") String supplierName
-    );
+    Integer getCount(String goodsType,String supplierName);
 
     /**
      * 初始化供应商名称下拉框

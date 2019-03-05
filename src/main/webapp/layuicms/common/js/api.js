@@ -144,6 +144,8 @@ layui.define(['$tool','jquery'], function (exports) {
         UpdateUserInfo:function(req,config,successCallback,errorCallback){
             doComplexPost($tool.getContext() + 'personCenter/update.do',req,config,successCallback,errorCallback);
         },
+
+        /*Supplier*/
         //添加供应商
         AddSupplier:function(req,successCallback,errorCallback){
             doPost($tool.getContext() + 'supplier/add.do',req,successCallback,errorCallback);
@@ -161,6 +163,7 @@ layui.define(['$tool','jquery'], function (exports) {
             doPost($tool.getContext() + 'supplier/delete.do',req,successCallback,errorCallback);
         },
 
+        /*Meterial*/
         //添加原料
         AddMeterial:function(req,successCallback,errorCallback){
             doPost($tool.getContext() + 'meterial/add.do',req,successCallback,errorCallback);
@@ -178,6 +181,7 @@ layui.define(['$tool','jquery'], function (exports) {
             doPost($tool.getContext() + 'meterial/delete.do',req,successCallback,errorCallback);
         },
 
+        /*Supplier_goods*/
         //添加原料商品
         AddSupplier_Goods:function(req,successCallback,errorCallback){
             doPost($tool.getContext() + 'supplier_goods/add.do',req,successCallback,errorCallback);
@@ -193,7 +197,15 @@ layui.define(['$tool','jquery'], function (exports) {
         //根据id删除原料商品
         DeleteSupplier_Goods:function(req,successCallback,errorCallback){
             doPost($tool.getContext() + 'supplier_goods/delete.do',req,successCallback,errorCallback);
-        }
+        },
+        //初始化供应商名称下拉框
+        GetSupplierName:function(req,successCallback,errorCallback){
+            doPost($tool.getContext() + 'supplier_goods/getSupplierName.do',req,successCallback,errorCallback);
+        },
+        //初始化货品类型下拉框
+        GetGoodsType:function(req,successCallback,errorCallback){
+            doPost($tool.getContext() + 'supplier_goods/getGoodsType.do',req,successCallback,errorCallback);
+        },
     };
 
 

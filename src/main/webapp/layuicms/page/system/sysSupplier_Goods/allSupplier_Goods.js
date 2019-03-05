@@ -27,7 +27,7 @@ layui.config({
         tableIns = table.render({
             elem: '#supplier_goods'
             , height: 415
-            , url: $tool.getContext() + 'supplier_goods/supplier_goodslList.do' //数据接口
+            , url: $tool.getContext() + 'supplier_goods/supplier_goodsList.do' //数据接口
             , method: 'post'
             , page:true //开启分页
             , cols: [[ //表头

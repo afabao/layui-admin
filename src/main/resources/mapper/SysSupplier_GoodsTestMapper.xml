@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gameloft9.demo.dataaccess.dao.system.SysSupplier_GoodsTestMapper">
+    <!--商品原料分页信息  List<SysSupplier_GoodsTestMapper> getAll();-->
+    <resultMap id="SupplierMap" type="com.gameloft9.demo.dataaccess.model.system.SysSupplierTest">
+
+        <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="SUPPLIER_NAME" property="supplierName" jdbcType="VARCHAR"/>
+        <result column="SUPPLIER_DESCRIBE" property="supplierDescribe" jdbcType="VARCHAR"/>
+        <result column="PHONE" property="phone" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="meterialMap" type="com.gameloft9.demo.dataaccess.model.system.MeterialTest">
+        <id property="id" column="ID" jdbcType="VARCHAR" />
+        <result property="goodsName" column="GOODS_NAME" jdbcType="VARCHAR" />
+        <result property="goodsType" column="GOODS_TYPE" jdbcType="VARCHAR" />
+        <result property="goodsDescribe" column="GOODS_DESCRIBE" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="getAll" resultType="com.gameloft9.demo.dataaccess.dao.system.SysSupplier_GoodsTestMapper">
+        select
+            m.GOODS_TYPE,
+            m.GOODS_NAME,
+            mg.GOODS_PRICE,
+            s.SUPPLIER_NAME,
+            s.PHONE
+        from
+            sys_supplier_test s,
+            sys_material_test m,
+            sys_material_goods_test mg
+        <where>
+            <if test="goodsType != null and goodsType != ''">
+                and m.GOODS_TYPE = #{goodsType,jdbcType=VARCAHR}
+            </if>
+            <if test="supplierName != null and supplierName != ''">
+                and s.SUPPLIER_NAME = #{supplierName,jdbcType=VARCAHR}
+            </if>
+        </where>
+        limit #{start,jdbcType=DECIMAL},#{end,jdbcType=DECIMAL}
+    </select>
+
+    <!--获取原料商品总条数  Integer getCount(-->
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(1) from sys_material_goods_test
+        <where>
+            <if test="goodsType != null and goodsType != ''">
+                and m.GOODS_TYPE = #{goodsType,jdbcType=VARCAHR}
+            </if>
+            <if test="supplierName != null and supplierName != ''">
+                and s.SUPPLIER_NAME = #{supplierName,jdbcType=VARCAHR}
+            </if>
+        </where>
+    </select>
+
+    <!--初始化供应商名称下拉框   List<SysSupplierTest> getSupplierName();-->
+    <select id="getSupplierName" resultMap="SupplierMap">
+        select * from sys_supplier_test
+    </select>
+
+    <!--初始化货品类型下拉框   List<MeterialTest> getGoodsType();-->
+    <select id="getGoodsType" resultMap="meterialMap">
+        select * from sys_material_test
+    </select>
+</mapper>

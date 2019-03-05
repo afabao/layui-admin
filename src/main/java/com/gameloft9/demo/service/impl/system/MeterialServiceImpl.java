@@ -8,10 +8,12 @@ import com.gameloft9.demo.service.beans.system.PageRange;
 import com.gameloft9.demo.utils.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class MeterialServiceImpl implements MeterialService {
 
     @Autowired
