@@ -26,6 +26,8 @@ layui.config({
             var data = res.data;
             /*$("[name='roleName']").val(data.roleName);*/
             $("[name='supplierName']").val(data.supplierName);
+            $("[name='supplierDescribe']").val(data.supplierDescribe);
+            $("[name='phone']").val(data.phone);
             /*if('1' === data.isSuper){
                 var c=document.editRoleForm.isSuper;
                 c.checked = true;

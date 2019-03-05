@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gameloft9.demo.dataaccess.dao.system.SysMeterialTestMapper">
+
+    <resultMap id="meterialMap" type="com.gameloft9.demo.dataaccess.model.system.MeterialTest">
+        <id property="id" column="ID" jdbcType="VARCHAR" />
+        <result property="goodsName" column="GOODS_NAME" jdbcType="VARCHAR" />
+        <result property="goodsType" column="GOODS_TYPE" jdbcType="VARCHAR" />
+        <result property="goodsDescribe" column="GOODS_DESCRIBE" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <!--原料分页  List<MeterialTest> getAll(-->
+    <select id="getAll" resultMap="meterialMap">
+        select * from sys_material_test
+        <where>
+            <if test="goodsName !=null and goodsName != ''">
+                and GOODS_NAME like "%"#{goodsName,jdbcType=VARCHAR}"%"
+            </if>
+            <if test="goodsType !=null and goodsType != ''">
+                and GOODS_TYPE = #{goodsType,jdbcType=VARCHAR}
+            </if>
+        </where>
+        limit #{start,jdbcType=DECIMAL},#{end,jdbcType=DECIMAL}
+    </select>
+
+    <!--原料总条数  Integer getCount(-->
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(1)
+        from sys_material_test
+        <where>
+            <if test="goodsName !=null and goodsName != ''">
+                and GOODS_NAME = #{goodsName,jdbcType=VARCHAR}
+            </if>
+            <if test="goodsType !=null and goodsType != ''">
+                and GOODS_TYPE = #{goodsType,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <!--添加原料  void addMeterial(MeterialTest meterialTest);-->
+    <insert id="addMeterial" parameterType="com.gameloft9.demo.dataaccess.model.system.MeterialTest">
+        insert into sys_material_test
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">
+                ID,
+            </if>
+            <if test="goodsName != null and goodsName != ''">
+                GOODS_NAME,
+            </if>
+            <if test="goodsType != null and goodsType != ''">
+                GOODS_TYPE,
+            </if>
+            <if test="goodsDescribe != null and goodsDescribe != ''">
+                GOODS_DESCRIBE,
+            </if>
+        </trim>
+        <trim prefix=" values(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsName != null and goodsName != ''">
+                #{goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsType != null and goodsType != ''">
+                #{goodsType,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsDescribe != null and goodsDescribe != ''">
+                #{goodsDescribe,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <!--根据名称查找原料  MeterialTest getByGoodsName(String goodsName);-->
+    <select id="getByGoodsName" parameterType="java.lang.String" resultMap="meterialMap">
+        select * from sys_material_test
+        <where>
+            <if test="_parameter != null">
+                and GOODS_NAME=#{goodsName,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <!--根据id查找原料   MeterialTest getById(String id);-->
+    <select id="getById" parameterType="java.lang.String" resultMap="meterialMap">
+        select * from sys_material_test
+        <where>
+            <if test="_parameter != null">
+                and ID=#{id,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <!--修改原料    void updateMeterial(MeterialTest meterialTest);-->
+    <update id="updateMeterial" parameterType="com.gameloft9.demo.dataaccess.model.system.MeterialTest">
+        update sys_material_test
+        <set>
+            <if test="goodsName !=null and goodsName != ''">
+                GOODS_NAME = #{goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsType !=null and goodsType != ''">
+                GOODS_TYPE = #{goodsType,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsType !=null and goodsType != ''">
+                GOODS_DESCRIBE = #{goodsDescribe,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <!--删除原料  void deleteMeterial(String id);-->
+    <delete id="deleteMeterial" parameterType="java.lang.String">
+        delete from sys_material_test
+        <where>
+            <if test="_parameter != null">
+                and ID = #{id,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </delete>
+
+
+</mapper>

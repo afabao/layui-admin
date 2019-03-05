@@ -1,6 +1,7 @@
 package com.gameloft9.demo.controllers.system;
 
 
+import com.gameloft9.demo.dataaccess.model.system.MeterialTest;
 import com.gameloft9.demo.dataaccess.model.system.SysSupplierTest;
 
 import com.gameloft9.demo.mgrframework.annotation.BizOperLog;
@@ -54,7 +55,7 @@ public class SysSupplierController {
      */
     @RequestMapping(value = "/update.do" ,method = RequestMethod.POST)
     @ResponseBody
-    @BizOperLog(operType = OperType.ADD,memo = "修改供应商")
+    @BizOperLog(operType = OperType.UPDATE,memo = "修改供应商")
 
     public IResult editSupplier(SysSupplierTest supplierTest){
         //返回json至前端的均返回ResultBean或者PageResultBean
@@ -62,7 +63,8 @@ public class SysSupplierController {
     }
 
     /**
-     *修改供应商
+     *id
+     *查找供应商
      */
     @RequestMapping(value = "/get.do" ,method = RequestMethod.POST)
     @ResponseBody
@@ -70,5 +72,16 @@ public class SysSupplierController {
         //返回json至前端的均返回ResultBean或者PageResultBean
         return new ResultBean<SysSupplierTest>(supplierService.getById(id));
     }
+
+    //删除供应商
+    @RequestMapping(value = "/delete.do" ,method = RequestMethod.POST)
+    @ResponseBody
+    @BizOperLog(operType = OperType.DELETE,memo = "删除供应商")
+    public IResult deleteSupplier(String id){
+        //返回json至前端的均返回ResultBean或者PageResultBean
+        return new ResultBean<Boolean>(supplierService.deleteSupllierById(id));
+    }
+
+
 
 }

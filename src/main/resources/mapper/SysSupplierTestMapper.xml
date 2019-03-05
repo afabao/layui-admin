@@ -17,10 +17,10 @@
        from sys_supplier_test
        <where>
            <if test="supplierName != null and supplierName != ''">
-               and supplierName like "%"#{supplierName,jdbcType=VARCHAR}"%"
+               and SUPPLIER_NAME like "%"#{supplierName,jdbcType=VARCHAR}"%"
            </if>
            <if test="phone != null and phone != ''">
-               and phone=#{phone,jdbcType=VARCHAR}
+               and PHONE=#{phone,jdbcType=VARCHAR}
            </if>
        </where>
        limit #{start,jdbcType=DECIMAL},#{end,jdbcType=DECIMAL}
@@ -32,10 +32,10 @@
         from sys_supplier_test
         <where>
             <if test="supplierName != null and supplierName != ''">
-                and supplierName like "%"#{supplierName,jdbcType=VARCHAR}"%"
+                and SUPPLIER_NAME like "%"#{supplierName,jdbcType=VARCHAR}"%"
             </if>
             <if test="phone != null and phone != ''">
-                and phone=#{phone,jdbcType=VARCHAR}
+                and PHONE=#{phone,jdbcType=VARCHAR}
             </if>
         </where>
     </select>
@@ -106,12 +106,7 @@
 
     <!--根据id删除供应商void deleteSupllierById(String id);-->
     <delete id="deleteSupllierById" parameterType="java.lang.String">
-        delete from sys_supplier_test
-        <where>
-            <if test="id != null and id != ''">
-
-            </if>
-        </where>
+        delete from sys_supplier_test where ID = #{id,jdbcType=VARCHAR}
     </delete>
 
 </mapper>

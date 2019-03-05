@@ -18,7 +18,7 @@ layui.config({
     /**
      * 页面初始化
      * */
-    function init() {
+    /*function init() {
 
         //初始化下拉框
         $api.GetFirstClassMenus(null,function (res) {
@@ -33,7 +33,7 @@ layui.config({
             }
         });
     }
-    init();
+    init();*/
 
 
     /**
@@ -41,7 +41,7 @@ layui.config({
      * */
     function defineTable() {
         tableIns = table.render({
-            elem: '#menu-data'
+            elem: '#supplier-data'
             , height: 415
             , url: $tool.getContext() + 'supplier/supplierList.do' //数据接口
             , method: 'post'
@@ -58,7 +58,7 @@ layui.config({
                 , {field: 'createTime', title: '创建时间', width: '20%'}
                 , {field: 'updateUser', title: '更新者', width: '10%'}
                 , {field: 'updateTime', title: '更新时间', width: '20%'}*/
-                , {fixed: 'right', title: '操作', width: 200, align: 'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
+                , {fixed: 'right', title: '操作', width: 300, align: 'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
             ]]
             , done: function (res, curr) {//请求完毕后的回调
                 //如果是异步请求数据方式，res即为你接口返回的信息.curr：当前页码
@@ -66,7 +66,7 @@ layui.config({
         });
 
         //为toolbar添加事件响应
-        table.on('tool(menuFilter)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+        table.on('tool(supplierFilter)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
             var row = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的DOM对象
@@ -85,16 +85,17 @@ layui.config({
 
     //查询
     form.on("submit(queryMenu)", function (data) {
-        var parentMenuId = data.field.parentMenuId;
+       /* var parentMenuId = data.field.parentMenuId;
         var menuName = data.field.menuName;
-        var menuCode = data.field.menuCode;
+        var menuCode = data.field.menuCode;*/
+        var supplierName = data.field.supplierName;
+        var phone = data.field.phone;
 
         //表格重新加载
         tableIns.reload({
             where:{
-                parentMenuId:parentMenuId,
-                menuName:menuName,
-                menuCode:menuCode
+                supplierName:supplierName,
+                phone:phone,
             }
         });
 
@@ -109,7 +110,7 @@ layui.config({
             content: "addSupplier.html",
             success: function (layero, index) {
                 setTimeout(function () {
-                    layui.layer.tips('点击此处返回菜单列表', '.layui-layer-setwin .layui-layer-close', {
+                    layui.layer.tips('点击此处返回供应商列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
                     });
                 }, 500)
@@ -129,10 +130,10 @@ layui.config({
             layer.close(confirmIndex);//关闭confirm
             //向服务端发送删除指令
             var req = {
-                menuId: id
+                id: id
             };
 
-            $api.DeleteMenu(req,function (data) {
+            $api.DeleteSupplier(req,function (data) {
                 layer.msg("删除成功",{time:1000},function(){
                     //obj.del(); //删除对应行（tr）的DOM结构
                     //重新加载表格
