@@ -2,6 +2,7 @@ package com.gameloft9.demo.service.api.system;
 
 import com.gameloft9.demo.dataaccess.dao.system.SysSupplier_GoodsTestMapper;
 import com.gameloft9.demo.dataaccess.model.system.MeterialTest;
+import com.gameloft9.demo.dataaccess.model.system.Supplier_Goods;
 import com.gameloft9.demo.dataaccess.model.system.Supplier_GoodsTest;
 import com.gameloft9.demo.dataaccess.model.system.SysSupplierTest;
 
@@ -27,5 +28,21 @@ public interface Supplier_GoodsService {
     /**
      * 初始化货品类型下拉框
      * */
-    List<MeterialTest> getGoodsType();
+    List<String> getGoodsType();
+
+    /**
+     * 初始化供应商电话
+     *
+     */
+    String getPhone(String supplierId);
+
+    /**
+     * 初始化原料名称
+     */
+    List<MeterialTest> initGoodsName (String goodsType);
+
+    /**
+     * 添加原料商品
+     */
+    String addSupplier_Goods(Supplier_Goods supplier_goods);
 }

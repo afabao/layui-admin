@@ -46,40 +46,77 @@ layui.config({
     function initGoodsType() {
         $api.GetGoodsType(null,function (res) {
             var data = res.data;
-            console.log(data)
+
+            //console.log(res)
             if (data.length > 0) {
                 var html = '<option value="">--请选择--</option>';
                 for (var i = 0; i < data.length; i++) {
-                    html += '<option value="' + data[i].id + '">' + data[i].goodsType + '</option>>';
+                    html += '<option value="' + data[i] + '">' + data[i] + '</option>>';
                 }
                 $('#goodsType').append($(html));
                 form.render();
             }
+
         });
     }
 
+
+        /**
+         * 监听select
+         */
+        form.on('select(initPhone)',function(data){
+            $('#supllierPhoe').val("");
+            var req={
+                supplierId:data.value
+            }
+            $api.InitPhone(req,function(res) {
+                var data = res;
+                //console.log(data);
+                $('#supllierPhoe').val(data.data);
+            });
+        });
+
     /**
-     * 监听radio选择
-     * */
-    form.on('radio(menuTypeFilter)', function (data) {
-        //console.log(data.elem); //得到radio原始DOM对象
-        var value = data.value;
-        if ('2' === value) {//二级菜单
-            $('.parent-menu').removeClass('layui-hide');
-            $('.parent-menu').addClass('layui-anim-up');
-        }else{
-            $('.parent-menu').addClass('layui-hide');
-            $('.parent-menu').removeClass('layui-anim-up');
+     * 监听select
+     */
+    form.on('select(initGoodsName)',function(data){
+        // $('#supplierName').html('<option value="">--请选择--</option>');
+        $('#goodsName option').remove();
+        //console.log(data.value)
+        form.render();
+        var req={
+            goodsType:data.value
         }
+
+        $api.InitGoodsName(req,function (res) {
+            var data = res.data;
+
+            console.log(res)
+            if (data.length > 0) {
+
+                var html = '<option value="">--请选择--</option>';
+                for (var i = 0; i < data.length; i++) {
+                    html += '<option value="' + data[i].id + '">' + data[i].goodsName + '</option>>';
+                }
+                $('#goodsName').append($(html));
+                form.render();
+            }
+
+        });
     });
+
 
     /**
      * 表单提交
      * */
-    form.on("submit(addMenu)", function (data) {
-        var supplierName = data.field.supplierName;
-        var supplierDescribe = data.field.supplierDescribe;
+    form.on("submit(addSupplier_Goods)", function (data) {
+        var supplierName = data.field.supplierNameId;
         var phone = data.field.phone;
+        var goodsType = data.field.goodsType;
+        var goodsName = data.field.goodsName;
+        var goodsPrice = data.field.goodsPrice;
+
+        //console.log(data)
         /*var parentMenuId = data.field.parentMenuId;
         var requestUrl = data.field.requestUrl;
         var sort = data.field.sort;*/
@@ -87,14 +124,16 @@ layui.config({
         //请求
         var req = {
             supplierName:supplierName,
-            supplierDescribe: supplierDescribe,
-            phone: phone,
+            phone:phone,
+            goodsType: goodsType,
+            goodsName: goodsName,
+            goodsPrice: goodsPrice
             /*parentMenuId:parentMenuId,
             requestUrl:requestUrl,
             sort:sort*/
         };
 
-        $api.AddSupplier(req,function (data) {
+        $api.AddSupplier_Goods(req,function (data) {
             //top.layer.close(index);(关闭遮罩已经放在了ajaxExtention里面了)
             layer.msg("供应商添加成功！", {time: 1000}, function () {
                 layer.closeAll("iframe");

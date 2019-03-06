@@ -1,6 +1,7 @@
 package com.gameloft9.demo.controllers.system;
 
 import com.gameloft9.demo.dataaccess.model.system.MeterialTest;
+import com.gameloft9.demo.dataaccess.model.system.Supplier_Goods;
 import com.gameloft9.demo.dataaccess.model.system.Supplier_GoodsTest;
 import com.gameloft9.demo.dataaccess.model.system.SysSupplierTest;
 import com.gameloft9.demo.mgrframework.beans.response.IResult;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Collection;
+import java.util.List;
 
 @Controller
 @RequestMapping("/supplier_goods")
@@ -29,9 +31,9 @@ public class Supplier_GoodsController {
      */
     @RequestMapping(value = "/supplier_goodsList" ,method = RequestMethod.POST)
     @ResponseBody
-    public IResult getAll(String page,String limit,String goodsType,String supplierName){
+    public IResult getAll(String page,String limit,String supplierName,String goodsType){
         //返回json至前端的均返回ResultBean或者PageResultBean
-        return new PageResultBean<Collection<Supplier_GoodsTest>>(supplier_goodsService.getAll(page,limit,goodsType,supplierName),supplier_goodsService.getCount(goodsType,supplierName));
+        return new PageResultBean<Collection<Supplier_GoodsTest>>(supplier_goodsService.getAll(page,limit,supplierName,goodsType),supplier_goodsService.getCount(supplierName,goodsType));
     }
 
     /**
@@ -51,6 +53,33 @@ public class Supplier_GoodsController {
     @ResponseBody
     public IResult getGoodsType(){
         //返回json至前端的均返回ResultBean或者PageResultBean
-        return new ResultBean<Collection<MeterialTest>>(supplier_goodsService.getGoodsType());
+        return new ResultBean<Collection<String>>(supplier_goodsService.getGoodsType());
+    }
+
+    /**
+     * 初始化供应商电话
+     */
+    @RequestMapping(value = "/getPhone.do",method = RequestMethod.POST)
+    @ResponseBody
+    public IResult getPhone(String supplierId){
+        return new ResultBean<String>(supplier_goodsService.getPhone(supplierId));
+    }
+
+    /**
+     * 初始化原料名称
+     */
+    @RequestMapping(value = "/getGoodsName.do",method = RequestMethod.POST)
+    @ResponseBody
+    public IResult initGoodsName(String goodsType){
+        return new ResultBean<Collection<MeterialTest>>(supplier_goodsService.initGoodsName(goodsType));
+    }
+
+    /**
+     * 添加原料商品
+     */
+    @RequestMapping(value = "/add.do" ,method = RequestMethod.POST)
+    @ResponseBody
+    public IResult addSupplier_Goods(Supplier_Goods supplier_goods){
+        return new ResultBean<String>(supplier_goodsService.addSupplier_Goods(supplier_goods));
     }
 }

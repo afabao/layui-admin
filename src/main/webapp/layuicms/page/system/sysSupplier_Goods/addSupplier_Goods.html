@@ -31,35 +31,43 @@
     <div class="layui-form-item parent-menu">
         <label class="layui-form-label">供应商名称</label>
         <div class="layui-input-block">
-            <select id="supplierName" name="supplierNameId"></select>
-        </div>
-    </div>
-
-    <div class="layui-form-item parent-menu">
-        <label class="layui-form-label">货品类型</label>
-        <div class="layui-input-block">
-            <select id="goodsType" name="goodsTypeId"></select>
-        </div>
-    </div>
-
-    <div class="layui-form-item">
-        <label class="layui-form-label">供应商简介</label>
-        <div class="layui-input-block">
-            <input type="text" class="layui-input" name="supplierDescribe" lay-verify="required" placeholder="供应商简介">
+            <select id="supplierName" name="supplierNameId" lay-filter="initPhone"></select>
         </div>
     </div>
 
     <div class="layui-form-item">
         <label class="layui-form-label">供应商电话</label>
         <div class="layui-input-block">
-            <input type="text" class="layui-input" name="phone" lay-verify="required" placeholder="供应商电话">
+            <input type="text" class="layui-input" id="supllierPhoe" name="phone" lay-verify="required" placeholder="供应商电话">
+        </div>
+    </div>
+
+    <div class="layui-form-item parent-menu">
+        <label class="layui-form-label">货品类型</label>
+        <div class="layui-input-block">
+            <select id="goodsType" name="goodsType" lay-filter="initGoodsName"></select>
+        </div>
+    </div>
+
+    <div class="layui-form-item parent-menu">
+        <label class="layui-form-label">货品名称</label>
+        <div class="layui-input-block">
+            <select id="goodsName" name="goodsName"></select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">货品单价</label>
+        <div class="layui-input-block">
+            <input type="text" class="layui-input" name="goodsPrice" lay-verify="required" placeholder="货品单价">
         </div>
     </div>
 
 
+
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <button class="layui-btn" lay-submit="" lay-filter="addMenu">立即提交</button>
+            <button class="layui-btn" lay-submit="" lay-filter="addSupplier_Goods">立即提交</button>
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
     </div>

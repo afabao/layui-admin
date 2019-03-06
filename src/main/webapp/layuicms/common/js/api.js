@@ -206,6 +206,14 @@ layui.define(['$tool','jquery'], function (exports) {
         GetGoodsType:function(req,successCallback,errorCallback){
             doPost($tool.getContext() + 'supplier_goods/getGoodsType.do',req,successCallback,errorCallback);
         },
+        //初始化供应商电话
+        InitPhone:function(req,successCallback,errorCallback){
+            doPost($tool.getContext() + 'supplier_goods/getPhone.do',req,successCallback,errorCallback);
+        },
+        //初始货品名称
+        InitGoodsName:function(req,successCallback,errorCallback){
+            doPost($tool.getContext() + 'supplier_goods/getGoodsName.do',req,successCallback,errorCallback);
+        },
     };
 
 

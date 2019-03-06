@@ -9,7 +9,7 @@ public class Supplier_GoodsTest {
 
     private String supplierId;//供应商id
 
-    private String materialIdl;//原料id
+    private String materialId;//原料id
 
     private String goodsPrice;//价格
 }

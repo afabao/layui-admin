@@ -2,10 +2,12 @@ package com.gameloft9.demo.service.impl.system;
 
 import com.gameloft9.demo.dataaccess.dao.system.SysSupplier_GoodsTestMapper;
 import com.gameloft9.demo.dataaccess.model.system.MeterialTest;
+import com.gameloft9.demo.dataaccess.model.system.Supplier_Goods;
 import com.gameloft9.demo.dataaccess.model.system.Supplier_GoodsTest;
 import com.gameloft9.demo.dataaccess.model.system.SysSupplierTest;
 import com.gameloft9.demo.service.api.system.Supplier_GoodsService;
 import com.gameloft9.demo.service.beans.system.PageRange;
+import com.gameloft9.demo.utils.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +22,7 @@ public class Supplier_GoodsTestMapperImpl implements Supplier_GoodsService {
     //分页原料商品
     public List<Supplier_GoodsTest> getAll(String page, String limit, String goodsType, String supplierName) {
         PageRange pageRange = new PageRange(page,limit);
-        return supplier_goodsTestMapper.getAll(pageRange.getPage(),pageRange.getLimit(),goodsType,supplierName);
+        return supplier_goodsTestMapper.getAll(pageRange.getStart(),pageRange.getEnd(),goodsType,supplierName);
     }
 
     //原料商品总条数
@@ -34,7 +36,31 @@ public class Supplier_GoodsTestMapperImpl implements Supplier_GoodsService {
     }
 
     //初始化货品类型
-    public List<MeterialTest> getGoodsType() {
+    public List<String> getGoodsType() {
         return supplier_goodsTestMapper.getGoodsType();
+    }
+
+    //初始化供应商电话
+    public String getPhone(String supplierId) {
+        return supplier_goodsTestMapper.getPhone(supplierId);
+    }
+
+    //初始化原料名称
+    public List<MeterialTest> initGoodsName(String goodsType) {
+        return supplier_goodsTestMapper.initGoodsName(goodsType);
+    }
+
+    //添加原料商品
+    public String addSupplier_Goods(Supplier_Goods supplier_goods) {
+
+        Supplier_GoodsTest supplier_goodsTest = new Supplier_GoodsTest();
+        supplier_goodsTest.setId(UUIDUtil.getUUID());
+        supplier_goodsTest.setGoodsPrice(supplier_goods.getGoodsPrice());
+        supplier_goodsTest.setSupplierId(supplier_goods.getSupplierName());
+        supplier_goodsTest.setMaterialId(supplier_goods.getGoodsName());
+        supplier_goodsTestMapper.addSupplier_Goods(supplier_goodsTest);
+
+
+        return supplier_goodsTest.getId();
     }
 }

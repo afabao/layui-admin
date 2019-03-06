@@ -37,7 +37,7 @@ layui.config({
                 , {field: 'goodsPrice', title: '货品单价'/*, width: '10%'*/}
                 , {field: 'supplierName', title: '供应商名称'/*, width: '10%'*/}
                 , {field: 'phone', title: '供应商电话'/*, width: '10%'*/}
-                , {fixed: 'right', title: '操作', width: 300, align: 'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
+                , {fixed: 'right', title: '操作', width: 200, align: 'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
             ]]
             , done: function (res, curr) {//请求完毕后的回调
                 //如果是异步请求数据方式，res即为你接口返回的信息.curr：当前页码
@@ -64,14 +64,15 @@ layui.config({
 
     //查询
     form.on("submit(queryMenu)", function (data) {
-        var goodsType = data.field.goodsType;
         var supplierName = data.field.supplierName;
-
+        var goodsType = data.field.goodsType;
+        console.log(goodsType)
+        console.log(supplierName)
         //表格重新加载
         tableIns.reload({
             where:{
-                goodsType:goodsType,
                 supplierName:supplierName,
+                goodsType:goodsType
             }
         });
 

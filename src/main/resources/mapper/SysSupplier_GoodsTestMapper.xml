@@ -17,7 +17,19 @@
         <result property="goodsDescribe" column="GOODS_DESCRIBE" jdbcType="VARCHAR" />
     </resultMap>
 
-    <select id="getAll" resultType="com.gameloft9.demo.dataaccess.dao.system.SysSupplier_GoodsTestMapper">
+    <resultMap id="supplier_goods_map" type="com.gameloft9.demo.dataaccess.model.system.Supplier_Goods">
+
+        <id property="id" column="ID"/>
+        <result property="supplierId" column="SUPPLIER_ID"/>
+        <result property="materialId" column="MATERIAL_ID"/>
+        <result property="goodsType" column="GOODS_TYPE"/>
+        <result property="supplierName" column="SUPPLIER_NAME"/>
+        <result property="goodsName" column="GOODS_NAME"/>
+        <result property="goodsPrice" column="GOODS_PRICE"/>
+        <result property="phone" column="PHONE"/>
+    </resultMap>
+
+    <select id="getAll" resultMap="supplier_goods_map">
         select
             m.GOODS_TYPE,
             m.GOODS_NAME,
@@ -27,27 +39,29 @@
         from
             sys_supplier_test s,
             sys_material_test m,
-            sys_material_goods_test mg
+            sys_supplier_goods_test mg
         <where>
             <if test="goodsType != null and goodsType != ''">
-                and m.GOODS_TYPE = #{goodsType,jdbcType=VARCAHR}
+                and m.GOODS_TYPE = #{goodsType,jdbcType=VARCHAR}
             </if>
             <if test="supplierName != null and supplierName != ''">
-                and s.SUPPLIER_NAME = #{supplierName,jdbcType=VARCAHR}
+                and s.SUPPLIER_NAME = #{supplierName,jdbcType=VARCHAR}
             </if>
+               and m.ID=mg.MATERIAL_ID
+               and s.ID=mg.SUPPLIER_ID
         </where>
         limit #{start,jdbcType=DECIMAL},#{end,jdbcType=DECIMAL}
     </select>
 
     <!--获取原料商品总条数  Integer getCount(-->
     <select id="getCount" resultType="java.lang.Integer">
-        select count(1) from sys_material_goods_test
+        select count(1) from sys_supplier_goods_test
         <where>
             <if test="goodsType != null and goodsType != ''">
-                and m.GOODS_TYPE = #{goodsType,jdbcType=VARCAHR}
+                and m.GOODS_TYPE = #{goodsType,jdbcType=VARCHAR}
             </if>
             <if test="supplierName != null and supplierName != ''">
-                and s.SUPPLIER_NAME = #{supplierName,jdbcType=VARCAHR}
+                and s.SUPPLIER_NAME = #{supplierName,jdbcType=VARCHAR}
             </if>
         </where>
     </select>
@@ -58,7 +72,53 @@
     </select>
 
     <!--初始化货品类型下拉框   List<MeterialTest> getGoodsType();-->
-    <select id="getGoodsType" resultMap="meterialMap">
-        select * from sys_material_test
+    <!--resultMap="meterialMap"-->
+    <select id="getGoodsType"  resultType="java.lang.String" >
+        /*select * from sys_material_test*/
+        select DISTINCT GOODS_TYPE from sys_material_test
     </select>
+
+    <!--初始化供应商电话   String getPhone(String supplierName);-->
+    <select id="getPhone" parameterType="java.lang.String" resultType="java.lang.String">
+        select PHONE from sys_supplier_test where ID = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <!--初始化原料名称  List<String> initGoodsName (String goodsId);-->
+    <select id="initGoodsName" parameterType="java.lang.String" resultMap="meterialMap">
+
+        select * from sys_material_test where GOODS_TYPE = #{goodsType,jdbcType=VARCHAR}
+    </select>
+
+    <!--添加原料商品   void addSupplier_Goods(Supplier_Goods supplier_goods);-->
+    <insert id="addSupplier_Goods" parameterType="com.gameloft9.demo.dataaccess.model.system.Supplier_GoodsTest">
+        insert into sys_supplier_goods_test
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">
+                ID,
+            </if>
+            <if test="materialId != null and materialId != ''">
+                MATERIAL_ID,
+            </if>
+            <if test="supplierId != null and supplierId != ''">
+                SUPPLIER_ID,
+            </if>
+            <if test="goodsPrice != null and goodsPrice != ''">
+                GOODS_PRICE,
+            </if>
+        </trim>
+        <trim suffix=")" prefix=" values(" suffixOverrides=",">
+            <if test="id != null and id != ''">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="materialId != null and materialId != ''">
+                #{materialId,jdbcType=VARCHAR},
+            </if>
+            <if test="supplierId != null and supplierId != ''">
+                #{supplierId,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsPrice != null and goodsPrice != ''">
+                #{goodsPrice,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
 </mapper>
