@@ -1,6 +1,7 @@
 package com.gameloft9.demo.service.impl.system;
 
 import com.gameloft9.demo.dataaccess.dao.system.SysMeterialTestMapper;
+import com.gameloft9.demo.dataaccess.dao.system.SysSupplier_GoodsTestMapper;
 import com.gameloft9.demo.dataaccess.model.system.MeterialTest;
 import com.gameloft9.demo.mgrframework.utils.CheckUtil;
 import com.gameloft9.demo.service.api.system.MeterialService;
@@ -18,6 +19,8 @@ public class MeterialServiceImpl implements MeterialService {
 
     @Autowired
     SysMeterialTestMapper meterialTestMapper;
+    @Autowired
+    SysSupplier_GoodsTestMapper sysSupplier_goodsTestMapper;
 
     //原料分页
     public List<MeterialTest> getAll(String page, String limit, String goodsName, String goodsType) {
@@ -61,6 +64,8 @@ public class MeterialServiceImpl implements MeterialService {
         //id是否存在
         CheckUtil.notBlank(id,"角色id为空");
         meterialTestMapper.deleteMeterial(id);
+        //同时删除原料商品对应的数据
+        sysSupplier_goodsTestMapper.deleteByMaterialId(id);
         return true;
     }
 

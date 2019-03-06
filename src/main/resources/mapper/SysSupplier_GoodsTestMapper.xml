@@ -29,6 +29,7 @@
         <result property="phone" column="PHONE"/>
     </resultMap>
 
+    <!--//供应商-原料一览表分页显示-->
     <select id="getAll" resultMap="supplier_goods_map">
         select
             m.GOODS_TYPE,
@@ -121,4 +122,25 @@
             </if>
         </trim>
     </insert>
+
+
+   <!--根据供应商id删除供应商   void deleteBySupplierId(String supplierId);-->
+    <delete id="deleteBySupplierId" parameterType="java.lang.String">
+        delete from sys_supplier_goods_test
+        <where>
+            <if test="_parameter != null and _parameter != ''">
+                SUPPLIER_ID=#{supplierId,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </delete>
+
+   <!--根据原料id删除原料商品void deleteByMaterialId(String MaterialId);-->
+    <delete id="deleteByMaterialId" parameterType="java.lang.String">
+        delete from sys_supplier_goods_test
+        <where>
+            <if test="_parameter != null and _parameter != ''">
+                MATERIAL_ID=#{materialId,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </delete>
 </mapper>

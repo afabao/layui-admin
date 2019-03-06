@@ -54,4 +54,14 @@ public interface SysSupplier_GoodsTestMapper {
      * 添加原料商品
      */
     void addSupplier_Goods(Supplier_GoodsTest supplier_GoodsTest);
+
+    /**
+     * 根据供应商id删除供应商商品
+     */
+    void deleteBySupplierId(String supplierId);
+
+    /**
+     * 根据原料id删除原料商品
+     */
+    void deleteByMaterialId(String MaterialId);
 }
