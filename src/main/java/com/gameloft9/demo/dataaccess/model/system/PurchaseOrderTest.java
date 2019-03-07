@@ -10,7 +10,7 @@ public class PurchaseOrderTest {
 
     private String id;//订单id
 
-    private String number;//订单编号
+    private String orderNumber;//订单编号
 
     private String goodsId;//购买原料id
 
@@ -29,7 +29,7 @@ public class PurchaseOrderTest {
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date applyTime;//订单申请时间
 
-    private String state;//订单状态
+    private String auditState;//订单状态
 
     private String orderAuditUser;//订单审核人
 
@@ -40,6 +40,8 @@ public class PurchaseOrderTest {
 
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date payAuditTime;//订单支付时间
+
+    private String payState;//支付状态
 
     private String applyDescribe;//申请原因
 

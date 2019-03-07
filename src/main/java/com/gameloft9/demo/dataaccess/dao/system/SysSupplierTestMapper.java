@@ -51,7 +51,7 @@ public interface SysSupplierTestMapper {
     SysSupplierTest getBySupplierName(String supplierName);
 
     /**
-     * 根据名称查找供应商
+     * 根据id查找供应商
      * @param id 供应商名称
      * @return
      */
@@ -62,5 +62,10 @@ public interface SysSupplierTestMapper {
      * @param id 供应商id
      */
     void deleteSupllierById(String id);
+
+    /**
+     * 根据供应商id查找供应商名称
+     */
+    String getNameById(String id);
 
 }

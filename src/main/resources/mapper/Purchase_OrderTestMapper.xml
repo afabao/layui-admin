@@ -31,22 +31,23 @@
 
     <resultMap id="purchase_order_map" type="com.gameloft9.demo.dataaccess.model.system.PurchaseOrderTest">
         <id property="id" column="ID"/>
-        <result property="NUMBER" column="number" jdbcType="VARCHAR"/>
-        <result property="GOODS_ID" column="goodsId" jdbcType="VARCHAR"/>
-        <result property="GOODS_NAME" column="goodsName" jdbcType="VARCHAR"/>
-        <result property="SUPPLIER_ID" column="applierId" jdbcType="VARCHAR"/>
-        <result property="SUPPLIER_NAME" column="applierName" jdbcType="VARCHAR"/>
-        <result property="GOODS_NUMBER" column="goodsNumber" jdbcType="VARCHAR"/>
-        <result property="TOTAL_PRICE" column="totalPrice" jdbcType="DOUBLE"/>
-        <result property="APPLY_USER" column="applyUser" jdbcType="VARCHAR"/>
-        <result property="APPLY_TIME" column="applyTime" jdbcType="DATE"/>
-        <result property="STATE" column="state" jdbcType="VARCHAR"/>
-        <result property="ORDER_AUDIT_USER" column="orderAuditUser" jdbcType="VARCHAR"/>
-        <result property="ORDER_AUDIT_TIME" column="orderAuditTime" jdbcType="DATE"/>
-        <result property="PAY_AUDIT_USER" column="payAuditUser" jdbcType="VARCHAR"/>
-        <result property="PAY_AUDIT_TIME" column="payAuditTime" jdbcType="DATE"/>
-        <result property="APPLY_DESCRIBE" column="applyDescribe" jdbcType="VARCHAR"/>
-        <result property="AUDIT_DESCRIBE" column="auditDescribe" jdbcType="VARCHAR"/>
+        <result column="ORDER_NUMBER" property="orderNumber" jdbcType="VARCHAR"/>
+        <result column="GOODS_ID" property="goodsId" jdbcType="VARCHAR"/>
+        <result column="GOODS_NAME" property="goodsName" jdbcType="VARCHAR"/>
+        <result column="SUPPLIER_ID" property="supplierId" jdbcType="VARCHAR"/>
+        <result column="SUPPLIER_NAME" property="supplierName" jdbcType="VARCHAR"/>
+        <result column="GOODS_NUMBER" property="goodsNumber" jdbcType="VARCHAR"/>
+        <result column="TOTAL_PRICE" property="totalPrice" jdbcType="DOUBLE"/>
+        <result column="APPLY_USER" property="applyUser" jdbcType="VARCHAR"/>
+        <result column="APPLY_TIME" property="applyTime" jdbcType="DATE"/>
+        <result column="AUDIT_STATE" property="auditState" jdbcType="VARCHAR"/>
+        <result column="ORDER_AUDIT_USER" property="orderAuditUser" jdbcType="VARCHAR"/>
+        <result column="ORDER_AUDIT_TIME" property="orderAuditTime" jdbcType="DATE"/>
+        <result column="PAY_AUDIT_USER" property="payAuditUser" jdbcType="VARCHAR"/>
+        <result column="PAY_AUDIT_TIME" property="payAuditTime" jdbcType="DATE"/>
+        <result column="PAY_STATE" property="payState" jdbcType="VARCHAR"/>
+        <result column="APPLY_DESCRIBE" property="applyDescribe" jdbcType="VARCHAR"/>
+        <result column="AUDIT_DESCRIBE" property="auditDescribe" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!--根据供应商id查找原料   List<MeterialTest> getGoodsTypeBySupplierId(String supplierId);-->
@@ -69,15 +70,15 @@
         select *
         from
         sys_purchase_order_test
-        <where>
+       <!-- <where>
             <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
                 and APPLY_TIME between #{startTime,jdbcType=DATE} and #{endTime,jdbcType=DATE}
             </if>
-            <if test="state != null and state != ''">
-                and STATE = #{state,jdbcType=VARCAHR}
+            <if test="auditState != null and auditState != ''">
+                and AUDIT_STATE = #{auditState,jdbcType=VARCHAR}
             </if>
         </where>
-        limit #{start,jdbcType=DECIMAL},#{end,jdbcType=DECIMAL}
+        limit #{start,jdbcType=DECIMAL},#{end,jdbcType=DECIMAL}-->
     </select>
 
     <!--获取总条数   Integer getCount(-->
@@ -89,8 +90,8 @@
             <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
                 and APPLY_TIME between #{startTime,jdbcType=DATE} and #{endTime,jdbcType=DATE}
             </if>
-            <if test="state != null and state != ''">
-                and STATE = #{state,jdbcType=VARCAHR}
+            <if test="auditState != null and auditState != ''">
+                and AUTID_STATE = #{auditState,jdbcType=VARCHAR}
             </if>
         </where>
     </select>
@@ -99,37 +100,85 @@
     <insert id="addPurchaseOrder" parameterType="com.gameloft9.demo.dataaccess.model.system.PurchaseOrderTest">
         insert into sys_purchase_order_test
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id !=''">
+                ID,
+            </if>
+            <if test="orderNumber != null and orderNumber !=''">
+                ORDER_NUMBER,
+            </if>
             <if test="supplierId != null and supplierId !=''">
                 SUPPLIER_ID,
+            </if>
+            <if test="supplierName != null and supplierName !=''">
+                SUPPLIER_NAME,
             </if>
             <if test="goodsId != null and goodsId !=''">
                 GOODS_ID,
             </if>
-            <if test="number != null and number !=''">
-                NUMBER,
+            <if test="goodsName != null and goodsName !=''">
+                GOODS_NAME,
+            </if>
+            <if test="goodsNumber != null and goodsNumber !=''">
+                GOODS_NUMBER,
             </if>
             <if test="totalPrice != null and totalPrice !=''">
                 TOTAL_PRICE,
+            </if>
+            <if test="applyUser != null and applyUser !=''">
+                APPLY_USER,
+            </if>
+            <if test="applyTime != null and applyTime !=''">
+                APPLY_TIME,
+            </if>
+            <if test="payState != null and payState !=''">
+                PAY_STATE,
+            </if>
+            <if test="auditState != null and auditState !=''">
+                AUDIT_STATE,
             </if>
             <if test="applyDescribe != null and applyDescribe !=''">
                 APPLY_DESCRIBE,
             </if>
         </trim>
         <trim prefix=" values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and id !=''">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNumber != null and orderNumber !=''">
+                #{orderNumber,jdbcType=VARCHAR},
+            </if>
             <if test="supplierId != null and supplierId !=''">
-                #{supplierId},
+                #{supplierId,jdbcType=VARCHAR},
+            </if>
+            <if test="supplierName != null and supplierName !=''">
+                #{supplierName,jdbcType=VARCHAR},
             </if>
             <if test="goodsId != null and goodsId !=''">
-                #{goodsId},
+                #{goodsId,jdbcType=VARCHAR},
             </if>
-            <if test="number != null and number !=''">
-                #{number},
+            <if test="goodsName != null and goodsName !=''">
+                #{goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsNumber != null and goodsNumber !=''">
+                #{goodsNumber,jdbcType=VARCHAR},
             </if>
             <if test="totalPrice != null and totalPrice !=''">
-                #{totalPrice},
+                #{totalPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="applyUser != null and applyUser !=''">
+                #{applyUser,jdbcType=VARCHAR},
+            </if>
+            <if test="applyTime != null and applyTime !=''">
+                #{applyTime,jdbcType=DATE},
+            </if>
+            <if test="payState != null and payState !=''">
+                #{payState,jdbcType=VARCHAR},
+            </if>
+            <if test="auditState != null and auditState !=''">
+                #{auditState,jdbcType=VARCHAR},
             </if>
             <if test="applyDescribe != null and applyDescribe !=''">
-                #{applyDescribe},
+                #{applyDescribe,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>

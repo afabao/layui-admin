@@ -21,7 +21,7 @@ public interface Purchase_OrderService {
                                    Date endTime,
                                    String page,
                                    String limit,
-                                   String state
+                                   String auditState
     );
 
     /**
@@ -30,7 +30,7 @@ public interface Purchase_OrderService {
     Integer getCount(
             Date startTime,//查询开始时间
             Date endTime,//查询终止时间
-            String state//订单状态
+            String auditState//订单状态
     );
 
     /**

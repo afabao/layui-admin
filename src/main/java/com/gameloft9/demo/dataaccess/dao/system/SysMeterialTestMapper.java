@@ -56,5 +56,10 @@ public interface SysMeterialTestMapper {
      */
     void deleteMeterial(String id);
 
+    /**
+     * 根据id查找原料名称
+     */
+    String getNameById(String id);
+
 
 }

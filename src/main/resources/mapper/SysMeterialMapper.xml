@@ -117,5 +117,14 @@
         </where>
     </delete>
 
+    <!--根据id查找原料名称   String getNameById(String id);-->
+    <select id="getNameById" resultType="java.lang.String" parameterType="java.lang.String">
+        select GOODS_NAME from sys_material_test
+        <where>
+            <if test="_parameter != null and _parameter != ''">
+                and ID = #{id,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
 
 </mapper>

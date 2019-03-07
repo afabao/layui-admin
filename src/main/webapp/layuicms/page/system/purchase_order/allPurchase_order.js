@@ -53,20 +53,21 @@ layui.config({
             , page:true //开启分页
             , cols: [[ //表头
                 {type:'numbers',title:'序号',fixed: 'left'},
-                {field: 'number', title: '订单编号'/*, width: '10%'*/}
-                , {field: 'goodsName', title: '购买货品'/*, width: '10%'*/}
-                , {field: 'goodsNumber', title: '购买数量'/*, width: '10%'*/}
-                , {field: 'totalPrice', title: '货品总价'/*, width: '10%'*/}
-                , {field: 'supplierName', title: '货品所属供应商'/*, width: '10%'*/}
-                , {field: 'applyUser', title: '订单申请人'/*, width: '10%'*/}
-                , {field: 'applyTime', title: '订单申请时间'/*, width: '10%'*/}
-                , {field: 'state', title: '订单状态'/*, width: '10%'*/}
-                , {field: 'orderAuditUser', title: '订单审核人'/*, width: '10%'*/}
-                , {field: 'orderAuditTime', title: '订单审核时间'/*, width: '10%'*/}
-                , {field: 'payAuditUser', title: '订单支付人'/*, width: '10%'*/}
-                , {field: 'payAuditTime', title: '订单支付时间'/*, width: '10%'*/}
-                , {field: 'applyDescribe', title: '申请原因'/*, width: '10%'*/}
-                , {field: 'auditDescribe', title: '审核信息'/*, width: '10%'*/}
+                {field: 'orderNumber', title: '订单编号', width: '22%',fixed: 'left'}
+                , {field: 'goodsName', title: '购买货品', width: '10%',fixed: 'left'}
+                , {field: 'goodsNumber', title: '购买数量', width: '10%'}
+                , {field: 'totalPrice', title: '货品总价(单位：元)', width: '15%'}
+                , {field: 'supplierName', title: '货品所属供应商', width: '17%'}
+                , {field: 'applyUser', title: '订单申请人', width: '10%'}
+                , {field: 'applyTime', title: '订单申请时间', width: '13%'}
+                , {field: 'auditState', title: '订单状态', width: '10%'}
+                , {field: 'orderAuditUser', title: '订单审核人', width: '10%'}
+                , {field: 'orderAuditTime', title: '订单审核时间', width: '10%'}
+                , {field: 'payAuditUser', title: '订单支付人', width: '10%'}
+                , {field: 'payAuditTime', title: '订单支付时间', width: '10%'}
+                , {field: 'payState', title: '支付状态', width: '10%'}
+                , {field: 'applyDescribe', title: '申请原因', width: '10%'}
+                , {field: 'auditDescribe', title: '审核信息', width: '10%'}
                 , {fixed: 'right', title: '操作', width: 200, align: 'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
             ]]
             , done: function (res, curr) {//请求完毕后的回调
@@ -94,15 +95,15 @@ layui.config({
 
     //查询
     form.on("submit(queryMenu)", function (data) {
-        var supplierName = data.field.supplierName;
-        var goodsType = data.field.goodsType;
+        var operDate = data.field.operDate;
+        var auditState = data.field.auditState;
         console.log(goodsType)
         console.log(supplierName)
         //表格重新加载
         tableIns.reload({
             where:{
                 supplierName:supplierName,
-                goodsType:goodsType
+                auditState:auditState
             }
         });
 

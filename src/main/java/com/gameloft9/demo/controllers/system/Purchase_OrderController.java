@@ -3,6 +3,7 @@ package com.gameloft9.demo.controllers.system;
 
 import com.gameloft9.demo.dataaccess.model.system.MeterialTest;
 import com.gameloft9.demo.dataaccess.model.system.PurchaseOrderTest;
+import com.gameloft9.demo.dataaccess.model.system.UserTest;
 import com.gameloft9.demo.mgrframework.annotation.BizOperLog;
 import com.gameloft9.demo.mgrframework.beans.constant.OperType;
 import com.gameloft9.demo.mgrframework.beans.response.IResult;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
 import java.util.Date;
 
@@ -33,10 +35,10 @@ public class Purchase_OrderController {
     }
 
     //订单分页显示
-    @RequestMapping(value = "/purchase_orderList",method = RequestMethod.POST)
+    @RequestMapping(value = "/purchase_orderList.do",method = RequestMethod.POST)
     @ResponseBody
-    public IResult getAll(Date startTime,Date endTime,String page,String limit,String state){
-        return new PageResultBean<Collection<PurchaseOrderTest>>(purchase_orderService.getAll(startTime,endTime,page,limit,state),purchase_orderService.getCount(startTime,endTime,state));
+    public IResult getAll(Date startTime,Date endTime,String page,String limit,String auditState){
+        return new PageResultBean<Collection<PurchaseOrderTest>>(purchase_orderService.getAll(startTime,endTime,page,limit,auditState),purchase_orderService.getCount(startTime,endTime,auditState));
     }
 
     //添加订单
@@ -45,6 +47,5 @@ public class Purchase_OrderController {
     @BizOperLog(operType = OperType.ADD,memo = "添加订单")
     public IResult addPurchaseOrder(PurchaseOrderTest purchaseOrderTest){
         return new ResultBean<String>(purchase_orderService.addPurchaseOrder(purchaseOrderTest));
-
     }
 }

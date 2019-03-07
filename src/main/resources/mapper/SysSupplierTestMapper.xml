@@ -109,4 +109,13 @@
         delete from sys_supplier_test where ID = #{id,jdbcType=VARCHAR}
     </delete>
 
+    <!--根据供应商id查找供应商名称   String getNameById(String id);-->
+    <select id="getNameById" resultType="java.lang.String" parameterType="java.lang.String">
+        select SUPPLIER_NAME from sys_supplier_test
+        <where>
+            <if test="_parameter != null and _parameter != ''">
+                and ID = #{id,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
 </mapper>
