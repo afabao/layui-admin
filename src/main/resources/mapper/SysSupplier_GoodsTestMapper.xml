@@ -143,4 +143,18 @@
             </if>
         </where>
     </delete>
+
+    <!--根据goodsId查询单价  String getPrice(String goodsId);-->
+    <select id="getPrice" resultType="java.lang.String" parameterType="java.lang.String">
+        select DISTINCT GOODS_PRICE
+        from sys_supplier_goods_test
+        <where>
+            <if test="_parameter != null and _parameter != ''">
+                and MATERIAL_ID = #{goodsId,jdbcType=VARCHAR}
+            </if>
+            <if test="_parameter != null and _parameter != ''">
+                and SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
 </mapper>

@@ -45,4 +45,9 @@ public interface Supplier_GoodsService {
      * 添加原料商品
      */
     String addSupplier_Goods(Supplier_Goods supplier_goods);
+
+    /**
+     * 根据原料id查询单价
+     */
+    String getPrice(String goodsId,String supplier);
 }

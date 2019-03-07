@@ -1,4 +1,4 @@
 
-ksquid:UselessImportCheck"@Remove this unused import 'org.apache.ibatis.annotations.Param'.(á¬Ó²8ì×çÃ”-
 ƒsquid:UselessImportCheck"SRemove this unused import 'com.gameloft9.demo.dataaccess.pagevo.SysSupplierPageVO'.(æ¦ú›ùÿÿÿÿ8ŠéùÛ”-
 nsquid:UselessImportCheck"CRemove this unused import 'org.springframework.stereotype.Service'.(¼º¡Ú8Ù·«Â”-
+ksquid:UselessImportCheck"@Remove this unused import 'org.apache.ibatis.annotations.Param'.(á¬Ó²8ì×çÃ”-

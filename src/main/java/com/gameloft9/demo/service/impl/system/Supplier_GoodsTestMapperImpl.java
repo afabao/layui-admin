@@ -60,7 +60,11 @@ public class Supplier_GoodsTestMapperImpl implements Supplier_GoodsService {
         supplier_goodsTest.setMaterialId(supplier_goods.getGoodsName());
         supplier_goodsTestMapper.addSupplier_Goods(supplier_goodsTest);
 
-
         return supplier_goodsTest.getId();
+    }
+
+    //根据原料id查询单价
+    public String getPrice(String goodsId,String supplierId) {
+        return supplier_goodsTestMapper.getPrice(goodsId,supplierId);
     }
 }

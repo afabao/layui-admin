@@ -14,9 +14,15 @@ public class PurchaseOrderTest {
 
     private String goodsId;//购买原料id
 
-    private String goodsName;//原料名称
+    private String goodsName;//货品名称
+
+    private String supplierId;//货品所属供应商id
+
+    private String supplierName;//货品所属供应商名称
 
     private String goodsNumber;//购买原料数量
+
+    private Double totalPrice;//总价
 
     private String applyUser;//订单申请人
 

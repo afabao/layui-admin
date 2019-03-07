@@ -48,13 +48,16 @@ layui.config({
         tableIns = table.render({
             elem: '#supplier_goods'
             , height: 415
-            , url: $tool.getContext() + 'supplier_goods/supplier_goodsList.do' //数据接口
+            , url: $tool.getContext() + 'purchase_order/purchase_orderList.do' //数据接口
             , method: 'post'
             , page:true //开启分页
             , cols: [[ //表头
                 {type:'numbers',title:'序号',fixed: 'left'},
                 {field: 'number', title: '订单编号'/*, width: '10%'*/}
                 , {field: 'goodsName', title: '购买货品'/*, width: '10%'*/}
+                , {field: 'goodsNumber', title: '购买数量'/*, width: '10%'*/}
+                , {field: 'totalPrice', title: '货品总价'/*, width: '10%'*/}
+                , {field: 'supplierName', title: '货品所属供应商'/*, width: '10%'*/}
                 , {field: 'applyUser', title: '订单申请人'/*, width: '10%'*/}
                 , {field: 'applyTime', title: '订单申请时间'/*, width: '10%'*/}
                 , {field: 'state', title: '订单状态'/*, width: '10%'*/}

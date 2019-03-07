@@ -26,16 +26,21 @@
     </style>
 </head>
 <body class="childrenBody">
+<div class="layui-inline" style="margin-top: 5px;margin-left: 10px" >
+    <a class="layui-btn layui-btn-normal orderAdd_btn">添加订单</a>
+</div>
+<br/>
 
 <hr class="layui-bg-red">
 
 
 <form class="layui-form" style="width:100%;" id="orderForm">
 
-        <div class=" layui-form-item" style="text-align: right">
+    <div id="orderList" >
+        <div class="layui-input-inline layui-form-item" style="text-align: right">
             <label class="layui-form-label">供应商名称</label>
             <div class="layui-input-block">
-                <select id="supplierName" name="supplierId" lay-filter="initGoodsType"></select>
+                <select id="supplierName" name="supplierNameId" lay-filter="initPhone"></select>
             </div>
         </div>
 
@@ -49,34 +54,37 @@
         <div class="layui-form-item layui-input-inline">
             <label class="layui-form-label">货品名称</label>
             <div class="layui-input-block">
-                <select id="goodsName" name="goodsId"></select>
+                <select id="goodsName" name="goodsName"></select>
             </div>
         </div>
 
         <div class="layui-form-item layui-input-inline">
             <label class="layui-form-label">购买数量</label>
             <div class="layui-input-block">
-                <input type="text" class="layui-input" id="number" name="goodsNumber" lay-verify="required" placeholder="购买数量">
+                <input type="text" class="layui-input" name="goodsPrice" lay-verify="required" placeholder="购买数量">
             </div>
         </div>
 
         <div class="layui-form-item layui-input-inline">
             <label class="layui-form-label">总价</label>
             <div class="layui-input-block">
-                <input readonly type="text" class="layui-input" id="totalPrice" name="totalPrice" lay-verify="required" placeholder="总价" >
+                <input type="text" class="layui-input" name="goodsPrice" lay-verify="required" placeholder="总价">
             </div>
         </div>
+        <hr class="layui-bg-red">
+    </div>
+
 
     <div class="layui-form-item layui-form-text" id="reason">
         <label class="layui-form-label">申请原因</label>
         <div class="layui-input-block">
-            <textarea name="applyDescribe" placeholder="请输入申请原因" class="layui-textarea"></textarea>
+            <textarea name="desc" placeholder="请输入申请原因" class="layui-textarea"></textarea>
         </div>
     </div>
 
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <button class="layui-btn" lay-submit="" lay-filter="addPurchase_Order">立即提交</button>
+            <button class="layui-btn" lay-submit="" lay-filter="addSupplier_Goods">立即提交</button>
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
     </div>
@@ -87,6 +95,6 @@
 <!--一般情况下，一个业务页面引入一个layui.js,config.js和业务js这三个js就够了-->
 <script type="text/javascript" src="../../../lib/layui/layui.js"></script>
 <script type="text/javascript" src="../../../common/js/config.js"></script>
-<script type="text/javascript" src="addPurchase_order.js"></script>
+<script type="text/javascript" src="../purchase_order/addPurchase_order.js"></script>
 </body>
 </html>

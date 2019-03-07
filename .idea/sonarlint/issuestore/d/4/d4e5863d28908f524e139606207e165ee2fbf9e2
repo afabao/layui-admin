@@ -1,9 +1,9 @@
 
-fsquid:S4488j"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(şş¢ÿÿÿÿÿ
-usquid:UselessImportCheck"LRemove this unused import 'org.apache.shiro.authz.annotation.RequiresRoles'.(¥¸Ã²øÿÿÿÿ
-asquid:S44882"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(­’í
-asquid:S4488'"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ƒéä
-asquid:S4488^"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ÉØç
 _squid:S4488="HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(Á’À
+asquid:S44882"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(­’í
 `squid:S4488H"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(¸‘¥V
+usquid:UselessImportCheck"LRemove this unused import 'org.apache.shiro.authz.annotation.RequiresRoles'.(¥¸Ã²øÿÿÿÿ
 `squid:S4488S"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(¡û°
+asquid:S4488^"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ÉØç
+asquid:S4488'"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ƒéä
+fsquid:S4488j"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(şş¢ÿÿÿÿÿ

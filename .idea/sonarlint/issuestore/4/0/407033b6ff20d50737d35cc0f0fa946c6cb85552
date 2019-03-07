@@ -1,4 +1,4 @@
 
-ƒsquid:UselessImportCheck"SRemove this unused import 'com.gameloft9.demo.dataaccess.pagevo.SysSupplierPageVO'.(æ¦ú›ùÿÿÿÿ8œ¥úÛ”-
 rsquid:S1192)"ODefine a constant instead of duplicating this literal "è§’è‰²idä¸ºç©º" 3 times.(½ö»’ùÿÿÿÿ8œ¥úÛ”-
 ƒsquid:UselessImportCheck"SRemove this unused import 'com.gameloft9.demo.dataaccess.model.system.SysRoleTest'.(Ûåé ýÿÿÿÿ8œ¥úÛ”-
+ƒsquid:UselessImportCheck"SRemove this unused import 'com.gameloft9.demo.dataaccess.pagevo.SysSupplierPageVO'.(æ¦ú›ùÿÿÿÿ8œ¥úÛ”-

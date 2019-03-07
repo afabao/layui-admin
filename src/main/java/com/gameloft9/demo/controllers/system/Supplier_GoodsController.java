@@ -82,4 +82,14 @@ public class Supplier_GoodsController {
     public IResult addSupplier_Goods(Supplier_Goods supplier_goods){
         return new ResultBean<String>(supplier_goodsService.addSupplier_Goods(supplier_goods));
     }
+
+    /**
+     * 根据原料id查询单价
+     */
+
+    @RequestMapping(value = "/getPrice.do" ,method = RequestMethod.POST)
+    @ResponseBody
+    public IResult getPrice(String goodsId,String supplierId){
+        return new ResultBean<String>(supplier_goodsService.getPrice(goodsId,supplierId));
+    }
 }

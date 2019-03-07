@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gameloft9.demo.dataaccess.dao.system.Purchase_OrderTestMapper">
+
+    <resultMap id="SupplierMap" type="com.gameloft9.demo.dataaccess.model.system.SysSupplierTest">
+
+        <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="SUPPLIER_NAME" property="supplierName" jdbcType="VARCHAR"/>
+        <result column="SUPPLIER_DESCRIBE" property="supplierDescribe" jdbcType="VARCHAR"/>
+        <result column="PHONE" property="phone" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="meterialMap" type="com.gameloft9.demo.dataaccess.model.system.MeterialTest">
+        <id property="id" column="ID" jdbcType="VARCHAR" />
+        <result property="goodsName" column="GOODS_NAME" jdbcType="VARCHAR" />
+        <result property="goodsType" column="GOODS_TYPE" jdbcType="VARCHAR" />
+        <result property="goodsDescribe" column="GOODS_DESCRIBE" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <resultMap id="supplier_goods_map" type="com.gameloft9.demo.dataaccess.model.system.Supplier_Goods">
+
+        <id property="id" column="ID" jdbcType="VARCHAR"/>
+        <result property="supplierId" column="SUPPLIER_ID" jdbcType="VARCHAR"/>
+        <result property="materialId" column="MATERIAL_ID" jdbcType="VARCHAR"/>
+        <result property="goodsType" column="GOODS_TYPE" jdbcType="VARCHAR"/>
+        <result property="supplierName" column="SUPPLIER_NAME" jdbcType="VARCHAR"/>
+        <result property="goodsName" column="GOODS_NAME" jdbcType="VARCHAR"/>
+        <result property="goodsPrice" column="GOODS_PRICE" jdbcType="VARCHAR"/>
+        <result property="phone" column="PHONE" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="purchase_order_map" type="com.gameloft9.demo.dataaccess.model.system.PurchaseOrderTest">
+        <id property="id" column="ID"/>
+        <result property="NUMBER" column="number" jdbcType="VARCHAR"/>
+        <result property="GOODS_ID" column="goodsId" jdbcType="VARCHAR"/>
+        <result property="GOODS_NAME" column="goodsName" jdbcType="VARCHAR"/>
+        <result property="SUPPLIER_ID" column="applierId" jdbcType="VARCHAR"/>
+        <result property="SUPPLIER_NAME" column="applierName" jdbcType="VARCHAR"/>
+        <result property="GOODS_NUMBER" column="goodsNumber" jdbcType="VARCHAR"/>
+        <result property="TOTAL_PRICE" column="totalPrice" jdbcType="DOUBLE"/>
+        <result property="APPLY_USER" column="applyUser" jdbcType="VARCHAR"/>
+        <result property="APPLY_TIME" column="applyTime" jdbcType="DATE"/>
+        <result property="STATE" column="state" jdbcType="VARCHAR"/>
+        <result property="ORDER_AUDIT_USER" column="orderAuditUser" jdbcType="VARCHAR"/>
+        <result property="ORDER_AUDIT_TIME" column="orderAuditTime" jdbcType="DATE"/>
+        <result property="PAY_AUDIT_USER" column="payAuditUser" jdbcType="VARCHAR"/>
+        <result property="PAY_AUDIT_TIME" column="payAuditTime" jdbcType="DATE"/>
+        <result property="APPLY_DESCRIBE" column="applyDescribe" jdbcType="VARCHAR"/>
+        <result property="AUDIT_DESCRIBE" column="auditDescribe" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--根据供应商id查找原料   List<MeterialTest> getGoodsTypeBySupplierId(String supplierId);-->
+    <select id="getGoodsTypeBySupplierId" parameterType="java.lang.String" resultType="String">
+        select
+            distinct m.GOODS_TYPE
+        from
+            sys_supplier_goods_test sg,
+            sys_material_test m
+        <where>
+            <if test="_parameter !=null and _parameter != ''">
+                and sg.SUPPLIER_ID=#{supplierId,jdbcType=VARCHAR}
+                and sg.MATERIAL_ID = m.ID
+            </if>
+        </where>
+    </select>
+
+    <!--分页显示订单列表  List<PurchaseOrderTest> getAll();-->
+    <select id="getAll" resultMap="purchase_order_map">
+        select *
+        from
+        sys_purchase_order_test
+        <where>
+            <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+                and APPLY_TIME between #{startTime,jdbcType=DATE} and #{endTime,jdbcType=DATE}
+            </if>
+            <if test="state != null and state != ''">
+                and STATE = #{state,jdbcType=VARCAHR}
+            </if>
+        </where>
+        limit #{start,jdbcType=DECIMAL},#{end,jdbcType=DECIMAL}
+    </select>
+
+    <!--获取总条数   Integer getCount(-->
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(1)
+        from
+        sys_purchase_order_test
+        <where>
+            <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+                and APPLY_TIME between #{startTime,jdbcType=DATE} and #{endTime,jdbcType=DATE}
+            </if>
+            <if test="state != null and state != ''">
+                and STATE = #{state,jdbcType=VARCAHR}
+            </if>
+        </where>
+    </select>
+    
+    <!--添加订单void addPurchaseOrder(PurchaseOrderTest purchaseOrderTest);-->
+    <insert id="addPurchaseOrder" parameterType="com.gameloft9.demo.dataaccess.model.system.PurchaseOrderTest">
+        insert into sys_purchase_order_test
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="supplierId != null and supplierId !=''">
+                SUPPLIER_ID,
+            </if>
+            <if test="goodsId != null and goodsId !=''">
+                GOODS_ID,
+            </if>
+            <if test="number != null and number !=''">
+                NUMBER,
+            </if>
+            <if test="totalPrice != null and totalPrice !=''">
+                TOTAL_PRICE,
+            </if>
+            <if test="applyDescribe != null and applyDescribe !=''">
+                APPLY_DESCRIBE,
+            </if>
+        </trim>
+        <trim prefix=" values (" suffix=")" suffixOverrides=",">
+            <if test="supplierId != null and supplierId !=''">
+                #{supplierId},
+            </if>
+            <if test="goodsId != null and goodsId !=''">
+                #{goodsId},
+            </if>
+            <if test="number != null and number !=''">
+                #{number},
+            </if>
+            <if test="totalPrice != null and totalPrice !=''">
+                #{totalPrice},
+            </if>
+            <if test="applyDescribe != null and applyDescribe !=''">
+                #{applyDescribe},
+            </if>
+        </trim>
+    </insert>
+</mapper>

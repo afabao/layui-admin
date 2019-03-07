@@ -145,6 +145,7 @@ layui.define(['$tool','jquery'], function (exports) {
             doComplexPost($tool.getContext() + 'personCenter/update.do',req,config,successCallback,errorCallback);
         },
 
+
         /*Supplier*/
         //添加供应商
         AddSupplier:function(req,successCallback,errorCallback){
@@ -163,6 +164,7 @@ layui.define(['$tool','jquery'], function (exports) {
             doPost($tool.getContext() + 'supplier/delete.do',req,successCallback,errorCallback);
         },
 
+
         /*Meterial*/
         //添加原料
         AddMeterial:function(req,successCallback,errorCallback){
@@ -180,6 +182,7 @@ layui.define(['$tool','jquery'], function (exports) {
         DeleteMeterial:function(req,successCallback,errorCallback){
             doPost($tool.getContext() + 'meterial/delete.do',req,successCallback,errorCallback);
         },
+
 
         /*Supplier_goods*/
         //添加原料商品
@@ -213,6 +216,21 @@ layui.define(['$tool','jquery'], function (exports) {
         //初始货品名称
         InitGoodsName:function(req,successCallback,errorCallback){
             doPost($tool.getContext() + 'supplier_goods/getGoodsName.do',req,successCallback,errorCallback);
+        },
+        //单价乘以数量=总价
+        getPrice:function(req,successCallback,errorCallback){
+        doPost($tool.getContext() + 'supplier_goods/getPrice.do',req,successCallback,errorCallback);
+        },
+
+
+        /*订单*/
+        //点击供应商名称后初始化原料类型
+        GetGoodsTypeBySupplierId:function(req,successCallback,errorCallback){
+            doPost($tool.getContext() + 'purchase_order/getGoodsTypeBySupplierId.do',req,successCallback,errorCallback);
+        },
+        //添加订单
+        AddPurchaseOrder:function(req,successCallback,errorCallback){
+            doPost($tool.getContext() + 'purchase_order/add.do',req,successCallback,errorCallback);
         },
     };
 

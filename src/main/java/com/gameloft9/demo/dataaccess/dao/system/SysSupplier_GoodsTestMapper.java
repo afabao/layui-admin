@@ -64,4 +64,10 @@ public interface SysSupplier_GoodsTestMapper {
      * 根据原料id删除原料商品
      */
     void deleteByMaterialId(String MaterialId);
+
+    /**
+     * 根据goodsId查询单价
+     */
+    String getPrice(@Param("goodsId") String goodsId,@Param("supplierId") String supplierId);
+
 }
