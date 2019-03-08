@@ -1,0 +1,7 @@
+
+esquid:S00101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(Å€Îå
+hsquid:S4488"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(– †º8®ÕÓ±•-
+hsquid:S4488$"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(Ä‚öÖ8Ê¿Ž¾•-
+squid:UselessImportCheck"TRemove this unused import 'com.gameloft9.demo.dataaccess.model.system.MeterialTest'.(¤ý”°8žÌêµ•-
+„squid:S00116"`Rename this field "purchase_orderService" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(âå˜ôûÿÿÿÿ8ˆÆ×±•-
+gsquid:S4488+"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(¸‘¥V8­¢œ¿•-

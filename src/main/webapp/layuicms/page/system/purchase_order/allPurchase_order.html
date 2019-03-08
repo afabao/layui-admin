@@ -28,7 +28,7 @@
         <div class="layui-input-inline">
             <label class="layui-form-label">申请状态</label>
             <div class="layui-input-block">
-                <select id="supplierName" name="auditState" lay-filter="initPhone"></select>
+                <select id="allState" name="allState" lay-filter="initPhone"></select>
             </div>
         </div>
 
@@ -44,7 +44,7 @@
 <!--表格区-->
 <div class="layui-form users_list">
     <!--通过lay-filter区分toolbar事件容器-->
-    <table id="supplier_goods" lay-filter="supplier_goodsFilter" class="layui-table">
+    <table id="supplier_goods" lay-filter="purchase_orderFilter" class="layui-table">
     </table>
 </div>
 <!--分页元素-->
@@ -54,6 +54,7 @@
     <!--通过lay-event定义事件-->
     <a class="layui-btn layui-btn-sm" lay-event="edit"><i class="layui-icon">&#xe642;</i>编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-sm" lay-event="del"><i class="layui-icon">&#xe640;</i>删除</a>
+    <a class="layui-btn layui-btn-normal layui-btn-sm" lay-event="commit"><i class="layui-icon">&#xe605;</i>提交</a>
 </script>
 
 
@@ -61,5 +62,3 @@
 <script type="text/javascript" src="../../../lib/layui/layui.js"></script>
 <script type="text/javascript" src="../../../common/js/config.js"></script>
 <script type="text/javascript" src="allPurchase_order.js"></script>
-</body>
-</html>

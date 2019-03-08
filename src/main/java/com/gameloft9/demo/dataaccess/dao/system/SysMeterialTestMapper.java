@@ -61,5 +61,10 @@ public interface SysMeterialTestMapper {
      */
     String getNameById(String id);
 
+    /**
+     * 根据id查找原料类型
+     */
+    String getTypeById(String id);
+
 
 }

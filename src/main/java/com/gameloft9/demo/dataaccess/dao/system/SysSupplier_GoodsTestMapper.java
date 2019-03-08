@@ -70,4 +70,9 @@ public interface SysSupplier_GoodsTestMapper {
      */
     String getPrice(@Param("goodsId") String goodsId,@Param("supplierId") String supplierId);
 
+    /**
+     * 根据id查找原料商品
+     */
+    Supplier_GoodsTest getById(String id);
+
 }

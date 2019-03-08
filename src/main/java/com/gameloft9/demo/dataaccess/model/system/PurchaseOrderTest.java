@@ -14,6 +14,8 @@ public class PurchaseOrderTest {
 
     private String goodsId;//购买原料id
 
+    private String goodsType;//货品类型
+
     private String goodsName;//货品名称
 
     private String supplierId;//货品所属供应商id

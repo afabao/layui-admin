@@ -18,5 +18,4 @@ public class Supplier_Goods {
 
     private String phone;//供应商电话
 
-
 }

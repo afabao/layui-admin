@@ -132,6 +132,7 @@ layui.config({
     form.on("submit(addPurchase_Order)", function (data) {
         var supplierId = data.field.supplierId;
         var goodsId = data.field.goodsId;
+        var goodsType = data.field.goodsType;
         var goodsNumber = data.field.goodsNumber;
         var totalPrice = data.field.totalPrice;
         var applyDescribe = data.field.applyDescribe;
@@ -146,6 +147,7 @@ layui.config({
             supplierId:supplierId,
             goodsId:goodsId,
             goodsNumber: goodsNumber,
+            goodsType: goodsType,
             totalPrice: totalPrice,
             applyDescribe: applyDescribe
         };

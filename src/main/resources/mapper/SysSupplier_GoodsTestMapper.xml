@@ -157,4 +157,18 @@
             </if>
         </where>
     </select>
+
+    <!--根据id获取原料商品   Supplier_GoodsTest getById(String id);-->
+    <select id="getById" parameterType="java.lang.String" resultMap="supplier_goods_map">
+        select
+            m.GOODS_TYPE,
+            m.GOODS_NAME,
+            mg.GOODS_PRICE,
+            s.SUPPLIER_NAME,
+            s.PHONE
+        from
+            sys_supplier_test s,
+            sys_material_test m,
+            sys_supplier_goods_test mg
+    </select>
 </mapper>

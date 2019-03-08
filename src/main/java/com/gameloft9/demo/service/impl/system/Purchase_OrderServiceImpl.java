@@ -4,7 +4,8 @@ import com.gameloft9.demo.dataaccess.dao.system.Purchase_OrderTestMapper;
 import com.gameloft9.demo.dataaccess.dao.system.SysMeterialTestMapper;
 import com.gameloft9.demo.dataaccess.dao.system.SysSupplierTestMapper;
 import com.gameloft9.demo.dataaccess.model.system.PurchaseOrderTest;
-import com.gameloft9.demo.dataaccess.model.system.UserTest;
+import com.gameloft9.demo.dataaccess.model.system.SysSupplierTest;
+import com.gameloft9.demo.mgrframework.utils.CheckUtil;
 import com.gameloft9.demo.service.api.system.Purchase_OrderService;
 import com.gameloft9.demo.service.beans.system.PageRange;
 import com.gameloft9.demo.utils.StatePayInfo;
@@ -16,6 +17,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -36,22 +39,56 @@ public class Purchase_OrderServiceImpl implements Purchase_OrderService {
     }
 
     //分页查询订单
-    public List<PurchaseOrderTest> getAll(Date startTime, Date endTime, String page, String limit, String auditState) {
+    public List<PurchaseOrderTest> getAll(String startTime1, String endTime1, String page, String limit, String allState) {
         PageRange pageRange = new PageRange(page,limit);
-        return purchase_orderMapper.getAll(startTime,endTime,pageRange.getStart(),pageRange.getEnd(),auditState);
+        Date startTime = null;
+        Date endTime = null;
+        if(startTime1 != null && !"".equals(startTime1)){
+            startTime = new Date();
+            endTime = new Date();
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+            try {
+                startTime = format.parse(startTime1);
+                endTime = format.parse(endTime1);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return purchase_orderMapper.getAll(startTime,endTime,pageRange.getStart(),pageRange.getEnd(),allState);
+        }
+
+        return purchase_orderMapper.getAll(startTime,endTime,pageRange.getStart(),pageRange.getEnd(),allState);
 
     }
 
     //查询总条数
-    public Integer getCount(Date startTime, Date endTime, String state) {
-        return purchase_orderMapper.getCount(startTime,endTime,state);
+    public Integer getCount(String startTime1, String endTime1, String allState) {
+        Date startTime = null;
+        Date endTime = null;
+        if(startTime1 != null && !"".equals(startTime1)){
+            startTime = new Date();
+            endTime = new Date();
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+            try {
+                startTime = format.parse(startTime1);
+                endTime = format.parse(endTime1);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return purchase_orderMapper.getCount(startTime,endTime,allState);
+        }
+
+        return purchase_orderMapper.getCount(startTime,endTime,allState);
     }
 
+    //添加订单申请
     public String addPurchaseOrder(PurchaseOrderTest purchaseOrderTest) {
         /*已有数据PurchaseOrderTest
         (id=null,,
         number=null,,
          goodsId=1c3da2c5d97e4c28bf9404346d3a3997,,
+         goodsType=null,
          goodsName=null,,
          supplierId=25ef61dbca5841dd9e35214500194876,,
          supplierName=null,,
@@ -81,9 +118,9 @@ public class Purchase_OrderServiceImpl implements Purchase_OrderService {
         String loginName = (String) request.getSession().getAttribute("sysUser");
         purchaseOrderTest.setApplyUser(loginName);
         //设置申请时间applyTime，
-        purchaseOrderTest.setApplyTime(new Date());
+        /*purchaseOrderTest.setApplyTime(new Date());*/
         //审核状态，
-        purchaseOrderTest.setAuditState(StatePayInfo.APPLY_INFO_WAITING);
+        purchaseOrderTest.setAuditState(StatePayInfo.APPLY_INFO_NO_SUBMIT);
         //支付状态，
         purchaseOrderTest.setPayState(StatePayInfo.PAY_INFO_WATING);
         //申请原因，
@@ -91,6 +128,24 @@ public class Purchase_OrderServiceImpl implements Purchase_OrderService {
 
         purchase_orderMapper.addPurchaseOrder(purchaseOrderTest);
         return purchaseOrderTest.getId();
+    }
+
+    //根据id查找订单申请
+    public PurchaseOrderTest getById(String id) {
+        return purchase_orderMapper.getById(id);
+    }
+
+    //修改订单申请
+    public Boolean updatePurchase_Order(PurchaseOrderTest purchaseOrderTest) {
+        CheckUtil.notBlank(purchaseOrderTest.getId(),"订单id为空");
+        purchase_orderMapper.updatePurchase_Order(purchaseOrderTest);
+        return true;
+    }
+
+    public Boolean deletePurchase_Order(String id) {
+        CheckUtil.notBlank(id,"订单id为空");
+        purchase_orderMapper.deletePurchase_Order(id);
+        return true;
     }
 
 

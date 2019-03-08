@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sun.misc.Request;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
@@ -35,10 +36,11 @@ public class Purchase_OrderController {
     }
 
     //订单分页显示
+    //TODO......查询
     @RequestMapping(value = "/purchase_orderList.do",method = RequestMethod.POST)
     @ResponseBody
-    public IResult getAll(Date startTime,Date endTime,String page,String limit,String auditState){
-        return new PageResultBean<Collection<PurchaseOrderTest>>(purchase_orderService.getAll(startTime,endTime,page,limit,auditState),purchase_orderService.getCount(startTime,endTime,auditState));
+    public IResult getAll(String startTime,String endTime,String page,String limit,String allState){
+        return new PageResultBean<Collection<PurchaseOrderTest>>(purchase_orderService.getAll(startTime,endTime,page,limit,allState),purchase_orderService.getCount(startTime,endTime,allState));
     }
 
     //添加订单
@@ -48,4 +50,27 @@ public class Purchase_OrderController {
     public IResult addPurchaseOrder(PurchaseOrderTest purchaseOrderTest){
         return new ResultBean<String>(purchase_orderService.addPurchaseOrder(purchaseOrderTest));
     }
+
+    //根据id查找订单申请(未提交)
+    @RequestMapping(value = "/get.do" ,method = RequestMethod.POST)
+    @ResponseBody
+    public IResult getById(String id){
+        return new ResultBean<PurchaseOrderTest>(purchase_orderService.getById(id));
+    }
+
+    //修改订单申请
+    @RequestMapping(value = "update.do" ,method = RequestMethod.POST)
+    @ResponseBody
+    @BizOperLog(operType = OperType.ADD,memo = "修改订单申请")
+    public IResult updatePurchase_Order(PurchaseOrderTest purchaseOrderTest){
+        return new ResultBean<Boolean>(purchase_orderService.updatePurchase_Order(purchaseOrderTest));
+    }
+
+    @RequestMapping(value = "delete.do" ,method = RequestMethod.POST)
+    @ResponseBody
+    @BizOperLog(operType = OperType.ADD,memo = "删除订单申请")
+    public IResult deletePurchase_Order(String id){
+        return new ResultBean<Boolean>(purchase_orderService.deletePurchase_Order(id));
+    }
+
 }

@@ -50,4 +50,9 @@ public interface Supplier_GoodsService {
      * 根据原料id查询单价
      */
     String getPrice(String goodsId,String supplier);
+
+    /**
+     * 根据id查找原料商品
+     */
+    Supplier_GoodsTest getById(String id);
 }

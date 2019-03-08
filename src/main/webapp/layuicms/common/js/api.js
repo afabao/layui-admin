@@ -232,6 +232,19 @@ layui.define(['$tool','jquery'], function (exports) {
         AddPurchaseOrder:function(req,successCallback,errorCallback){
             doPost($tool.getContext() + 'purchase_order/add.do',req,successCallback,errorCallback);
         },
+        //根据id获取订单
+        GetPurchase_Order:function(req,successCallback,errorCallback){
+            doPost($tool.getContext() + 'purchase_order/get.do',req,successCallback,errorCallback);
+        },
+        //修改订单申请
+        UpdatePurchase_Order:function(req,successCallback,errorCallback){
+            doPost($tool.getContext() + 'purchase_order/update.do',req,successCallback,errorCallback);
+        },
+        //删除订单申请
+        DeletePurchase_Order:function(req,successCallback,errorCallback){
+            doPost($tool.getContext() + 'purchase_order/delete.do',req,successCallback,errorCallback);
+        },
+
     };
 
 

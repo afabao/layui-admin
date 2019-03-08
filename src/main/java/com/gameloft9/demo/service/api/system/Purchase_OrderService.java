@@ -2,6 +2,7 @@ package com.gameloft9.demo.service.api.system;
 
 
 import com.gameloft9.demo.dataaccess.model.system.PurchaseOrderTest;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -17,24 +18,42 @@ public interface Purchase_OrderService {
     /**
      * 分页显示订单列表
      */
-    List<PurchaseOrderTest> getAll(Date startTime,
-                                   Date endTime,
+    List<PurchaseOrderTest> getAll(String startTime,
+                                   String endTime,
                                    String page,
                                    String limit,
-                                   String auditState
+                                   String allState
     );
 
     /**
      * 获取总条数
      */
     Integer getCount(
-            Date startTime,//查询开始时间
-            Date endTime,//查询终止时间
-            String auditState//订单状态
+            String startTime,//查询开始时间
+            String endTime,//查询终止时间
+            String allState//订单状态
     );
 
     /**
      * 添加订单
      */
     String addPurchaseOrder(PurchaseOrderTest purchaseOrderTest);
+
+    /**
+     * 根据id获取申请信息
+     */
+    PurchaseOrderTest getById(String id);
+
+    /**
+     * 修改订单申请
+     *
+     */
+    Boolean updatePurchase_Order(PurchaseOrderTest purchaseOrderTest);
+
+    /**
+     * 删除订单
+     */
+    Boolean deletePurchase_Order(String id);
+
+
 }

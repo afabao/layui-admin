@@ -67,4 +67,9 @@ public class Supplier_GoodsTestMapperImpl implements Supplier_GoodsService {
     public String getPrice(String goodsId,String supplierId) {
         return supplier_goodsTestMapper.getPrice(goodsId,supplierId);
     }
+
+    //根据id获取原料商品
+    public Supplier_GoodsTest getById(String id) {
+        return supplier_goodsTestMapper.getById(id);
+    }
 }

@@ -1,0 +1,6 @@
+
+dsquid:S00101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ŸŠ
+Xsquid:S1191	"5Use classes from the Java API instead of Sun classes.(Â‡¬°ÿÿÿÿÿ8éÖ˜¿•-
+nsquid:UselessImportCheck	">Remove this unused import 'com.sun.xml.internal.bind.v2.TODO'.(Â‡¬°ÿÿÿÿÿ8Õ§®¿•-
+squid:UselessImportCheck"TRemove this unused import 'com.gameloft9.demo.dataaccess.model.system.MeterialTest'.(¤ı”°8¤£²•-
+ƒsquid:S00116"_Rename this field "purchase_orderMapper" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(„É‘üÿÿÿÿ8Š”Àµ•-

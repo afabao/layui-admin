@@ -45,16 +45,18 @@ layui.config({
         });
 
         //为toolbar添加事件响应
-        table.on('tool(supplier_goods)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+        table.on('tool(supplier_goodsFilter)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
             var row = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的DOM对象
 
             //区分事件
             if (layEvent === 'del') { //删除
+
                 delSupplier_Goods(row.id);
             } else if (layEvent === 'edit') { //编辑
                 //do something
+
                 editSupplier_Goods(row.id);
             }
         });

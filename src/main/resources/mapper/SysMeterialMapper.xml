@@ -127,4 +127,14 @@
         </where>
     </select>
 
+    <!--根据id查找原料类型   String getTypeById(String id);-->
+    <select id="getTypeById" resultType="java.lang.String" parameterType="java.lang.String">
+        select GOODS_TYPE from sys_material_test
+        <where>
+            <if test="_parameter != null and _parameter != ''">
+                and ID=#{id,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
 </mapper>

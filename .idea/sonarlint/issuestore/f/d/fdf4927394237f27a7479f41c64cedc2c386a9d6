@@ -1,7 +1,7 @@
 
-squid:UselessImportCheck"TRemove this unused import 'com.gameloft9.demo.dataaccess.model.system.MeterialTest'.(¤ı”°8Ö³ë”-
-hsquid:S4488E"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ÉØç8†õåÛ”-
-msquid:S44888"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(şş¢ÿÿÿÿÿ8†õåÛ”-
-gsquid:S4488M"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(¡û°8É°€Ü”-
-gsquid:S4488-"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(¸‘¥V8†õåÛ”-
 hsquid:S4488#"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(Ğ½‹Ğ8§ëÑÃ”-
+hsquid:S4488E"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ÉØç8†õåÛ”-
+gsquid:S4488-"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(¸‘¥V8†õåÛ”-
+squid:UselessImportCheck"TRemove this unused import 'com.gameloft9.demo.dataaccess.model.system.MeterialTest'.(¤ı”°8Ö³ë”-
+gsquid:S4488M"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(¡û°8É°€Ü”-
+msquid:S44888"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(şş¢ÿÿÿÿÿ8†õåÛ”-

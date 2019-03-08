@@ -1,12 +1,13 @@
 
-gsquid:S4488P"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(¸‘¥V8¢Àˆ•-
-[squid:UselessImportCheck"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8ù¿ì‰•-
-fsquid:S44884"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(Ã‘íøüÿÿÿÿ
-fsquid:S4488 "JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(Ñûûÿÿÿÿ
+osquid:S00117R"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ï×õ68¥ •-
 esquid:S00101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(­—²Ì
-hsquid:S4488>"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(©”²8ªè†•-
 gsquid:S4488G"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(”ï‚M8ÇÈÕ‰•-
+msquid:S4488Z"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(‚«Ë™şÿÿÿÿ8‹˜’¸•-
+[squid:UselessImportCheck"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8ù¿ì‰•-
+fsquid:S4488 "JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(Ñûûÿÿÿÿ
+fsquid:S44884"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(Ã‘íøüÿÿÿÿ
+fsquid:S4488*"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(¿ÚœÜıÿÿÿÿ
+gsquid:S4488P"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(¸‘¥V8¢Àˆ•-
 lsquid:S00100R"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ï×õ68¢Àˆ•-
 }squid:S00116"`Rename this field "supplier_goodsService" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ä˜¦ùüÿÿÿÿ
-fsquid:S4488*"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(¿ÚœÜıÿÿÿÿ
-osquid:S00117R"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ï×õ68¥ •-
+hsquid:S4488>"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(©”²8ªè†•-

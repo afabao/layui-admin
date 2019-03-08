@@ -22,7 +22,7 @@ public interface Purchase_OrderTestMapper {
             @Param("endTime") Date endTime,//查询终止时间
             @Param("start") int start,
             @Param("end") int end,
-            @Param("auditState") String auditState//订单状态
+            @Param("allState") String allState//订单状态
             );
 
     /**
@@ -31,11 +31,26 @@ public interface Purchase_OrderTestMapper {
     Integer getCount(
             @Param("startTime") Date startTime,//查询开始时间
             @Param("endTime") Date endTime,//查询终止时间
-            @Param("auditState") String auditState//订单状态
+            @Param("allState") String allState//订单状态
     );
 
     /**
      * 添加订单
      */
     void addPurchaseOrder(PurchaseOrderTest purchaseOrderTest);
+
+    /**
+     * 根据id获取申请信息
+     */
+    PurchaseOrderTest getById(String id);
+
+    /**
+     * 修改订单申请
+     */
+    void updatePurchase_Order(PurchaseOrderTest purchaseOrderTest);
+
+    /**
+     * 删除订单
+     */
+    void deletePurchase_Order(String id);
 }

@@ -92,4 +92,14 @@ public class Supplier_GoodsController {
     public IResult getPrice(String goodsId,String supplierId){
         return new ResultBean<String>(supplier_goodsService.getPrice(goodsId,supplierId));
     }
+
+    /**
+     * 根据id获取原料商品
+     */
+    @RequestMapping(value = "/get.do" ,method = RequestMethod.POST)
+    @ResponseBody
+    public IResult getById(String id){
+        return new ResultBean<Supplier_GoodsTest>(supplier_goodsService.getById(id));
+    }
+
 }
