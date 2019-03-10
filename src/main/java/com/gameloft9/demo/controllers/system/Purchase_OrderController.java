@@ -66,6 +66,10 @@ public class Purchase_OrderController {
         return new ResultBean<Boolean>(purchase_orderService.updatePurchase_Order(purchaseOrderTest));
     }
 
+    /**
+     * 删除订单
+     *
+     */
     @RequestMapping(value = "delete.do" ,method = RequestMethod.POST)
     @ResponseBody
     @BizOperLog(operType = OperType.ADD,memo = "删除订单申请")
@@ -73,4 +77,30 @@ public class Purchase_OrderController {
         return new ResultBean<Boolean>(purchase_orderService.deletePurchase_Order(id));
     }
 
+    /**
+     * 提交订单
+     */
+    @RequestMapping(value = "buyerCommit.do" ,method = RequestMethod.POST)
+    @ResponseBody
+    @BizOperLog(operType = OperType.ADD,memo = "提交订单申请")
+    public IResult buyCommit(PurchaseOrderTest purchaseOrderTest){
+        return new ResultBean<Boolean>(purchase_orderService.buyerCommit(purchaseOrderTest));
+    }
+
+    /**
+     * 查询订单状态
+     */
+    @RequestMapping(value = "findState.do" ,method = RequestMethod.POST)
+    @ResponseBody
+    public IResult findState(String id){
+        return new ResultBean<String>(purchase_orderService.findState(id));
+    }
+
+    //订单分页显示(不包含未提交)
+    //TODO......查询
+    @RequestMapping(value = "/purchase_orderListByBuyerM.do",method = RequestMethod.POST)
+    @ResponseBody
+    public IResult getAllBuyderM(String startTime,String endTime,String page,String limit,String allState,String notCommit){
+        return new PageResultBean<Collection<PurchaseOrderTest>>(purchase_orderService.getAllByBuyerM(startTime,endTime,page,limit,allState,notCommit),purchase_orderService.getCountByBuyerM(startTime,endTime,allState,notCommit));
+    }
 }

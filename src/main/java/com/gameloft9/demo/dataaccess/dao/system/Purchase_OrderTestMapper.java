@@ -15,7 +15,7 @@ public interface Purchase_OrderTestMapper {
     List<String> getGoodsTypeBySupplierId(String supplierId);
 
     /**
-     * 分页显示订单列表
+     * 采购员工分页显示订单列表
      */
     List<PurchaseOrderTest> getAll(
             @Param("startTime") Date startTime,//查询开始时间
@@ -26,7 +26,7 @@ public interface Purchase_OrderTestMapper {
             );
 
     /**
-     * 获取总条数
+     * 采购员工获取总条数
      */
     Integer getCount(
             @Param("startTime") Date startTime,//查询开始时间
@@ -53,4 +53,36 @@ public interface Purchase_OrderTestMapper {
      * 删除订单
      */
     void deletePurchase_Order(String id);
+
+    /**
+     * 提交订单
+     */
+    void buyerCommit(PurchaseOrderTest purchaseOrderTest);
+
+    /**
+     * 查询订单状态
+     */
+    String findState(String id);
+
+    /**
+     * 采购领导分页显示订单列表
+     */
+    List<PurchaseOrderTest> getAllByBuyerM(
+            @Param("startTime") Date startTime,//查询开始时间
+            @Param("endTime") Date endTime,//查询终止时间
+            @Param("start") int start,
+            @Param("end") int end,
+            @Param("allState") String allState,//订单状态
+            @Param("notCommit") String notCommit//未提交
+    );
+
+    /**
+     * 采购领导获取总条数
+     */
+    Integer getCountByBuyerM(
+            @Param("startTime") Date startTime,//查询开始时间
+            @Param("endTime") Date endTime,//查询终止时间
+            @Param("allState") String allState,//订单状态
+            @Param("notCommit") String notCommit//未提交
+    );
 }

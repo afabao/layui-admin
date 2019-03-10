@@ -5,6 +5,7 @@ import com.gameloft9.demo.dataaccess.model.system.MeterialTest;
 import com.gameloft9.demo.dataaccess.model.system.Supplier_Goods;
 import com.gameloft9.demo.dataaccess.model.system.Supplier_GoodsTest;
 import com.gameloft9.demo.dataaccess.model.system.SysSupplierTest;
+import com.gameloft9.demo.mgrframework.utils.CheckUtil;
 import com.gameloft9.demo.service.api.system.Supplier_GoodsService;
 import com.gameloft9.demo.service.beans.system.PageRange;
 import com.gameloft9.demo.utils.UUIDUtil;
@@ -69,7 +70,19 @@ public class Supplier_GoodsTestMapperImpl implements Supplier_GoodsService {
     }
 
     //根据id获取原料商品
-    public Supplier_GoodsTest getById(String id) {
+    public Supplier_Goods getById(String id) {
         return supplier_goodsTestMapper.getById(id);
+    }
+
+    public Boolean updateSupplier_Goods(Supplier_GoodsTest supplier_goodsTest) {
+        supplier_goodsTestMapper.updateSupplier_Goods(supplier_goodsTest);
+        return true;
+    }
+
+    //删除原料商品
+    public Boolean deleteSupplier_Goods(String id) {
+        CheckUtil.notBlank(id,"id为空");
+        supplier_goodsTestMapper.deleteSupplier_Goods(id);
+        return true;
     }
 }

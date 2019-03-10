@@ -29,15 +29,9 @@ layui.config({
     function init() {
         initDate();//初始化日期选择框
         initState();
-        initCommit()
     }
 
     init();
-
-    function initCommit(){
-        var a = 'a'
-        $('#barDemo').append($(a))
-    }
 
     /**
      * 初始化日期选择
@@ -56,9 +50,6 @@ layui.config({
      */
     function initState(){
                 var html1 = '<option value="">--请选择--</option>';
-                html1 += '<option value="未提交">未提交</option>>';
-                html1 += '<option value="待审核">待审核</option>>';
-                html1 += '<option value="审核中">审核中</option>>';
                 html1 += '<option value="审核通过">审核通过</option>>';
                 html1 += '<option value="审核未通过">审核未通过</option>>';
                 html1 += '<option value="待付款">待付款</option>>';
@@ -69,12 +60,11 @@ layui.config({
                 form.render();
     }
 
-
     function defineTable() {
         tableIns = table.render({
             elem: '#supplier_goods'
             , height: 415
-            , url: $tool.getContext() + 'purchase_order/purchase_orderList.do' //数据接口
+            , url: $tool.getContext() + 'purchase_order/purchase_orderListByBuyerM.do' //数据接口
             , method: 'post'
             , page:true //开启分页
             , cols: [[ //表头
@@ -94,7 +84,7 @@ layui.config({
                 , {field: 'payState', title: '支付状态', width: '10%'}
                 , {field: 'applyDescribe', title: '申请原因', width: '10%'}
                 , {field: 'auditDescribe', title: '审核信息', width: '10%'}
-                , {fixed: 'right', title: '操作', width: 260, align: 'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
+                , {fixed: 'right', title: '操作', width: 250, align: 'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
             ]]
             , done: function (res, curr) {//请求完毕后的回调
                 //如果是异步请求数据方式，res即为你接口返回的信息.curr：当前页码
@@ -106,6 +96,7 @@ layui.config({
             var row = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的DOM对象
+
             //区分事件
             if (layEvent === 'del') { //删除
                 delPurchase_Order(row.id);
@@ -113,7 +104,6 @@ layui.config({
                 //do something
                 editPurchase_Order(row.id);
             } else if(layEvent === 'commit') {
-                //var a = $(this).html("<i class=\"layui-icon\">&#xe605;</i>提交")
                 buyerCommit(row.id);
             }
         });
@@ -214,14 +204,12 @@ layui.config({
             };
 
             $api.buyerCommit(req,function (data) {
-
                 layer.msg("提交成功",{time:1000},function(){
                     //obj.del(); //删除对应行（tr）的DOM结构
                     //重新加载表格
                     tableIns.reload();
                 });
             });
-
         });
     }
 

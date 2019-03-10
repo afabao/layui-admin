@@ -32,6 +32,7 @@
     <!--//供应商-原料一览表分页显示-->
     <select id="getAll" resultMap="supplier_goods_map">
         select
+            mg.ID,
             m.GOODS_TYPE,
             m.GOODS_NAME,
             mg.GOODS_PRICE,
@@ -42,22 +43,28 @@
             sys_material_test m,
             sys_supplier_goods_test mg
         <where>
+               m.ID=mg.MATERIAL_ID
+               and s.ID=mg.SUPPLIER_ID
             <if test="goodsType != null and goodsType != ''">
                 and m.GOODS_TYPE = #{goodsType,jdbcType=VARCHAR}
             </if>
             <if test="supplierName != null and supplierName != ''">
                 and s.SUPPLIER_NAME = #{supplierName,jdbcType=VARCHAR}
             </if>
-               and m.ID=mg.MATERIAL_ID
-               and s.ID=mg.SUPPLIER_ID
         </where>
         limit #{start,jdbcType=DECIMAL},#{end,jdbcType=DECIMAL}
     </select>
 
     <!--获取原料商品总条数  Integer getCount(-->
     <select id="getCount" resultType="java.lang.Integer">
-        select count(1) from sys_supplier_goods_test
+        select count(1)
+        from
+        sys_supplier_test s,
+        sys_material_test m,
+        sys_supplier_goods_test mg
         <where>
+            m.ID=mg.MATERIAL_ID
+            and s.ID=mg.SUPPLIER_ID
             <if test="goodsType != null and goodsType != ''">
                 and m.GOODS_TYPE = #{goodsType,jdbcType=VARCHAR}
             </if>
@@ -161,6 +168,8 @@
     <!--根据id获取原料商品   Supplier_GoodsTest getById(String id);-->
     <select id="getById" parameterType="java.lang.String" resultMap="supplier_goods_map">
         select
+            mg.MATERIAL_ID,
+            mg.SUPPLIER_ID,
             m.GOODS_TYPE,
             m.GOODS_NAME,
             mg.GOODS_PRICE,
@@ -170,5 +179,43 @@
             sys_supplier_test s,
             sys_material_test m,
             sys_supplier_goods_test mg
+        <where>
+            <if test="_parameter != null and _parameter != ''">
+              and mg.ID = #{id,jdbcType=VARCHAR}
+            </if>
+        </where>
+              and  m.ID=mg.MATERIAL_ID
+              and s.ID=mg.SUPPLIER_ID
     </select>
+
+    <!--修改原料商品   void updateSupplier_Goods(Supplier_GoodsTest supplier_goodsTest);-->
+    <update id="updateSupplier_Goods" parameterType="com.gameloft9.demo.dataaccess.model.system.Supplier_GoodsTest">
+        update sys_supplier_goods_test
+        <set>
+            <if test="supplierId != null and supplierId != ''">
+                SUPPLIER_ID = #{supplierId,jdbcType=VARCHAR},
+            </if>
+            <if test="materialId != null and materialId != ''">
+                MATERIAL_ID = #{materialId,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsPrice != null and goodsPrice != ''">
+                GOODS_PRICE = #{goodsPrice,jdbcType=VARCHAR}
+            </if>
+        </set>
+        <where>
+            <if test="id != null and id != ''">
+                and ID = #{id,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </update>
+
+    <!--删除原料商品   void deleteSupplier_Goods(String id);-->
+    <delete id="deleteSupplier_Goods" parameterType="java.lang.String">
+        delete from sys_supplier_goods_test
+        <where>
+            <if test="_parameter != null and _parameter != ''">
+                ID = #{id,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </delete>
 </mapper>

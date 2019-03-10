@@ -8,11 +8,17 @@ import lombok.Data;
 @Data
 public class Supplier_Goods {
 
+    private String id;
+
+    private String materialId;
+
     private String goodsType;//商品类型
 
     private String goodsName;//商品名称
 
     private String goodsPrice;//原料单价
+
+    private String supplierId;
 
     private String supplierName;//供应商名称
 

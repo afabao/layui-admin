@@ -54,5 +54,15 @@ public interface Supplier_GoodsService {
     /**
      * 根据id查找原料商品
      */
-    Supplier_GoodsTest getById(String id);
+    Supplier_Goods getById(String id);
+
+    /**
+     * 修改原料商品
+     */
+    Boolean updateSupplier_Goods(Supplier_GoodsTest supplier_goodsTest);
+
+    /**
+     * 删除原料商品
+     */
+    Boolean deleteSupplier_Goods(String id);
 }

@@ -239,4 +239,69 @@
             </if>
         </where>
     </delete>
+    
+    <!--提交订单 void buyerCommit(String id);-->
+    <update id="buyerCommit" parameterType="com.gameloft9.demo.dataaccess.model.system.PurchaseOrderTest">
+        update sys_purchase_order_test
+        <set>
+            <if test="auditState != null and auditState != ''">
+                AUDIT_STATE = #{auditState,jdbcType=VARCHAR}
+            </if>
+        </set>
+        <where>
+            <if test="_parameter != null and _parameter != ''">
+                and ID = #{id,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </update>
+
+    <!--查询状态   String findState(String id);-->
+    <select id="findState" parameterType="java.lang.String" resultType="java.lang.String">
+        select AUDIT_STATE
+        from sys_purchase_order_test
+        <where>
+            <if test="_parameter != null and _parameter != ''">
+                ID = #{id,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <!--已提交的显示列表   List<PurchaseOrderTest> getAllByBuyerM-->
+    <select id="getAllByBuyerM" resultMap="purchase_order_map">
+        select *
+        from
+        sys_purchase_order_test
+        <where>
+            <if test="startTime != null and endTime != null">
+                and APPLY_TIME between #{startTime,jdbcType=DATE} and #{endTime,jdbcType=DATE}
+            </if>
+            <if test="allState != null and allState != ''">
+                and AUDIT_STATE = #{allState,jdbcType=VARCHAR}
+            </if>
+            <if test="notCommit != null and notCommit != ''">
+                and AUDIT_STATE  not in (#{notCommit,jdbcType=VARCHAR})
+            </if>
+        </where>
+
+        limit #{start,jdbcType=DECIMAL},#{end,jdbcType=DECIMAL}
+    </select>
+
+
+    <!--获取总条数   Integer getCountByBuyerM-->
+    <select id="getCountByBuyerM" resultType="java.lang.Integer">
+        select count(1)
+        from
+        sys_purchase_order_test
+        <where>
+            <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+                and APPLY_TIME between #{startTime,jdbcType=DATE} and #{endTime,jdbcType=DATE}
+            </if>
+            <if test="allState != null and allState != ''">
+                and AUDIT_STATE = #{allState,jdbcType=VARCHAR}
+            </if>
+            <if test="notCommit != null and notCommit != ''">
+                and AUDIT_STATE  not in (#{notCommit,jdbcType=VARCHAR})
+            </if>
+        </where>
+    </select>
 </mapper>

@@ -4,6 +4,8 @@ import com.gameloft9.demo.dataaccess.model.system.MeterialTest;
 import com.gameloft9.demo.dataaccess.model.system.Supplier_Goods;
 import com.gameloft9.demo.dataaccess.model.system.Supplier_GoodsTest;
 import com.gameloft9.demo.dataaccess.model.system.SysSupplierTest;
+import com.gameloft9.demo.mgrframework.annotation.BizOperLog;
+import com.gameloft9.demo.mgrframework.beans.constant.OperType;
 import com.gameloft9.demo.mgrframework.beans.response.IResult;
 
 import com.gameloft9.demo.mgrframework.beans.response.PageResultBean;
@@ -16,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Collection;
-import java.util.List;
 
 @Controller
 @RequestMapping("/supplier_goods")
@@ -33,7 +34,7 @@ public class Supplier_GoodsController {
     @ResponseBody
     public IResult getAll(String page,String limit,String supplierName,String goodsType){
         //返回json至前端的均返回ResultBean或者PageResultBean
-        return new PageResultBean<Collection<Supplier_GoodsTest>>(supplier_goodsService.getAll(page,limit,supplierName,goodsType),supplier_goodsService.getCount(supplierName,goodsType));
+        return new PageResultBean<Collection<Supplier_GoodsTest>>(supplier_goodsService.getAll(page,limit,goodsType,supplierName),supplier_goodsService.getCount(goodsType,supplierName));
     }
 
     /**
@@ -79,6 +80,7 @@ public class Supplier_GoodsController {
      */
     @RequestMapping(value = "/add.do" ,method = RequestMethod.POST)
     @ResponseBody
+    @BizOperLog(operType = OperType.ADD,memo = "添加原料商品")
     public IResult addSupplier_Goods(Supplier_Goods supplier_goods){
         return new ResultBean<String>(supplier_goodsService.addSupplier_Goods(supplier_goods));
     }
@@ -99,7 +101,26 @@ public class Supplier_GoodsController {
     @RequestMapping(value = "/get.do" ,method = RequestMethod.POST)
     @ResponseBody
     public IResult getById(String id){
-        return new ResultBean<Supplier_GoodsTest>(supplier_goodsService.getById(id));
+        return new ResultBean<Supplier_Goods>(supplier_goodsService.getById(id));
     }
 
+    /**
+     * 修改原料商品
+     */
+    @RequestMapping(value = "/update.do" ,method = RequestMethod.POST)
+    @ResponseBody
+    @BizOperLog(operType = OperType.ADD,memo = "修改原料商品")
+    public IResult updateSupplier_Goods(Supplier_GoodsTest supplier_goodsTest){
+        return new ResultBean<Boolean>(supplier_goodsService.updateSupplier_Goods(supplier_goodsTest));
+    }
+
+    /**
+     * 删除原料商品
+     */
+    @RequestMapping(value = "/delete.do" ,method = RequestMethod.POST)
+    @ResponseBody
+    @BizOperLog(operType = OperType.ADD,memo = "删除原料商品")
+    public IResult deleteSupplier_Goods(String id){
+        return new ResultBean<Boolean>(supplier_goodsService.deleteSupplier_Goods(id));
+    }
 }

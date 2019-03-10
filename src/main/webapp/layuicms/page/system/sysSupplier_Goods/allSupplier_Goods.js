@@ -50,13 +50,12 @@ layui.config({
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的DOM对象
 
+
             //区分事件
             if (layEvent === 'del') { //删除
-
                 delSupplier_Goods(row.id);
             } else if (layEvent === 'edit') { //编辑
                 //do something
-
                 editSupplier_Goods(row.id);
             }
         });
@@ -67,9 +66,8 @@ layui.config({
     //查询
     form.on("submit(queryMenu)", function (data) {
         var supplierName = data.field.supplierName;
+        console.log("supplierName="+supplierName);
         var goodsType = data.field.goodsType;
-        console.log(goodsType)
-        console.log(supplierName)
         //表格重新加载
         tableIns.reload({
             where:{
@@ -125,7 +123,7 @@ layui.config({
     //编辑
     function editSupplier_Goods(id){
         var index = layui.layer.open({
-            title: "编辑供应商",
+            title: "编辑原料商品",
             type: 2,
             content: "editSupplier_Goods.html?id="+id,
             success: function (layero, index) {

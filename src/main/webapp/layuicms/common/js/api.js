@@ -244,6 +244,14 @@ layui.define(['$tool','jquery'], function (exports) {
         DeletePurchase_Order:function(req,successCallback,errorCallback){
             doPost($tool.getContext() + 'purchase_order/delete.do',req,successCallback,errorCallback);
         },
+        //提交订单申请
+        buyerCommit:function(req,successCallback,errorCallback){
+            doPost($tool.getContext() + 'purchase_order/buyerCommit.do',req,successCallback,errorCallback);
+        },
+        //查询订单状态
+        findState:function(req,successCallback,errorCallback){
+            doPost($tool.getContext() + 'purchase_order/findState.do',req,successCallback,errorCallback);
+        },
 
     };
 

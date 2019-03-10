@@ -55,5 +55,25 @@ public interface Purchase_OrderService {
      */
     Boolean deletePurchase_Order(String id);
 
+    /**
+     * 提交订单
+     */
+    Boolean buyerCommit(PurchaseOrderTest purchaseOrderTest);
+
+    /**
+     * 查询订单状态
+     */
+    String findState(String id);
+
+    /**
+     * 采购领导分页显示订单列表
+     */
+    List<PurchaseOrderTest> getAllByBuyerM(String startTime1, String endTime1, String page, String limit, String allState,String notCommit);
+
+    /**
+     * 采购领导获取总条数
+     */
+    Integer getCountByBuyerM(String startTime1, String endTime1, String allState, String notCommit);
+
 
 }

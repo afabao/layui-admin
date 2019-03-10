@@ -73,6 +73,16 @@ public interface SysSupplier_GoodsTestMapper {
     /**
      * 根据id查找原料商品
      */
-    Supplier_GoodsTest getById(String id);
+    Supplier_Goods getById(String id);
+
+    /**
+     * 修改原料商品
+     */
+    void updateSupplier_Goods(Supplier_GoodsTest supplier_goodsTest);
+
+    /**
+     * 删除原料商品
+     */
+    void deleteSupplier_Goods(String id);
 
 }

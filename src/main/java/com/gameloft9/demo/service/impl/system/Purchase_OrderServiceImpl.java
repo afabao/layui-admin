@@ -142,10 +142,83 @@ public class Purchase_OrderServiceImpl implements Purchase_OrderService {
         return true;
     }
 
+    /**
+     * 删除订单
+     */
     public Boolean deletePurchase_Order(String id) {
         CheckUtil.notBlank(id,"订单id为空");
         purchase_orderMapper.deletePurchase_Order(id);
         return true;
+    }
+
+    /**
+     * 提交订单
+     *
+     */
+    public Boolean buyerCommit(PurchaseOrderTest purchaseOrderTest) {
+        CheckUtil.notBlank(purchaseOrderTest.getId(),"订单id为空");
+        purchaseOrderTest.setAuditState(StatePayInfo.APPLY_INFO_WAITING);
+        purchase_orderMapper.buyerCommit(purchaseOrderTest);
+        return true;
+    }
+
+    /**
+     * 查询订单状态
+     *
+     */
+    public String findState(String id) {
+        CheckUtil.notBlank(id,"订单id为空");
+        return purchase_orderMapper.findState(id);
+    }
+
+    /**
+     * 采购领导分页显示订单列表
+     */
+    public List<PurchaseOrderTest> getAllByBuyerM(String startTime1, String endTime1, String page, String limit, String allState,String notCommit) {
+        PageRange pageRange = new PageRange(page,limit);
+        notCommit = StatePayInfo.APPLY_INFO_NO_SUBMIT;
+        Date startTime = null;
+        Date endTime = null;
+        if(startTime1 != null && !"".equals(startTime1)){
+            startTime = new Date();
+            endTime = new Date();
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+            try {
+                startTime = format.parse(startTime1);
+                endTime = format.parse(endTime1);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return purchase_orderMapper.getAllByBuyerM(startTime,endTime,pageRange.getStart(),pageRange.getEnd(),allState,notCommit);
+        }
+
+        return purchase_orderMapper.getAllByBuyerM(startTime,endTime,pageRange.getStart(),pageRange.getEnd(),allState,notCommit);
+
+    }
+
+
+    /**
+     * 采购领导获取总条数
+     */
+    public Integer getCountByBuyerM(String startTime1, String endTime1, String allState, String notCommit) {
+        Date startTime = null;
+        Date endTime = null;
+        if(startTime1 != null && !"".equals(startTime1)){
+            startTime = new Date();
+            endTime = new Date();
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+            try {
+                startTime = format.parse(startTime1);
+                endTime = format.parse(endTime1);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return purchase_orderMapper.getCountByBuyerM(startTime,endTime,allState,notCommit);
+        }
+
+        return purchase_orderMapper.getCountByBuyerM(startTime,endTime,allState,notCommit);
     }
 
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="utf-8">
     <title>订单表</title>
@@ -34,11 +34,12 @@
 
 
         <div class="layui-inline">
-            <a class="layui-btn search_btn" lay-submit="" lay-filter="queryMenu">查询</a>
+            <span class="layui-btn search_btn" lay-submit="" lay-filter="queryMenu">查询</span>
         </div>
         <div class="layui-inline">
-            <a class="layui-btn layui-btn-normal purchase_orderAdd_btn">添加订单</a>
+            <span class="layui-btn layui-btn-normal purchase_orderAdd_btn">添加订单</span>
         </div>
+
     </form>
 </blockquote>
 <!--表格区-->
@@ -52,9 +53,15 @@
 <!--toolbar 模板-->
 <script type="text/html" id="barDemo">
     <!--通过lay-event定义事件-->
+    {{# if(d.auditState=="未提交"){ }}
     <a class="layui-btn layui-btn-sm" lay-event="edit"><i class="layui-icon">&#xe642;</i>编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-sm" lay-event="del"><i class="layui-icon">&#xe640;</i>删除</a>
     <a class="layui-btn layui-btn-normal layui-btn-sm" lay-event="commit"><i class="layui-icon">&#xe605;</i>提交</a>
+    {{# } else if(d.auditState=="待审核"){ }}
+    <a class="layui-btn  layui-btn-sm layui-disabled" ><i class="layui-icon">&#xe642;</i>编辑</a>
+    <a class="layui-btn layui-btn-sm layui-disabled" ><i class="layui-icon">&#xe640;</i>删除</a>
+    <a class="layui-btn layui-btn-normal layui-btn-sm" lay-event="back"><i class="layui-icon">&#xe605;</i>撤回</a>
+    {{# } }}
 </script>
 
 
