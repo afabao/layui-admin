@@ -58,10 +58,8 @@ public class Supplier_GoodsTestMapperImpl implements Supplier_GoodsService {
         supplier_goodsTest.setId(UUIDUtil.getUUID());
         List<Supplier_Goods> list = supplier_goodsTestMapper.all();
         //商品id和供应商id不能同时重复
-        //TODO...判断失误
         for (Supplier_Goods supplierGoods : list) {
-            boolean a = supplierGoods.getSupplierId().equals(supplier_goods.getSupplierId()) && supplierGoods.getMaterialId().equals(supplier_goods.getMaterialId());
-            CheckUtil.check(a,"该原料商品已经存在");
+            CheckUtil.check(!(supplierGoods.getSupplierId().equals(supplier_goods.getSupplierName()) && supplierGoods.getMaterialId().equals(supplier_goods.getGoodsName())),"该原料商品已经存在");
 
         }
         supplier_goodsTest.setGoodsPrice(supplier_goods.getGoodsPrice());

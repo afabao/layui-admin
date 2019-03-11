@@ -94,7 +94,13 @@
     <!--初始化原料名称  List<String> initGoodsName (String goodsId);-->
     <select id="initGoodsName" parameterType="java.lang.String" resultMap="meterialMap">
 
-        select * from sys_material_test where GOODS_TYPE = #{goodsType,jdbcType=VARCHAR}
+        select * from
+        sys_material_test m,sys_supplier_goods_test mg,sys_supplier_test s
+        where
+        m.GOODS_TYPE = #{goodsType,jdbcType=VARCHAR}
+        and m.ID=mg.MATERIAL_ID
+        and s.ID=mg.SUPPLIER_ID
+        and mg.GOODS_PRICE is not null
     </select>
 
     <!--添加原料商品   void addSupplier_Goods(Supplier_Goods supplier_goods);-->

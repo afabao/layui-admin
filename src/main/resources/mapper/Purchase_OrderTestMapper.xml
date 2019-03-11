@@ -62,6 +62,7 @@
             <if test="_parameter !=null and _parameter != ''">
                 and sg.SUPPLIER_ID=#{supplierId,jdbcType=VARCHAR}
                 and sg.MATERIAL_ID = m.ID
+                and sg.GOODS_PRICE is not null
             </if>
         </where>
     </select>

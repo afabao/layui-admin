@@ -75,8 +75,6 @@ layui.config({
      * 点击原料类型初始化原料名称下拉框
      */
     form.on('select(initGoodsName)',function(data){
-        // $('#supplierName').html('<option value="">--请选择--</option>');
-        //alert(1);
         $('#goodsName option').remove();
         //console.log(data.value)
         form.render();
