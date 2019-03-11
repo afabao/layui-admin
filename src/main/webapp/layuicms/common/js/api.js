@@ -252,6 +252,14 @@ layui.define(['$tool','jquery'], function (exports) {
         findState:function(req,successCallback,errorCallback){
             doPost($tool.getContext() + 'purchase_order/findState.do',req,successCallback,errorCallback);
         },
+        //审核订单结果（本部门）
+        ApplyBy_M:function(req,successCallback,errorCallback){
+            doPost($tool.getContext() + 'purchase_order/applyPassInfo.do',req,successCallback,errorCallback);
+        },
+        //撤回申请（本部门）
+        recall:function(req,successCallback,errorCallback){
+            doPost($tool.getContext() + 'purchase_order/recall.do',req,successCallback,errorCallback);
+        },
 
     };
 

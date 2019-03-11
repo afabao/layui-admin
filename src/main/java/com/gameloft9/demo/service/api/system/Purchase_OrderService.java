@@ -75,5 +75,19 @@ public interface Purchase_OrderService {
      */
     Integer getCountByBuyerM(String startTime1, String endTime1, String allState, String notCommit);
 
+    /**
+     * 采购部领导审批结果
+     * id:queryArgs['id'],
+     *             auditDescribe:auditDescribe,
+     *             agree:agree,
+     *             disagree:disagree
+     */
+    Boolean applyByM(String id,String auditDescribe,String agree);
+
+    /**
+     * 撤回申请
+     */
+    Boolean recall(String id);
+
 
 }

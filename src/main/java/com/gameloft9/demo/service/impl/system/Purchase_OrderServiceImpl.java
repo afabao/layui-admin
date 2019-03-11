@@ -110,6 +110,8 @@ public class Purchase_OrderServiceImpl implements Purchase_OrderService {
         //设置和订单编号number
         purchaseOrderTest.setOrderNumber(UUIDUtil.getUUID());
         //设置原料名称goodsName
+        //TODO....原料商品逻辑
+        /*CheckUtil.check(supplierTest == null || supplierTest.getSupplierName().equals(supplier.getSupplierName()),"该角色名称已经存在");*/
         purchaseOrderTest.setGoodsName(sysMeterialTestMapper.getNameById(purchaseOrderTest.getGoodsId()));
         //设置供应商名称supplierName
         purchaseOrderTest.setSupplierName(sysSupplierTestMapper.getNameById(purchaseOrderTest.getSupplierId()));
@@ -158,6 +160,7 @@ public class Purchase_OrderServiceImpl implements Purchase_OrderService {
     public Boolean buyerCommit(PurchaseOrderTest purchaseOrderTest) {
         CheckUtil.notBlank(purchaseOrderTest.getId(),"订单id为空");
         purchaseOrderTest.setAuditState(StatePayInfo.APPLY_INFO_WAITING);
+        purchaseOrderTest.setApplyTime(new Date());
         purchase_orderMapper.buyerCommit(purchaseOrderTest);
         return true;
     }
@@ -204,6 +207,7 @@ public class Purchase_OrderServiceImpl implements Purchase_OrderService {
     public Integer getCountByBuyerM(String startTime1, String endTime1, String allState, String notCommit) {
         Date startTime = null;
         Date endTime = null;
+        notCommit = StatePayInfo.APPLY_INFO_NO_SUBMIT;
         if(startTime1 != null && !"".equals(startTime1)){
             startTime = new Date();
             endTime = new Date();
@@ -219,6 +223,45 @@ public class Purchase_OrderServiceImpl implements Purchase_OrderService {
         }
 
         return purchase_orderMapper.getCountByBuyerM(startTime,endTime,allState,notCommit);
+    }
+
+    /**
+     * 审核信息
+     *
+     */
+    public Boolean applyByM(String id, String auditDescribe, String agree) {
+        CheckUtil.notBlank(id,"订单id为空");
+        //获取订单信息
+        PurchaseOrderTest purchaseOrderTest = purchase_orderMapper.getById(id);
+        //设置审批人orderAuditUser，
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        String orderAuditUser = (String) request.getSession().getAttribute("sysUser");
+        purchaseOrderTest.setOrderAuditUser(orderAuditUser);
+        //根据同意或不同意设置订单状态
+        if("同意".equals(agree)){
+            purchaseOrderTest.setAuditState(StatePayInfo.APPLY_INFO_WAITING_BY_REPOSITRY);
+        }else{
+            purchaseOrderTest.setAuditState(StatePayInfo.APPLY_INFO_NOT_PASS);
+        }
+        //设置审批时间
+        purchaseOrderTest.setOrderAuditTime(new Date());
+        //设置审核信息
+        purchaseOrderTest.setAuditDescribe(auditDescribe);
+
+        purchase_orderMapper.applyByM(purchaseOrderTest);
+        return true;
+    }
+
+    /**
+     * 撤回申请
+     *
+     */
+    public Boolean recall(String id) {
+        CheckUtil.notBlank(id,"订单id为空");
+        PurchaseOrderTest purchaseOrderTest = purchase_orderMapper.getById(id);
+        purchaseOrderTest.setAuditState(StatePayInfo.APPLY_INFO_NO_SUBMIT);
+        purchase_orderMapper.recall(purchaseOrderTest);
+        return true;
     }
 
 

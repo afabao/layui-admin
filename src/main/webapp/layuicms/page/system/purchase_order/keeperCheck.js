@@ -49,16 +49,16 @@ layui.config({
      * 初始化状态查询
      */
     function initState(){
-                var html1 = '<option value="">--请选择--</option>';
-                html1 += '<option value="待审核">待审核</option>>';
-                html1 += '<option value="审核通过">审核通过</option>>';
-                html1 += '<option value="审核未通过">审核未通过</option>>';
-                html1 += '<option value="待付款">待付款</option>>';
-                html1 += '<option value="被驳回">被驳回</option>>';
-                html1 += '<option value="已付款">已付款</option>>';
+        var html1 = '<option value="">--请选择--</option>';
+        html1 += '<option value="待审核">待审核</option>>';
+        html1 += '<option value="审核通过">审核通过</option>>';
+        html1 += '<option value="审核未通过">审核未通过</option>>';
+        html1 += '<option value="待付款">待付款</option>>';
+        html1 += '<option value="被驳回">被驳回</option>>';
+        html1 += '<option value="已付款">已付款</option>>';
 
-                $('#allState').append($(html1));
-                form.render();
+        $('#allState').append($(html1));
+        form.render();
     }
 
     function defineTable() {

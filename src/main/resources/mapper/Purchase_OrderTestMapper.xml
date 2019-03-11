@@ -40,12 +40,12 @@
         <result column="GOODS_NUMBER" property="goodsNumber" jdbcType="VARCHAR"/>
         <result column="TOTAL_PRICE" property="totalPrice" jdbcType="DOUBLE"/>
         <result column="APPLY_USER" property="applyUser" jdbcType="VARCHAR"/>
-        <result column="APPLY_TIME" property="applyTime" jdbcType="DATE"/>
+        <result column="APPLY_TIME" property="applyTime" jdbcType="TIMESTAMP"/>
         <result column="AUDIT_STATE" property="auditState" jdbcType="VARCHAR"/>
         <result column="ORDER_AUDIT_USER" property="orderAuditUser" jdbcType="VARCHAR"/>
-        <result column="ORDER_AUDIT_TIME" property="orderAuditTime" jdbcType="DATE"/>
+        <result column="ORDER_AUDIT_TIME" property="orderAuditTime" jdbcType="TIMESTAMP"/>
         <result column="PAY_AUDIT_USER" property="payAuditUser" jdbcType="VARCHAR"/>
-        <result column="PAY_AUDIT_TIME" property="payAuditTime" jdbcType="DATE"/>
+        <result column="PAY_AUDIT_TIME" property="payAuditTime" jdbcType="TIMESTAMP"/>
         <result column="PAY_STATE" property="payState" jdbcType="VARCHAR"/>
         <result column="APPLY_DESCRIBE" property="applyDescribe" jdbcType="VARCHAR"/>
         <result column="AUDIT_DESCRIBE" property="auditDescribe" jdbcType="VARCHAR"/>
@@ -245,7 +245,10 @@
         update sys_purchase_order_test
         <set>
             <if test="auditState != null and auditState != ''">
-                AUDIT_STATE = #{auditState,jdbcType=VARCHAR}
+                AUDIT_STATE = #{auditState,jdbcType=VARCHAR},
+            </if>
+            <if test="applyTime != null and applyTime != ''">
+                APPLY_TIME = #{applyTime,jdbcType=VARCHAR}
             </if>
         </set>
         <where>
@@ -304,4 +307,43 @@
             </if>
         </where>
     </select>
+    
+    <!--采购部领导审批结果 void applyByM(PurchaseOrderTest purchaseOrderTest);-->
+    <update id="applyByM" parameterType="com.gameloft9.demo.dataaccess.model.system.PurchaseOrderTest">
+        update sys_purchase_order_test
+        <set>
+            <if test="auditState != null and auditState != ''">
+                AUDIT_STATE = #{auditState,jdbcType=VARCHAR},
+            </if>
+            <if test="orderAuditTime != null and orderAuditTime != ''">
+                ORDER_AUDIT_TIME = #{orderAuditTime,jdbcType=VARCHAR},
+            </if>
+            <if test="orderAuditUser != null and orderAuditUser != ''">
+                ORDER_AUDIT_USER = #{orderAuditUser,jdbcType=VARCHAR},
+            </if>
+            <if test="auditDescribe != null and auditDescribe != ''">
+                AUDIT_DESCRIBE = #{auditDescribe,jdbcType=VARCHAR}
+            </if>
+        </set>
+        <where>
+            <if test="id != null and id != ''">
+                and ID=#{id,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </update>
+
+    <!--撤回申请   void recall(String id);-->
+    <update id="recall" parameterType="com.gameloft9.demo.dataaccess.model.system.PurchaseOrderTest">
+        update sys_purchase_order_test
+        <set>
+            <if test="auditState != null and auditState != ''">
+                AUDIT_STATE = #{auditState,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <where>
+            <if test="id != null and id != ''">
+                and ID=#{id,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </update>
 </mapper>

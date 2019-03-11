@@ -1,4 +1,6 @@
 
+msquid:S001007"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(µœéÃ8€îþâ•-
+squid:UselessImportCheck"TRemove this unused import 'com.gameloft9.demo.dataaccess.model.system.MeterialTest'.(¤ý”°8é— ²•-
 psquid:S00114
 "QRename this interface name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ñøÍ„8ãí£±•-
-squid:UselessImportCheck"TRemove this unused import 'com.gameloft9.demo.dataaccess.model.system.MeterialTest'.(¤ý”°8é— ²•-
+msquid:S001002"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(©ªã„8—ÕÂâ•-

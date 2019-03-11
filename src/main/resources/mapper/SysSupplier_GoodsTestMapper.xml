@@ -218,4 +218,10 @@
             </if>
         </where>
     </delete>
+
+    <!--获取所有，不分页   List<Supplier_Goods> all();-->
+    <select id="all" resultMap="supplier_goods_map">
+        select * from
+        sys_supplier_goods_test
+    </select>
 </mapper>

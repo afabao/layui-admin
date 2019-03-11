@@ -85,4 +85,16 @@ public interface Purchase_OrderTestMapper {
             @Param("allState") String allState,//订单状态
             @Param("notCommit") String notCommit//未提交
     );
+
+    /**
+     * 采购部领导审批
+     */
+    void applyByM(PurchaseOrderTest purchaseOrderTest);
+
+    /**
+     * 撤回申请
+     */
+    void recall(PurchaseOrderTest purchaseOrderTest);
+
+
 }

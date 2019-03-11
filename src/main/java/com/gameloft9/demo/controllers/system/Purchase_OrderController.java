@@ -97,10 +97,29 @@ public class Purchase_OrderController {
     }
 
     //订单分页显示(不包含未提交)
-    //TODO......查询
     @RequestMapping(value = "/purchase_orderListByBuyerM.do",method = RequestMethod.POST)
     @ResponseBody
     public IResult getAllBuyderM(String startTime,String endTime,String page,String limit,String allState,String notCommit){
         return new PageResultBean<Collection<PurchaseOrderTest>>(purchase_orderService.getAllByBuyerM(startTime,endTime,page,limit,allState,notCommit),purchase_orderService.getCountByBuyerM(startTime,endTime,allState,notCommit));
+    }
+
+    /**
+     * 采购部领导审核
+     */
+    @RequestMapping(value = "/applyPassInfo.do",method = RequestMethod.POST)
+    @ResponseBody
+    @BizOperLog(operType = OperType.ADD,memo = "采购部领导审核订单")
+    public IResult applyPassInfo(String id,String auditDescribe,String agree){
+        return new ResultBean<Boolean>(purchase_orderService.applyByM(id,auditDescribe,agree));
+    }
+
+    /**
+     * 撤回
+     */
+    @RequestMapping(value = "/recall.do",method = RequestMethod.POST)
+    @ResponseBody
+    @BizOperLog(operType = OperType.ADD,memo = "撤回申请")
+    public IResult recall(String id){
+        return new ResultBean<Boolean>(purchase_orderService.recall(id));
     }
 }

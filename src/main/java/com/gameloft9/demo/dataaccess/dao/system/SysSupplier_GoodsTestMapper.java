@@ -85,4 +85,9 @@ public interface SysSupplier_GoodsTestMapper {
      */
     void deleteSupplier_Goods(String id);
 
+    /**
+     * 获取所有，不分页
+     */
+    List<Supplier_Goods> all();
+
 }

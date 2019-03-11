@@ -59,8 +59,16 @@
     <a class="layui-btn layui-btn-normal layui-btn-sm" lay-event="commit"><i class="layui-icon">&#xe605;</i>提交</a>
     {{# } else if(d.auditState=="待审核"){ }}
     <a class="layui-btn  layui-btn-sm layui-disabled" ><i class="layui-icon">&#xe642;</i>编辑</a>
-    <a class="layui-btn layui-btn-sm layui-disabled" ><i class="layui-icon">&#xe640;</i>删除</a>
+    <a class="layui-btn layui-btn-sm layui-btn-danger layui-disabled" ><i class="layui-icon">&#xe640;</i>删除</a>
     <a class="layui-btn layui-btn-normal layui-btn-sm" lay-event="back"><i class="layui-icon">&#xe605;</i>撤回</a>
+    {{# } else if(d.auditState=="待审核(仓库)"){ }}
+    <a class="layui-btn  layui-btn-sm layui-disabled" ><i class="layui-icon">&#xe642;</i>编辑</a>
+    <a class="layui-btn layui-btn-sm layui-btn-danger layui-disabled" ><i class="layui-icon">&#xe640;</i>删除</a>
+    <a class="layui-btn layui-btn-normal layui-btn-sm layui-disabled" lay-event="back"><i class="layui-icon">&#xe605;</i>撤回</a>
+    {{# } else if(d.auditState=="审核未通过(采购部)"){ }}
+    <a class="layui-btn  layui-btn-sm " lay-event="edit"><i class="layui-icon">&#xe642;</i>编辑</a>
+    <a class="layui-btn layui-btn-sm layui-btn-danger layui-disabled" ><i class="layui-icon">&#xe640;</i>删除</a>
+    <a class="layui-btn layui-btn-normal layui-btn-sm" lay-event="commit"><i class="layui-icon">&#xe605;</i>提交</a>
     {{# } }}
 </script>
 

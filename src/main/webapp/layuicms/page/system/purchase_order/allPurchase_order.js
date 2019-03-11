@@ -79,7 +79,7 @@ layui.config({
             , page:true //开启分页
             , cols: [[ //表头
                 {type:'numbers',title:'序号',fixed: 'left'},
-                {field: 'orderNumber', title: '订单编号', width: '22%',fixed: 'left'}
+                {field: 'orderNumber', title: '订单编号', width: '10%',fixed: 'left'}
                 , {field: 'goodsName', title: '购买货品', width: '10%',fixed: 'left'}
                 , {field: 'goodsNumber', title: '购买数量', width: '10%'}
                 , {field: 'totalPrice', title: '货品总价(单位：元)', width: '15%'}
@@ -94,7 +94,7 @@ layui.config({
                 , {field: 'payState', title: '支付状态', width: '10%'}
                 , {field: 'applyDescribe', title: '申请原因', width: '10%'}
                 , {field: 'auditDescribe', title: '审核信息', width: '10%'}
-                , {fixed: 'right', title: '操作', width: 260, align: 'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
+                , {fixed: 'right', title: '操作', width: 250, align: 'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
             ]]
             , done: function (res, curr) {//请求完毕后的回调
                 //如果是异步请求数据方式，res即为你接口返回的信息.curr：当前页码
@@ -115,6 +115,8 @@ layui.config({
             } else if(layEvent === 'commit') {
                 //var a = $(this).html("<i class=\"layui-icon\">&#xe605;</i>提交")
                 buyerCommit(row.id);
+            } else if(layEvent === 'back') {
+                recall(row.id);
             }
         });
     }
@@ -216,6 +218,27 @@ layui.config({
             $api.buyerCommit(req,function (data) {
 
                 layer.msg("提交成功",{time:1000},function(){
+                    //obj.del(); //删除对应行（tr）的DOM结构
+                    //重新加载表格
+                    tableIns.reload();
+                });
+            });
+
+        });
+    }
+
+    //撤回
+    function recall(id){
+        layer.confirm('确认撤回吗？', function (confirmIndex) {
+            layer.close(confirmIndex);//关闭confirm
+            //向服务端发送删除指令
+            var req = {
+                id: id
+            };
+
+            $api.recall(req,function (data) {
+
+                layer.msg("撤回成功",{time:1000},function(){
                     //obj.del(); //删除对应行（tr）的DOM结构
                     //重新加载表格
                     tableIns.reload();
