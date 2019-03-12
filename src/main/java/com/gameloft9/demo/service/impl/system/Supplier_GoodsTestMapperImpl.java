@@ -91,4 +91,14 @@ public class Supplier_GoodsTestMapperImpl implements Supplier_GoodsService {
         supplier_goodsTestMapper.deleteSupplier_Goods(id);
         return true;
     }
+
+    /**
+     * 根据供应商id和原料类型查找原料名称
+     * @param id 供应商id
+     * @param goodsType 货品类型
+     * @return 货品集合
+     */
+    public List<MeterialTest> InitGoodsNameBySupplierAndGoodsType(String id, String goodsType) {
+        return supplier_goodsTestMapper.InitGoodsNameBySupplierAndGoodsType(id,goodsType);
+    }
 }

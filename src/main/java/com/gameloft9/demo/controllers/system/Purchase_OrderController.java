@@ -122,4 +122,8 @@ public class Purchase_OrderController {
     public IResult recall(String id){
         return new ResultBean<Boolean>(purchase_orderService.recall(id));
     }
+
+    /**
+     *
+     */
 }

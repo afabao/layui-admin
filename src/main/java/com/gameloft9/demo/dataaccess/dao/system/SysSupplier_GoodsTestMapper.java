@@ -90,4 +90,14 @@ public interface SysSupplier_GoodsTestMapper {
      */
     List<Supplier_Goods> all();
 
+    /**
+     * 根据供应商id和原料类型查找原料名称
+     */
+    List<MeterialTest> InitGoodsNameBySupplierAndGoodsType(
+            @Param("supplierId") String supplierId,
+            @Param("goodsType") String goodsType
+    );
+
+
+
 }

@@ -65,4 +65,13 @@ public interface Supplier_GoodsService {
      * 删除原料商品
      */
     Boolean deleteSupplier_Goods(String id);
+
+    /**
+     * 根据供应商id和原料类型查找原料名称
+     * @param id 供应商id
+     * @param goodsType 货品类型
+     * @return 货品集合
+     */
+    List<MeterialTest> InitGoodsNameBySupplierAndGoodsType(String id,String goodsType);
+
 }

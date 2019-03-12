@@ -8,6 +8,7 @@ import com.gameloft9.demo.dataaccess.model.system.SysSupplierTest;
 import com.gameloft9.demo.mgrframework.utils.CheckUtil;
 import com.gameloft9.demo.service.api.system.Purchase_OrderService;
 import com.gameloft9.demo.service.beans.system.PageRange;
+import com.gameloft9.demo.utils.DateFormatUtil;
 import com.gameloft9.demo.utils.StatePayInfo;
 import com.gameloft9.demo.utils.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ import java.util.List;
 public class Purchase_OrderServiceImpl implements Purchase_OrderService {
 
 
+
     @Autowired
     Purchase_OrderTestMapper purchase_orderMapper;
     @Autowired
@@ -44,16 +46,9 @@ public class Purchase_OrderServiceImpl implements Purchase_OrderService {
         Date startTime = null;
         Date endTime = null;
         if(startTime1 != null && !"".equals(startTime1)){
-            startTime = new Date();
-            endTime = new Date();
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-            try {
-                startTime = format.parse(startTime1);
-                endTime = format.parse(endTime1);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            startTime = DateFormatUtil.convert(startTime1);
+            //DateFormatUtil.convert(startTime,endTime,startTime1,endTime1);
+            endTime = DateFormatUtil.convert(endTime1);
             return purchase_orderMapper.getAll(startTime,endTime,pageRange.getStart(),pageRange.getEnd(),allState);
         }
 
@@ -66,16 +61,8 @@ public class Purchase_OrderServiceImpl implements Purchase_OrderService {
         Date startTime = null;
         Date endTime = null;
         if(startTime1 != null && !"".equals(startTime1)){
-            startTime = new Date();
-            endTime = new Date();
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-            try {
-                startTime = format.parse(startTime1);
-                endTime = format.parse(endTime1);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            startTime = DateFormatUtil.convert(startTime1);
+            endTime = DateFormatUtil.convert(endTime1);
             return purchase_orderMapper.getCount(startTime,endTime,allState);
         }
 
@@ -183,16 +170,9 @@ public class Purchase_OrderServiceImpl implements Purchase_OrderService {
         Date startTime = null;
         Date endTime = null;
         if(startTime1 != null && !"".equals(startTime1)){
-            startTime = new Date();
-            endTime = new Date();
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-            try {
-                startTime = format.parse(startTime1);
-                endTime = format.parse(endTime1);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            startTime = DateFormatUtil.convert(startTime1);
+            //DateFormatUtil.convert(startTime,endTime,startTime1,endTime1);
+            endTime = DateFormatUtil.convert(endTime1);
             return purchase_orderMapper.getAllByBuyerM(startTime,endTime,pageRange.getStart(),pageRange.getEnd(),allState,notCommit);
         }
 
@@ -205,20 +185,14 @@ public class Purchase_OrderServiceImpl implements Purchase_OrderService {
      * 采购领导获取总条数
      */
     public Integer getCountByBuyerM(String startTime1, String endTime1, String allState, String notCommit) {
+
+        notCommit = StatePayInfo.APPLY_INFO_NO_SUBMIT;
         Date startTime = null;
         Date endTime = null;
-        notCommit = StatePayInfo.APPLY_INFO_NO_SUBMIT;
         if(startTime1 != null && !"".equals(startTime1)){
-            startTime = new Date();
-            endTime = new Date();
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-            try {
-                startTime = format.parse(startTime1);
-                endTime = format.parse(endTime1);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            startTime = DateFormatUtil.convert(startTime1);
+            //DateFormatUtil.convert(startTime,endTime,startTime1,endTime1);
+            endTime = DateFormatUtil.convert(endTime1);
             return purchase_orderMapper.getCountByBuyerM(startTime,endTime,allState,notCommit);
         }
 
@@ -230,6 +204,7 @@ public class Purchase_OrderServiceImpl implements Purchase_OrderService {
      *
      */
     public Boolean applyByM(String id, String auditDescribe, String agree) {
+        //TODO...审核信息字符串拼接
         CheckUtil.notBlank(id,"订单id为空");
         //获取订单信息
         PurchaseOrderTest purchaseOrderTest = purchase_orderMapper.getById(id);
@@ -246,7 +221,7 @@ public class Purchase_OrderServiceImpl implements Purchase_OrderService {
         //设置审批时间
         purchaseOrderTest.setOrderAuditTime(new Date());
         //设置审核信息
-        purchaseOrderTest.setAuditDescribe(auditDescribe);
+        purchaseOrderTest.setAuditDescribe(auditDescribe + "&&");
 
         purchase_orderMapper.applyByM(purchaseOrderTest);
         return true;

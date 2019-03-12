@@ -95,12 +95,9 @@
     <select id="initGoodsName" parameterType="java.lang.String" resultMap="meterialMap">
 
         select * from
-        sys_material_test m,sys_supplier_goods_test mg,sys_supplier_test s
+          sys_material_test
         where
-        m.GOODS_TYPE = #{goodsType,jdbcType=VARCHAR}
-        and m.ID=mg.MATERIAL_ID
-        and s.ID=mg.SUPPLIER_ID
-        and mg.GOODS_PRICE is not null
+          GOODS_TYPE = #{goodsType,jdbcType=VARCHAR}
     </select>
 
     <!--添加原料商品   void addSupplier_Goods(Supplier_Goods supplier_goods);-->
@@ -229,5 +226,29 @@
     <select id="all" resultMap="supplier_goods_map">
         select * from
         sys_supplier_goods_test
+    </select>
+
+    <!--根据供应商id和原料类型查找原料名称   List<MeterialTest> InitGoodsNameBySupplierAndGoodsType(String id,String goodsType);-->
+    <select id="InitGoodsNameBySupplierAndGoodsType" resultMap="meterialMap">
+        select
+        m.ID,
+        m.GOODS_NAME,
+        m.GOODS_TYPE,
+        m.GOODS_DESCRIBE
+        from
+        sys_supplier_test s,
+        sys_material_test m,
+        sys_supplier_goods_test mg
+        <where>
+                s.ID = mg.SUPPLIER_ID
+                and
+                m.ID = mg.MATERIAL_ID
+            <if test="supplierId != null and supplierId != ''">
+                and s.ID = #{supplierId,jdbcType=VARCHAR}
+            </if>
+            <if test="goodsType != null and goodsType != ''">
+                and m.GOODS_TYPE = #{goodsType,jdbcType=VARCHAR}
+            </if>
+        </where>
     </select>
 </mapper>

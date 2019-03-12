@@ -1,7 +1,15 @@
 
-ksquid:S00101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ŸŠ8åÇ¹×•-
+dsquid:S1226©"FIntroduce a new variable instead of reusing the parameter "notCommit".(Ÿ–ò8òõé„—-
+nsquid:CommentedOutCodeLine2"<This block of commented-out lines of code should be removed.(Ü¤Ïƒıÿÿÿÿ8•±Çˆ—-
+isquid:CommentedOutCodeLinen"<This block of commented-out lines of code should be removed.(ï³šÕ8òõé„—-
+`squid:UselessImportCheck"5Remove this unused import 'java.text.ParseException'.(ñ®ï•8÷´•‰—-
+ksquid:S00101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ŸŠ8åÇ¹×•-
+osquid:CommentedOutCodeLine®"<This block of commented-out lines of code should be removed.(Ü¤Ïƒıÿÿÿÿ8÷´•‰—-
 ‚squid:UselessImportCheck"WRemove this unused import 'com.gameloft9.demo.dataaccess.model.system.SysSupplierTest'.(å€Â’8â¥ìâ•-
-Fsquid:S1148M"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ŞÏå•-
-Fsquid:S11487"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8˜ÖÆå•-
-ƒsquid:S00116"_Rename this field "purchase_orderMapper" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(„É‘üÿÿÿÿ8åÇ¹×•-
-isquid:CommentedOutCodeLiney"<This block of commented-out lines of code should be removed.(ï³šÕ8èšŞâ•-
+osquid:CommentedOutCodeLineÂ"<This block of commented-out lines of code should be removed.(Ü¤Ïƒıÿÿÿÿ8ıî“‰—-
+isquid:CommentedOutCodeLinee"<This block of commented-out lines of code should be removed.(‰Äƒå8òõé„—-
+ƒsquid:S00116!"_Rename this field "purchase_orderMapper" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(„É‘üÿÿÿÿ8åÇ¹×•-
+bsquid:UselessImportCheck"7Remove this unused import 'java.text.SimpleDateFormat'.(ú¡ÙÛ8÷´•‰—-
+dsquid:S1226½"FIntroduce a new variable instead of reusing the parameter "notCommit".(Ÿ–ò8òõé„—-
+ssquid:S1192"ODefine a constant instead of duplicating this literal "è®¢å•idä¸ºç©º" 6 times.(õÃ‡ıÿÿÿÿ8òõé„—-
+Psquid:S1135d"2Complete the task associated to this TODO comment.(óø–8òõé„—-

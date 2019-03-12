@@ -123,4 +123,10 @@ public class Supplier_GoodsController {
     public IResult deleteSupplier_Goods(String id){
         return new ResultBean<Boolean>(supplier_goodsService.deleteSupplier_Goods(id));
     }
+
+    @RequestMapping(value = "/InitGoodsNameBySupplierAndGoodsType.do" ,method = RequestMethod.POST)
+    @ResponseBody
+    public IResult InitGoodsNameBySupplierAndGoodsType(String supplierId,String goodsType){
+        return new ResultBean<Collection<MeterialTest>>(supplier_goodsService.InitGoodsNameBySupplierAndGoodsType(supplierId,goodsType));
+    }
 }

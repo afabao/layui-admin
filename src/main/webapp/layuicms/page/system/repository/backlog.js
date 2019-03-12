@@ -29,15 +29,9 @@ layui.config({
     function init() {
         initDate();//初始化日期选择框
         initState();
-        initCommit()
     }
 
     init();
-
-    function initCommit(){
-        var a = 'a'
-        $('#barDemo').append($(a))
-    }
 
     /**
      * 初始化日期选择
@@ -55,26 +49,23 @@ layui.config({
      * 初始化状态查询
      */
     function initState(){
-                var html1 = '<option value="">--请选择--</option>';
-                html1 += '<option value="未提交">未提交</option>>';
-                html1 += '<option value="待审核">待审核</option>>';
-                html1 += '<option value="审核中">审核中</option>>';
-                html1 += '<option value="审核通过">审核通过</option>>';
-                html1 += '<option value="审核未通过">审核未通过</option>>';
-                html1 += '<option value="待付款">待付款</option>>';
-                html1 += '<option value="被驳回">被驳回</option>>';
-                html1 += '<option value="已付款">已付款</option>>';
+        var html1 = '<option value="">--请选择--</option>';
+        html1 += '<option value="待审核">待审核</option>>';
+        html1 += '<option value="审核通过">审核通过</option>>';
+        html1 += '<option value="审核未通过">审核未通过</option>>';
+        html1 += '<option value="待付款">待付款</option>>';
+        html1 += '<option value="被驳回">被驳回</option>>';
+        html1 += '<option value="已付款">已付款</option>>';
 
-                $('#allState').append($(html1));
-                form.render();
+        $('#allState').append($(html1));
+        form.render();
     }
-
 
     function defineTable() {
         tableIns = table.render({
             elem: '#supplier_goods'
             , height: 415
-            , url: $tool.getContext() + 'purchase_order/purchase_orderList.do' //数据接口
+            , url: $tool.getContext() + 'repository/repositoryListByRepositoryM.do' //数据接口
             , method: 'post'
             , page:true //开启分页
             , cols: [[ //表头
@@ -94,7 +85,7 @@ layui.config({
                 , {field: 'payState', title: '支付状态', width: '10%'}
                 , {field: 'applyDescribe', title: '申请原因', width: '10%'}
                 , {field: 'auditDescribe', title: '审核信息', width: '10%'}
-                , {fixed: 'right', title: '操作', width: 250, align: 'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
+                , {fixed: 'right', title: '操作', width: 100, align: 'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
             ]]
             , done: function (res, curr) {//请求完毕后的回调
                 //如果是异步请求数据方式，res即为你接口返回的信息.curr：当前页码
@@ -102,24 +93,14 @@ layui.config({
         });
 
         //为toolbar添加事件响应
-        table.on('tool(purchase_orderFilter)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+        table.on('tool(repositoryFilter)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
             var row = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的DOM对象
-            //区分事件
-            if (layEvent === 'del') { //删除
-                delPurchase_Order(row.id);
-            } else if (layEvent === 'edit') { //编辑
-                //do something
-                editPurchase_Order(row.id);
-            } else if(layEvent === 'commit') {
-                //var a = $(this).html("<i class=\"layui-icon\">&#xe605;</i>提交")
-                buyerCommit(row.id);
-            } else if(layEvent === 'back') {
-                recall(row.id);
-            } else if(layEvent === 'lookBack'){
 
-                lookBack(row.id);
+            //区分事件
+            if (layEvent === 'check') { //删除
+                checkApplyInfo(row.id);
             }
         });
     }
@@ -202,7 +183,6 @@ layui.config({
             }
         });
 
-
         //改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）
         $(window).resize(function () {
             layui.layer.full(index);
@@ -210,14 +190,16 @@ layui.config({
         layui.layer.full(index);
     }
 
-    //查看
-    function lookBack(id){
+    /**
+     * 查看
+     * @param id
+     */
+    function checkApplyInfo(id){
         var index = layui.layer.open({
-            title: "编辑申请",
+            title: "查看申请",
             type: 2,
-            content: "editPurchase_order.html?id="+id,
+            content: "checkByRepository.html?id="+id,
             success: function (layero, index) {
-                console.log(layero)
                 setTimeout(function () {
                     layui.layer.tips('点击此处返回菜单列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
@@ -225,7 +207,6 @@ layui.config({
                 }, 500)
             }
         });
-
 
         //改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）
         $(window).resize(function () {
@@ -244,35 +225,12 @@ layui.config({
             };
 
             $api.buyerCommit(req,function (data) {
-
                 layer.msg("提交成功",{time:1000},function(){
                     //obj.del(); //删除对应行（tr）的DOM结构
                     //重新加载表格
                     tableIns.reload();
                 });
             });
-
-        });
-    }
-
-    //撤回
-    function recall(id){
-        layer.confirm('确认撤回吗？', function (confirmIndex) {
-            layer.close(confirmIndex);//关闭confirm
-            //向服务端发送删除指令
-            var req = {
-                id: id
-            };
-
-            $api.recall(req,function (data) {
-
-                layer.msg("撤回成功",{time:1000},function(){
-                    //obj.del(); //删除对应行（tr）的DOM结构
-                    //重新加载表格
-                    tableIns.reload();
-                });
-            });
-
         });
     }
 

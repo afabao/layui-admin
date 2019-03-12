@@ -13,13 +13,26 @@ layui.config({
         $api = layui.$api;
 
     /**
+     * 同意和不同意按钮
+     */
+    function initBtn(){
+        var auditDescribe = $("#auditDescribe").val()
+        if(auditDescribe != null && auditDescribe != ''){
+            $("#agree").remove();
+            $("#disagree").remove();
+            auditDescribe.attr("readonly","readonly");
+            form.render();
+        }
+    }
+
+    /**
      * 初始化页面
      * */
     function init() {
+        //alert(1)
         //初始化供应商名称下拉框
         initSupplierName();
         initGoodsType();
-        //initGoodsName();
 
         /**
          * 初始化供应商名称下拉框
@@ -37,6 +50,8 @@ layui.config({
                 }
             });
         }
+
+
 
         /**
          * 初始化货品类型
@@ -179,11 +194,13 @@ layui.config({
 
         $api.GetPurchase_Order(req,function (res) {
             var data = res.data;
+            //alert(data.auditDescribe)
             $("[name='supplierId']").val(data.supplierId);
             $("[name='goodsType']").val(data.goodsType);
             $("[name='goodsNumber']").val(data.goodsNumber);
             $("[name='totalPrice']").val(data.totalPrice);
             $("[name='applyDescribe']").val(data.applyDescribe);
+            $("[name='auditDescribe']").val(data.auditDescribe);
             initGoodsName(data.goodsId);/*********************/
             /*if('1' === data.isSuper){
                 var c=document.editRoleForm.isSuper;
@@ -194,35 +211,27 @@ layui.config({
     }
 
     init();
+    initBtn();
 
 
     /**
-     * 表单提交
+     * 审核结果
      * */
-    form.on("submit(editPurchase_Order)", function (data) {
-        var supplierId = data.field.supplierId;
-        var goodsId = data.field.goodsId;
-        var goodsType = data.field.goodsType;
-        var goodsNumber = data.field.goodsNumber;
-        var totalPrice = data.field.totalPrice;
-        var applyDescribe = data.field.applyDescribe;
+    form.on("submit(purchase_orderFilter_agree)", function (data) {
+        var auditDescribe = data.field.auditDescribe;
         // isSuper = $tool.isBlank(isSuper)?'0':isSuper;
-
         var queryArgs = $tool.getQueryParam();//获取查询参数
-
+        var agree = $(this).html();
         //请求
         var req = {
             id:queryArgs['id'],
-            supplierId:supplierId,
-            goodsId:goodsId,
-            goodsType:goodsType,
-            goodsNumber:goodsNumber,
-            totalPrice:totalPrice,
-            applyDescribe:applyDescribe,
+            auditDescribe:auditDescribe,
+            agree:agree
         };
 
-        $api.UpdatePurchase_Order(req,function (data) {
-            layer.msg("修改成功！",{time:1000},function () {
+
+        $api.ApplyBy_RepositoryM(req,function (data) {
+            layer.msg("操作成功！",{time:1000},function () {
                 layer.closeAll("iframe");
                 //刷新父页面
                 parent.location.reload();

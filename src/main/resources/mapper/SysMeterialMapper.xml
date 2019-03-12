@@ -120,12 +120,10 @@
 
     <!--根据id查找原料名称   String getNameById(String id);-->
     <select id="getNameById" resultType="java.lang.String" parameterType="java.lang.String">
-        select GOODS_NAME from sys_material_test m,sys_supplier_goods_test mg
+        select GOODS_NAME from sys_material_test m
         <where>
             <if test="_parameter != null and _parameter != ''">
                 and m.ID = #{id,jdbcType=VARCHAR}
-                and m.ID=mg.MATERIAL_ID
-                and mg.GOODS_PRICE is not null
             </if>
         </where>
     </select>

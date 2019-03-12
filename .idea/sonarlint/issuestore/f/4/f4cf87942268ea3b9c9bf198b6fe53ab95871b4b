@@ -1,14 +1,20 @@
 
-esquid:S00101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(­—²Ì
-lsquid:S00100R"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ï×õ68¢Àˆ•-
-hsquid:S4488c"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ÉØç8ö¨ê•-
-osquid:S00117R"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ï×õ68¥ •-
-fsquid:S44884"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(Ã‘íøüÿÿÿÿ
-hsquid:S4488>"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(©”²8ªè†•-
-msquid:S4488Z"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(‚«Ë™şÿÿÿÿ8‹˜’¸•-
-gsquid:S4488P"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(¸‘¥V8¢Àˆ•-
-fsquid:S4488*"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(¿ÚœÜıÿÿÿÿ
-fsquid:S4488 "JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(Ñûûÿÿÿÿ
-[squid:UselessImportCheck"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8ù¿ì‰•-
-}squid:S00116"`Rename this field "supplier_goodsService" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ä˜¦ùüÿÿÿÿ
-gsquid:S4488G"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(”ï‚M8ÇÈÕ‰•-
+gsquid:S4488Q"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(¸‘¥V8ÆõíÒ–-
+hsquid:S4488e"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ÉØç8ÆõíÒ–-
+rsquid:S00100{"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ù‰³Ãúÿÿÿÿ8ÆõíÒ–-
+msquid:S4488n"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(şş¢ÿÿÿÿÿ8ÆõíÒ–-
+msquid:S4488+"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(¿ÚœÜıÿÿÿÿ8ÆõíÒ–-
+msquid:S4488!"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(Ñûûÿÿÿÿ8ÆõíÒ–-
+lsquid:S00100T"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ï×õ68ÆõíÒ–-
+msquid:S4488\"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(‚«Ë™şÿÿÿÿ8ÆõíÒ–-
+msquid:S4488"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ƒø°¼øÿÿÿÿ8èå ı–-
+psquid:S00117q"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ó½…¼8ÆõíÒ–-
+hsquid:S4488?"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(©”²8ÆõíÒ–-
+lsquid:S00101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(­—²Ì8ÆõíÒ–-
+msquid:S00100q"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ó½…¼8ÆõíÒ–-
+gsquid:S4488H"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(”ï‚M8ÆõíÒ–-
+„squid:S00116"`Rename this field "supplier_goodsService" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ä˜¦ùüÿÿÿÿ8ÆõíÒ–-
+msquid:S44885"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(Ã‘íøüÿÿÿÿ8ÆõíÒ–-
+gsquid:S4488x"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(¡û°8ÆõíÒ–-
+ssquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ƒ©Ë©şÿÿÿÿ8èå ı–-
+osquid:S00117T"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ï×õ68ÆõíÒ–-

@@ -77,12 +77,15 @@ layui.config({
     form.on('select(initGoodsName)',function(data){
         $('#goodsName option').remove();
         //console.log(data.value)
+        var supplierId = $('#supplierName').val();
+
         form.render();
         var req={
-            goodsType:data.value
+            goodsType:data.value,
+            supplierId : supplierId
         }
 
-        $api.InitGoodsName(req,function (res) {
+        $api.InitGoodsNameBySupplierAndGoodsType(req,function (res) {
             var data = res.data;
 
             console.log(res)

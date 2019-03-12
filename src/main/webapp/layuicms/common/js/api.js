@@ -260,6 +260,17 @@ layui.define(['$tool','jquery'], function (exports) {
         recall:function(req,successCallback,errorCallback){
             doPost($tool.getContext() + 'purchase_order/recall.do',req,successCallback,errorCallback);
         },
+        //根据供应商id和原料类型查找原料名称
+        InitGoodsNameBySupplierAndGoodsType:function(req,successCallback,errorCallback){
+            doPost($tool.getContext() + 'supplier_goods/InitGoodsNameBySupplierAndGoodsType.do',req,successCallback,errorCallback);
+        },
+
+
+        /*仓库*/
+        //仓库审核订单申请
+        ApplyBy_RepositoryM:function(req,successCallback,errorCallback){
+            doPost($tool.getContext() + 'repository/repositoryCheck.do',req,successCallback,errorCallback);
+        },
 
     };
 
