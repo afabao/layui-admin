@@ -118,8 +118,7 @@ layui.config({
             } else if(layEvent === 'back') {
                 recall(row.id);
             } else if(layEvent === 'lookBack'){
-
-                lookBack(row.id);
+                lookBack(row.id,"a");
             }
         });
     }
@@ -211,11 +210,11 @@ layui.config({
     }
 
     //查看
-    function lookBack(id){
+    function lookBack(id,auditState){
         var index = layui.layer.open({
-            title: "编辑申请",
+            title: "查看申请",
             type: 2,
-            content: "editPurchase_order.html?id="+id,
+            content: "editPurchase_order.html?id="+id+"&auditState="+auditState,
             success: function (layero, index) {
                 console.log(layero)
                 setTimeout(function () {

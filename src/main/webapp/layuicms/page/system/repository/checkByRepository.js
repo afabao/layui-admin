@@ -16,11 +16,13 @@ layui.config({
      * 同意和不同意按钮
      */
     function initBtn(){
-        var auditDescribe = $("#auditDescribe").val()
-        if(auditDescribe != null && auditDescribe != ''){
+
+        var auditDescribeByRepository = $("#auditDescribeByRepository").val()
+        console.log($("#auditDescribeByRepository").val())
+        if(auditDescribeByRepository != null && auditDescribeByRepository != ''){
             $("#agree").remove();
             $("#disagree").remove();
-            auditDescribe.attr("readonly","readonly");
+            $("#auditDescribeByRepository").attr("readonly","readonly");
             form.render();
         }
     }
@@ -194,31 +196,34 @@ layui.config({
 
         $api.GetPurchase_Order(req,function (res) {
             var data = res.data;
-            //alert(data.auditDescribe)
+            var audit = data.auditDescribe;
+            var str = audit.split("&&");
             $("[name='supplierId']").val(data.supplierId);
             $("[name='goodsType']").val(data.goodsType);
             $("[name='goodsNumber']").val(data.goodsNumber);
             $("[name='totalPrice']").val(data.totalPrice);
+            $("[name='auditDescribe']").val(str[0]);
+            $("[name='auditDescribeByRepository']").val(str[1]);
             $("[name='applyDescribe']").val(data.applyDescribe);
-            $("[name='auditDescribe']").val(data.auditDescribe);
             initGoodsName(data.goodsId);/*********************/
             /*if('1' === data.isSuper){
                 var c=document.editRoleForm.isSuper;
                 c.checked = true;
             }*/
+            initBtn();
             form.render();//重新绘制表单，让修改生效
         });
     }
 
     init();
-    initBtn();
+
 
 
     /**
      * 审核结果
      * */
     form.on("submit(purchase_orderFilter_agree)", function (data) {
-        var auditDescribe = data.field.auditDescribe;
+        var auditDescribe = data.field.auditDescribeByRepository;
         // isSuper = $tool.isBlank(isSuper)?'0':isSuper;
         var queryArgs = $tool.getQueryParam();//获取查询参数
         var agree = $(this).html();

@@ -20,7 +20,7 @@ layui.config({
         if(auditDescribe != null && auditDescribe != ''){
             $("#agree").remove();
             $("#disagree").remove();
-            auditDescribe.attr("readonly","readonly");
+            $("#auditDescribe").attr("readonly","readonly");
             form.render();
         }
     }
@@ -194,24 +194,27 @@ layui.config({
 
         $api.GetPurchase_Order(req,function (res) {
             var data = res.data;
-            //alert(data.auditDescribe)
+            var audit = data.auditDescribe
+            var str = audit.split("&&");
             $("[name='supplierId']").val(data.supplierId);
             $("[name='goodsType']").val(data.goodsType);
             $("[name='goodsNumber']").val(data.goodsNumber);
             $("[name='totalPrice']").val(data.totalPrice);
+            $("[name='auditDescribe']").val(str[0]);
+            $("[name='auditDescribeByRepository']").val(str[1]);
             $("[name='applyDescribe']").val(data.applyDescribe);
-            $("[name='auditDescribe']").val(data.auditDescribe);
             initGoodsName(data.goodsId);/*********************/
             /*if('1' === data.isSuper){
                 var c=document.editRoleForm.isSuper;
                 c.checked = true;
             }*/
+            initBtn();
             form.render();//重新绘制表单，让修改生效
         });
     }
 
     init();
-    initBtn();
+
 
 
     /**

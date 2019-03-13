@@ -80,7 +80,7 @@ public class RepositoryServiceImpl implements RepositoryService {
         //设置审批时间
         purchaseOrderTest.setOrderAuditTime(new Date());
         //设置审核信息
-        purchaseOrderTest.setAuditDescribe(auditDescribe + "&&");
+        purchaseOrderTest.setAuditDescribe(purchaseOrderTest.getAuditDescribe() + auditDescribe + "&&");
 
         repositoryMapper.applyCheckByRepository(purchaseOrderTest);
         return true;

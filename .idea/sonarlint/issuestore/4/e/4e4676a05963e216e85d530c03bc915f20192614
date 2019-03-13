@@ -1,0 +1,3 @@
+
+Xsquid:S1118":Add a private constructor to hide the implicit public one.(’ÀüÎ8ƒ’¥—-
+†squid:S1488"cImmediately return this expression instead of assigning it to the temporary variable "currentUser".(Î•œüÿÿÿÿ8…‹§—-

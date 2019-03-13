@@ -15,11 +15,31 @@ layui.config({
     /**
      * 初始化页面
      * */
+
+
+
     function init() {
         //初始化供应商名称下拉框
+
         initSupplierName();
         initGoodsType();
         //initGoodsName();
+        getAuditState();
+
+
+        function getAuditState(){
+            var url = location.search;
+            if(url.indexOf("&")!=-1){
+                $('#supplierName').attr("disabled","disabled");
+                $('#goodsType').attr("disabled","disabled");
+                $('#goodsName').attr("disabled","disabled");
+                $('#number').attr("readonly","readonly");
+                $('#totalPrice').attr("readonly","readonly");
+                $('[name=applyDescribe]').attr("readonly","readonly");
+                $('#tool').remove();
+            }
+        }
+
 
         /**
          * 初始化供应商名称下拉框
@@ -179,10 +199,14 @@ layui.config({
 
         $api.GetPurchase_Order(req,function (res) {
             var data = res.data;
+            var audit = data.auditDescribe
+            var str = audit.split("&&");
             $("[name='supplierId']").val(data.supplierId);
             $("[name='goodsType']").val(data.goodsType);
             $("[name='goodsNumber']").val(data.goodsNumber);
             $("[name='totalPrice']").val(data.totalPrice);
+            $("[name='auditDescribe']").val(str[0]);
+            $("[name='auditDescribeByRepository']").val(str[1]);
             $("[name='applyDescribe']").val(data.applyDescribe);
             initGoodsName(data.goodsId);/*********************/
             /*if('1' === data.isSuper){

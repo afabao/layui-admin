@@ -268,9 +268,15 @@ layui.define(['$tool','jquery'], function (exports) {
 
         /*仓库*/
         //仓库审核订单申请
-        ApplyBy_RepositoryM:function(req,successCallback,errorCallback){
-            doPost($tool.getContext() + 'repository/repositoryCheck.do',req,successCallback,errorCallback);
+        getBearingHistogramData:function(req,successCallback,errorCallback){
+            doPost($tool.getContext() + 'chart/getBearingHistogramData.do',req,successCallback,errorCallback);
         },
+
+
+
+        /*图表*/
+        //柱状图，公司、零件类型、零件名称、零件价格
+
 
     };
 

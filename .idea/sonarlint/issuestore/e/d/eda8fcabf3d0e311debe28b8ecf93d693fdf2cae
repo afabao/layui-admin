@@ -1,23 +1,23 @@
 
-lsquid:S00101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(Å€Îå8½Ê¹×•-
+„squid:S00116"`Rename this field "purchase_orderService" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(âå˜ôûÿÿÿÿ8½Ê¹×•-
 hsquid:S4488m"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(òî·8ÛËÔÚ–-
-msquid:S4488S"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(§¢ƒëúÿÿÿÿ8ìı…Ó–-
-msquid:S00100A"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ç¸Ç¬8ÊÍóâ•-
-msquid:S4488w"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(‘€Ëüÿÿÿÿ8“·“à–-
-]squid:UselessImportCheck"-Remove this unused import 'sun.misc.Request'.(¤İÒçÿÿÿÿÿ8ÊÍóâ•-
-hsquid:S4488>"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(Óë“¼8ÊÍóâ•-
+hsquid:S4488d"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(²úòô8ìı…Ó–-
 €squid:UselessImportCheck"PRemove this unused import 'com.gameloft9.demo.dataaccess.model.system.UserTest'.(äÈÿúÿÿÿÿ8½Ê¹×•-
-hsquid:S4488 "JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(– †º8½Ê¹×•-
-gsquid:S4488/"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(¸‘¥V8½Ê¹×•-
-Xsquid:S1191"5Use classes from the Java API instead of Sun classes.(¤İÒçÿÿÿÿÿ8ÊÍóâ•-
 rsquid:S00100L"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸ Ó ÿÿÿÿÿ8ÔéŒã•-
-msquid:UselessImportCheck"BRemove this unused import 'javax.servlet.http.HttpServletRequest'.(ø©¹…8½Ê¹×•-
-squid:UselessImportCheck"TRemove this unused import 'com.gameloft9.demo.dataaccess.model.system.MeterialTest'.(¤ı”°8Ìêµ•-
-Vsquid:UselessImportCheck"+Remove this unused import 'java.util.Date'.(¸…¼ü8¶¬²ä•-
+msquid:S4488S"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(§¢ƒëúÿÿÿÿ8ìı…Ó–-
+]squid:UselessImportCheck"-Remove this unused import 'sun.misc.Request'.(¤İÒçÿÿÿÿÿ8ÊÍóâ•-
 hsquid:S44887"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ÉØç8Ôì°Ø•-
 gsquid:S4488]"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(úñ8ìı…Ó–-
-Psquid:S1135'"2Complete the task associated to this TODO comment.(àı‡í8óšÕ×•-
-hsquid:S4488d"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(²úòô8ìı…Ó–-
+lsquid:S00101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(Å€Îå8½Ê¹×•-
+msquid:UselessImportCheck"BRemove this unused import 'javax.servlet.http.HttpServletRequest'.(ø©¹…8½Ê¹×•-
+msquid:S00100A"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ç¸Ç¬8ÊÍóâ•-
+hsquid:S4488 "JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(– †º8½Ê¹×•-
 hsquid:S4488("JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(Ğ»¨„8½Ê¹×•-
-„squid:S00116"`Rename this field "purchase_orderService" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(âå˜ôûÿÿÿÿ8½Ê¹×•-
+Vsquid:UselessImportCheck"+Remove this unused import 'java.util.Date'.(¸…¼ü8¶¬²ä•-
+gsquid:S4488/"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(¸‘¥V8½Ê¹×•-
+msquid:S4488w"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(‘€Ëüÿÿÿÿ8“·“à–-
+Xsquid:S1191"5Use classes from the Java API instead of Sun classes.(¤İÒçÿÿÿÿÿ8ÊÍóâ•-
 msquid:S4488I"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(‡­Îëúÿÿÿÿ8ÔéŒã•-
+hsquid:S4488>"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(Óë“¼8ÊÍóâ•-
+Psquid:S1135'"2Complete the task associated to this TODO comment.(àı‡í8óšÕ×•-
+squid:UselessImportCheck"TRemove this unused import 'com.gameloft9.demo.dataaccess.model.system.MeterialTest'.(¤ı”°8Ìêµ•-
