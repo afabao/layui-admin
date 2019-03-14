@@ -27,6 +27,22 @@ layui.config({
         }
     }
 
+    function initTestarea(){
+        var queryArgs = $tool.getQueryParam();//获取查询参数
+        var id = queryArgs['id'];
+        var req = {
+            id:id
+        };
+        $api.GetPurchase_Order(req,function (res) {
+            var data = res.data;
+            if(data.auditState == "待审核(仓库)"){
+                $('#reasonByFinanceM').remove();
+
+            }
+        });
+    }
+    initTestarea()
+
     /**
      * 初始化页面
      * */
@@ -204,6 +220,7 @@ layui.config({
             $("[name='totalPrice']").val(data.totalPrice);
             $("[name='auditDescribe']").val(str[0]);
             $("[name='auditDescribeByRepository']").val(str[1]);
+            $("[name='auditDescribeByFinanceM']").val(str[2]);
             $("[name='applyDescribe']").val(data.applyDescribe);
             initGoodsName(data.goodsId);/*********************/
             /*if('1' === data.isSuper){
@@ -236,7 +253,7 @@ layui.config({
 
 
         $api.ApplyBy_RepositoryM(req,function (data) {
-            layer.msg("操作成功！",{time:1000},function () {
+            layer.msg("审核完成！",{time:1000},function () {
                 layer.closeAll("iframe");
                 //刷新父页面
                 parent.location.reload();

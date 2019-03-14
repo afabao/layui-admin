@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.gameloft9.demo.dataaccess.dao.system.RepositoryMapper">
+<mapper namespace="com.gameloft9.demo.dataaccess.dao.system.FinanceMapper">
 
     <resultMap id="purchase_order_map" type="com.gameloft9.demo.dataaccess.model.system.PurchaseOrderTest">
         <id property="id" column="ID"/>
@@ -24,8 +24,8 @@
         <result column="AUDIT_DESCRIBE" property="auditDescribe" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <!--仓库分页显示订单列表   List<PurchaseOrderTest> getAllByRepositoryM(-->
-    <select id="getAllByRepositoryM" resultMap="purchase_order_map">
+    <!--财务分页显示订单列表   List<PurchaseOrderTest> getAllByRepositoryM(-->
+    <select id="getAllByfinanceM" resultMap="purchase_order_map">
         select *
         from
         sys_purchase_order_test
@@ -36,19 +36,19 @@
             <if test="allState != null and allState != ''">
                 and AUDIT_STATE = #{allState,jdbcType=VARCHAR}
             </if>
-            <if test="notContain != null and notContain != ''">
-                and AUDIT_STATE  not in
-                <foreach collection="notContain" item="notContain" index="index" open="(" close=")" separator=",">
-                    #{notContain}
-                </foreach>
+            <if test="contain != null and contain != ''">
+                and AUDIT_STATE  in (#{contain})
+                <!--<foreach collection="contain" item="contain" index="index" open="(" close=")" separator=",">
+                    #{contain}
+                </foreach> -->
             </if>
         </where>
 
         limit #{start,jdbcType=DECIMAL},#{end,jdbcType=DECIMAL}
     </select>
 
-    <!--仓库领导获取总条数   Integer getCountByRepositoryM(-->
-    <select id="getCountByRepositoryM" resultType="java.lang.Integer">
+    <!--财务领导获取总条数   Integer getCountByRepositoryM(-->
+    <select id="getCountByfinanceM" resultType="java.lang.Integer">
         select count(1)
         from
         sys_purchase_order_test
@@ -59,30 +59,27 @@
             <if test="allState != null and allState != ''">
                 and AUDIT_STATE = #{allState,jdbcType=VARCHAR}
             </if>
-            <if test="notContain != null and notContain != ''">
-                and AUDIT_STATE  not in
-                <foreach collection="notContain" item="notContain" index="index" open="(" close=")" separator=",">
-                    #{notContain}
-                </foreach>
+            <if test="contain != null and contain != ''">
+                and AUDIT_STATE in (#{contain})
+                <!--<foreach collection="contain" item="contain" index="index" open="(" close=")" separator=",">
+                    #{contain}
+                </foreach> -->
             </if>
         </where>
     </select>
 
-    <!--仓库审核订单申请   void applyCheckByRepository(PurchaseOrderTest purchaseOrderTest);-->
-    <update id="applyCheckByRepository" parameterType="com.gameloft9.demo.dataaccess.model.system.PurchaseOrderTest">
+    <!--仓库审核订单   void applyCheckByFinance(PurchaseOrderTest purchaseOrderTest);-->
+    <update id="applyCheckByFinance" parameterType="com.gameloft9.demo.dataaccess.model.system.PurchaseOrderTest">
         update sys_purchase_order_test
         <set>
-            <if test="auditState != null and auditState != ''">
-                AUDIT_STATE = #{auditState,jdbcType=VARCHAR},
-            </if>
-            <if test="orderAuditTime != null and orderAuditTime != ''">
-                ORDER_AUDIT_TIME = #{orderAuditTime,jdbcType=VARCHAR},
-            </if>
-            <if test="orderAuditUser != null and orderAuditUser != ''">
-                ORDER_AUDIT_USER = #{orderAuditUser,jdbcType=VARCHAR},
-            </if>
             <if test="payState != null and payState != ''">
                 PAY_STATE = #{payState,jdbcType=VARCHAR},
+            </if>
+            <if test="payAuditUser != null and payAuditUser != ''">
+                PAY_AUDIT_USER = #{payAuditUser,jdbcType=VARCHAR},
+            </if>
+            <if test="payAuditTime != null and payAuditTime != ''">
+                PAY_AUDIT_TIME = #{payAuditTime,jdbcType=VARCHAR},
             </if>
             <if test="auditDescribe != null and auditDescribe != ''">
                 AUDIT_DESCRIBE = #{auditDescribe,jdbcType=VARCHAR}
@@ -94,4 +91,5 @@
             </if>
         </where>
     </update>
+
 </mapper>

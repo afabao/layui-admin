@@ -12,34 +12,17 @@ layui.config({
         $tool = layui.$tool,
         $api = layui.$api;
 
-    function initTestarea(){
-        var queryArgs = $tool.getQueryParam();//获取查询参数
-        var id = queryArgs['id'];
-        var req = {
-            id:id
-        };
-        $api.GetPurchase_Order(req,function (res) {
-            var data = res.data;
-            console.log(data);
-            if(data.auditState == "待审核"){
-                $('#reasonByRepositoryM').remove();
-                $('#reasonByFinanceM').remove();
-            }
-        });
-    }
-
-    initTestarea()
-
-
     /**
      * 同意和不同意按钮
      */
     function initBtn(){
-        var auditDescribe = $("#auditDescribe").val()
-        if(auditDescribe != null && auditDescribe != ''){
+
+        var auditDescribeByRepository = $("#auditDescribeByFinanceM").val()
+        console.log($("#auditDescribeByFinanceM").val())
+        if(auditDescribeByRepository != null && auditDescribeByRepository != ''){
             $("#agree").remove();
             $("#disagree").remove();
-            $("#auditDescribe").attr("readonly","readonly");
+            $("#auditDescribeByRepository").attr("readonly","readonly");
             form.render();
         }
     }
@@ -213,20 +196,15 @@ layui.config({
 
         $api.GetPurchase_Order(req,function (res) {
             var data = res.data;
-            if(data.auditDescribe != null){
-                var audit = data.auditDescribe
-                var str = audit.split("&&");
-            }
+            var audit = data.auditDescribe;
+            var str = audit.split("&&");
             $("[name='supplierId']").val(data.supplierId);
             $("[name='goodsType']").val(data.goodsType);
             $("[name='goodsNumber']").val(data.goodsNumber);
             $("[name='totalPrice']").val(data.totalPrice);
-            if(data.auditDescribe != null){
-                $("[name='auditDescribe']").val(str[0]);
-                $("[name='auditDescribeByRepository']").val(str[1]);
-                $("[name='auditDescribeByFinanceM']").val(str[2]);
-            }
-
+            $("[name='auditDescribe']").val(str[0]);
+            $("[name='auditDescribeByRepository']").val(str[1]);
+            $("[name='auditDescribeByFinanceM']").val(str[2]);
             $("[name='applyDescribe']").val(data.applyDescribe);
             initGoodsName(data.goodsId);/*********************/
             /*if('1' === data.isSuper){
@@ -246,7 +224,7 @@ layui.config({
      * 审核结果
      * */
     form.on("submit(purchase_orderFilter_agree)", function (data) {
-        var auditDescribe = data.field.auditDescribe;
+        var auditDescribe = data.field.auditDescribeByFinanceM;
         // isSuper = $tool.isBlank(isSuper)?'0':isSuper;
         var queryArgs = $tool.getQueryParam();//获取查询参数
         var agree = $(this).html();
@@ -257,9 +235,8 @@ layui.config({
             agree:agree
         };
 
-
-        $api.ApplyBy_M(req,function (data) {
-            layer.msg("操作成功！",{time:1000},function () {
+        $api.ApplyBy_FinanceM(req,function (data) {
+            layer.msg("审核完成！",{time:1000},function () {
                 layer.closeAll("iframe");
                 //刷新父页面
                 parent.location.reload();

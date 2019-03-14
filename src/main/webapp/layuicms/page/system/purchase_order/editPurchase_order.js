@@ -15,15 +15,27 @@ layui.config({
     /**
      * 初始化页面
      * */
+    function initTestarea(){
+        var queryArgs = $tool.getQueryParam();//获取查询参数
+        var id = queryArgs['id'];
+        var req = {
+            id:id
+        };
+        $api.GetPurchase_Order(req,function (res) {
+            var data = res.data;
+            if(data.auditState == "未提交"){
+                $('#reasonByM').remove();
+                $('#reasonByRepositoryM').remove();
 
+            }
+        });
+    }
 
-
+    initTestarea()
     function init() {
         //初始化供应商名称下拉框
 
         initSupplierName();
-        initGoodsType();
-        //initGoodsName();
         getAuditState();
 
 
@@ -62,7 +74,10 @@ layui.config({
          * 初始化货品类型
          * */
 
-        function initGoodsType() {
+        function initGoodsType(hh,aa) {
+            var req={
+                supplierId:hh
+            }
             $api.GetGoodsTypeBySupplierId(req, function (res) {
                 var data = res.data;
                 if (data.length > 0) {
@@ -71,7 +86,7 @@ layui.config({
                         html += '<option value="' + data[i] + '">' + data[i] + '</option>>';
                     }
                     $('#goodsType').append($(html));
-
+                    $('#goodsType').val(aa);
                     form.render();
                 }
 
@@ -82,16 +97,17 @@ layui.config({
         /**
          * 初始化货品名称
          */
-        function initGoodsName(haha) {
+        function initGoodsName(haha,hehe) {
 
-            var goodsType = $('#goodsType option:selected').val();
+            var goodsType = hehe;
+            var supplierId = $('#supplierName').val();
             var req={
-                goodsType:goodsType
+                goodsType:goodsType,
+                supplierId : supplierId
             }
 
-            $api.InitGoodsName(req, function (res) {
+            $api.InitGoodsNameBySupplierAndGoodsType(req, function (res) {
                 var data = res.data;
-
                 if (data.length > 0) {
 
                     var html = '<option value="">--请选择--</option>';
@@ -146,11 +162,13 @@ layui.config({
         form.on('select(initGoodsName)',function(data){
             $('#goodsName option').remove();
             form.render();
+            var supplierId = $('#supplierName').val();
             var req={
+                supplierId:supplierId,
                 goodsType:data.value
             }
 
-            $api.InitGoodsName(req,function (res) {
+            $api.InitGoodsNameBySupplierAndGoodsType(req,function (res) {
                 var data = res.data;
                 if (data.length > 0) {
 
@@ -199,20 +217,24 @@ layui.config({
 
         $api.GetPurchase_Order(req,function (res) {
             var data = res.data;
-            var audit = data.auditDescribe
-            var str = audit.split("&&");
+            if(data.auditDescribe != null){
+                var audit = data.auditDescribe
+                var str = audit.split("&&");
+            }
             $("[name='supplierId']").val(data.supplierId);
             $("[name='goodsType']").val(data.goodsType);
+            initGoodsType(data.supplierId,data.goodsType)
             $("[name='goodsNumber']").val(data.goodsNumber);
             $("[name='totalPrice']").val(data.totalPrice);
-            $("[name='auditDescribe']").val(str[0]);
-            $("[name='auditDescribeByRepository']").val(str[1]);
+            if(data.auditDescribe != null){
+                console.log($("[name='auditDescribe']").val(str[0]));
+                $("[name='auditDescribe']").val(str[0]);
+                $("[name='auditDescribeByRepository']").val(str[1]);
+                $("[name='auditDescribeByFinanceM']").val(str[2]);
+            }
+
             $("[name='applyDescribe']").val(data.applyDescribe);
-            initGoodsName(data.goodsId);/*********************/
-            /*if('1' === data.isSuper){
-                var c=document.editRoleForm.isSuper;
-                c.checked = true;
-            }*/
+            initGoodsName(data.goodsId,data.goodsType);/*********************/
             form.render();//重新绘制表单，让修改生效
         });
     }
@@ -223,7 +245,7 @@ layui.config({
     /**
      * 表单提交
      * */
-    form.on("submit(editPurchase_Order)", function (data) {
+    form.on("submit(purchase_orderFilter)", function (data) {
         var supplierId = data.field.supplierId;
         var goodsId = data.field.goodsId;
         var goodsType = data.field.goodsType;

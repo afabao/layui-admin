@@ -111,7 +111,7 @@ public class Purchase_OrderServiceImpl implements Purchase_OrderService {
         //审核状态，
         purchaseOrderTest.setAuditState(StatePayInfo.APPLY_INFO_NO_SUBMIT);
         //支付状态，
-        purchaseOrderTest.setPayState(StatePayInfo.PAY_INFO_WATING);
+        //purchaseOrderTest.setPayState(StatePayInfo.PAY_INFO_WATING);
         //申请原因，
         purchaseOrderTest.setApplyDescribe(purchaseOrderTest.getApplyDescribe());
 

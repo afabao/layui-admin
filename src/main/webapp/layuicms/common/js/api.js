@@ -268,14 +268,21 @@ layui.define(['$tool','jquery'], function (exports) {
 
         /*仓库*/
         //仓库审核订单申请
-        getBearingHistogramData:function(req,successCallback,errorCallback){
-            doPost($tool.getContext() + 'chart/getBearingHistogramData.do',req,successCallback,errorCallback);
+        ApplyBy_RepositoryM:function(req,successCallback,errorCallback){
+            doPost($tool.getContext() + 'repository/repositoryCheck.do',req,successCallback,errorCallback);
         },
 
-
+        /*财务*/
+        //财务审核订单申请
+        ApplyBy_FinanceM:function(req,successCallback,errorCallback){
+            doPost($tool.getContext() + 'finance/checkApplyByFinance.do',req,successCallback,errorCallback);
+        },
 
         /*图表*/
         //柱状图，公司、零件类型、零件名称、零件价格
+        getBearingHistogramData:function(req,successCallback,errorCallback){
+            doPost($tool.getContext() + 'chart/getBearingHistogramData.do',req,successCallback,errorCallback);
+        },
 
 
     };

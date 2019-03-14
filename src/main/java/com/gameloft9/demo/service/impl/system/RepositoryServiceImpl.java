@@ -74,6 +74,7 @@ public class RepositoryServiceImpl implements RepositoryService {
         //根据同意或不同意设置订单状态
         if("同意".equals(agree)){
             purchaseOrderTest.setAuditState(StatePayInfo.APPLY_INFO_PAST);
+            purchaseOrderTest.setPayState(StatePayInfo.PAY_INFO_WATING);
         }else{
             purchaseOrderTest.setAuditState(StatePayInfo.APPLY_INFO_NOT_PASS_REPOSITRY);
         }
