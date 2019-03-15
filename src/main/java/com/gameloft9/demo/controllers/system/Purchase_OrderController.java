@@ -36,7 +36,6 @@ public class Purchase_OrderController {
     }
 
     //订单分页显示
-    //TODO......查询
     @RequestMapping(value = "/purchase_orderList.do",method = RequestMethod.POST)
     @ResponseBody
     public IResult getAll(String startTime,String endTime,String page,String limit,String allState){

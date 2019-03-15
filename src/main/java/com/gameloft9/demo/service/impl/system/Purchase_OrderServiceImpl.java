@@ -97,7 +97,6 @@ public class Purchase_OrderServiceImpl implements Purchase_OrderService {
         //设置和订单编号number
         purchaseOrderTest.setOrderNumber(UUIDUtil.getUUID());
         //设置原料名称goodsName
-        //TODO....原料商品逻辑
         /*CheckUtil.check(supplierTest == null || supplierTest.getSupplierName().equals(supplier.getSupplierName()),"该角色名称已经存在");*/
         purchaseOrderTest.setGoodsName(sysMeterialTestMapper.getNameById(purchaseOrderTest.getGoodsId()));
         //设置供应商名称supplierName
@@ -204,7 +203,6 @@ public class Purchase_OrderServiceImpl implements Purchase_OrderService {
      *
      */
     public Boolean applyByM(String id, String auditDescribe, String agree) {
-        //TODO...审核信息字符串拼接
         CheckUtil.notBlank(id,"订单id为空");
         //获取订单信息
         PurchaseOrderTest purchaseOrderTest = purchase_orderMapper.getById(id);

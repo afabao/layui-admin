@@ -64,7 +64,6 @@ public class RepositoryServiceImpl implements RepositoryService {
      * 仓库审核订单申请
      */
     public Boolean applyCheckByRepository(String id,String auditDescribe,String agree) {
-        //TODO...仓库审批字符串拼接
         CheckUtil.notBlank(id,"订单id为空");
         //根据id查找purchase_order
         PurchaseOrderTest purchaseOrderTest = purchase_orderTestMapper.getById(id);

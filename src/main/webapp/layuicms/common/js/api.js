@@ -272,10 +272,16 @@ layui.define(['$tool','jquery'], function (exports) {
             doPost($tool.getContext() + 'repository/repositoryCheck.do',req,successCallback,errorCallback);
         },
 
+
         /*财务*/
         //财务审核订单申请
         ApplyBy_FinanceM:function(req,successCallback,errorCallback){
             doPost($tool.getContext() + 'finance/checkApplyByFinance.do',req,successCallback,errorCallback);
+        },
+
+        /*采购收货管理*/
+        receive:function(req,successCallback,errorCallback){
+            doPost($tool.getContext() + 'receiveOrRejected/receive.do',req,successCallback,errorCallback);
         },
 
         /*图表*/

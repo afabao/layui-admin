@@ -251,4 +251,24 @@
             </if>
         </where>
     </select>
+
+    <!--根据id查找供应商名称   String findSupplierNameById(String id);-->
+    <select id="findSupplierNameById" parameterType="java.lang.String" resultType="java.lang.String">
+        select s.SUPPLIER_NAME
+        from sys_supplier_test s
+        where s.ID=
+        (select sg.SUPPLIER_ID
+        from sys_supplier_goods_test sg
+        where sg.ID= #{id,jdbcType=VARCHAR})
+    </select>
+
+    <!--根据id查找供应商名称   String findSupplierNameById(String id);-->
+    <select id="findSupplierNameById" parameterType="java.lang.String" resultType="java.lang.String">
+        select s.SUPPLIER_NAME
+        from sys_supplier_test s
+        where s.ID=
+        (select sg.SUPPLIER_ID
+        from sys_supplier_goods_test sg
+        where sg.ID= #{id,jdbcType=VARCHAR})
+    </select>
 </mapper>

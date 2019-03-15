@@ -49,6 +49,7 @@
     <table id="supplier_goods" lay-filter="purchase_orderFilter" class="layui-table">
     </table>
 </div>
+
 <!--分页元素-->
 <div id="page"></div>
 <!--toolbar 模板-->
@@ -70,8 +71,12 @@
     <a class="layui-btn  layui-btn-sm " lay-event="lookBack" ><i class="layui-icon">&#xe642;</i>查看</a>
     {{# } else if(d.auditState=="审核未通过(仓库)"){ }}
     <a class="layui-btn  layui-btn-sm " lay-event="lookBack" ><i class="layui-icon">&#xe642;</i>查看</a>
-    {{# } else if(d.auditState=="审核通过"){ }}
+    {{# } else if(d.auditState=="审核通过" && d.payState=="被驳回(财务)" ){ }}
     <a class="layui-btn  layui-btn-sm " lay-event="lookBack" ><i class="layui-icon">&#xe642;</i>查看</a>
+    {{# } else if(d.payState=="已付款" && d.auditState=="审核通过"){ }}
+    <a class="layui-btn  layui-btn-sm " lay-event="lookBack" ><i class="layui-icon">&#xe642;</i>查看</a>
+    <a class="layui-btn  layui-btn-sm layui-icon-cart-simple " lay-event="receive" ><i class="layui-icon">&#xe698;;</i>收货</a>
+    <a class="layui-btn  layui-btn-sm layui-icon-close " lay-event="rejected" ><i class="layui-icon">&#x1006;</i>退货</a>
     {{# } }}
 </script>
 

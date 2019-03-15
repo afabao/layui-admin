@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gameloft9.demo.dataaccess.dao.system.DepotOrderMapper">
+    <resultMap id="depotOrderMap" type="com.gameloft9.demo.dataaccess.model.system.DepotOrderTest">
+        <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="ORDER_TYPE" property="orderType" jdbcType="INTEGER"/>
+        <result column="GOODS_ID" property="goodsId" jdbcType="VARCHAR"/>
+        <result column="SUPPLIER_NAME" property="supplierName" jdbcType="VARCHAR"/>
+        <result column="GOODS_TYPE" property="goodsType" jdbcType="VARCHAR"/>
+        <result column="GOODS_NAME" property="goodsName" jdbcType="VARCHAR"/>
+        <result column="GOODS_NUMBER" property="goodsNumber" jdbcType="VARCHAR"/>
+        <result column="APPLY_USER" property="applyUser" jdbcType="VARCHAR"/>
+        <result column="APPLY_TIME" property="applyTime" jdbcType="TIMESTAMP"/>
+        <result column="STATE" property="state" jdbcType="VARCHAR"/>
+        <result column="ORDER_AUDIT_USER" property="orderAuditUser" jdbcType="VARCHAR"/>
+        <result column="ORDER_AUDIT_TIME" property="orderAuditTime" jdbcType="TIMESTAMP"/>
+        <result column="APPLY_DESCRIBE" property="applyDescribe" jdbcType="VARCHAR"/>
+        <result column="AUDIT_DESCRIBE" property="auditDescribe" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--点击收货初始化入库单-->
+    <insert id="initDepotOrder" parameterType="com.gameloft9.demo.dataaccess.model.system.DepotOrderTest">
+        insert into depot_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">
+                ID,
+            </if>
+            <if test="orderType != null and orderType != ''">
+                ORDER_TYPE,
+            </if>
+            <if test="goodsId != null and goodsId != ''">
+                GOODS_ID,
+            </if>
+            <if test="supplierName != null and supplierName != ''">
+                SUPPLIER_NAME,
+            </if>
+            <if test="goodsType != null and goodsType != ''">
+                GOODS_TYPE,
+            </if>
+            <if test="goodsName != null and goodsName != ''">
+                GOODS_NAME,
+            </if>
+            <if test="goodsNumber != null and goodsNumber != ''">
+                GOODS_NUMBER,
+            </if>
+            <if test="applyUser != null and applyUser != ''">
+                APPLY_USER,
+            </if>
+            <if test="state != null and state != ''">
+                STATE,
+            </if>
+        </trim>
+        <trim prefix=" values( " suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">
+                #{id,jdbcType="VARCHAR"},
+            </if>
+            <if test="orderType != null and orderType != ''">
+                #{orderType,jdbcType="INTEGER"},
+            </if>
+            <if test="goodsId != null and goodsId != ''">
+                #{goodsId,jdbcType="VARCHAR"},
+            </if>
+            <if test="supplierName != null and supplierName != ''">
+                #{supplierName,jdbcType="VARCHAR"},
+            </if>
+            <if test="goodsType != null and goodsType != ''">
+                #{goodsType,jdbcType="VARCHAR"},
+            </if>
+            <if test="goodsName != null and goodsName != ''">
+                #{goodsName,jdbcType="VARCHAR"},
+            </if>
+            <if test="goodsNumber != null and goodsNumber != ''">
+                #{goodsNumber,jdbcType="VARCHAR"},
+            </if>
+            <if test="applyUser != null and applyUser != ''">
+                #{applyUser,jdbcType="VARCHAR"},
+            </if>
+            <if test="state != null and state != ''">
+                #{state,jdbcType="VARCHAR"},
+            </if>
+        </trim>
+    </insert>
+</mapper>

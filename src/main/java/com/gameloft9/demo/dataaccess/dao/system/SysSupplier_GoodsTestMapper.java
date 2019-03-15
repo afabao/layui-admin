@@ -9,6 +9,8 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+
+
 public interface SysSupplier_GoodsTestMapper {
 
     /**
@@ -58,6 +60,7 @@ public interface SysSupplier_GoodsTestMapper {
     /**
      * 根据供应商id删除供应商商品
      */
+
     void deleteBySupplierId(String supplierId);
 
     /**
@@ -97,6 +100,11 @@ public interface SysSupplier_GoodsTestMapper {
             @Param("supplierId") String supplierId,
             @Param("goodsType") String goodsType
     );
+
+    /**
+     * 根据id查找供应商名称
+     */
+    String findSupplierNameById(String id);
 
 
 
